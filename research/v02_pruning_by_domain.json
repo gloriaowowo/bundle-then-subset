@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-v02-pruning-harm-by-domain",
+  "addedFor": "Camera-ready, after the authors' post-acceptance critique (CLEA #74): v0.2 Safe-Subset pruning harm by domain and organization.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "runSet": "research/robustness_v02_hidden_run_set.json",
+  "units": 480,
+  "verifier": "full eight-case verifier (gate records bundle:full-8 and safe-subset:full-8)",
+  "definitions": {
+    "pruningEvent": "Bundle releases the candidate and Safe-Subset releases fewer rules",
+    "harmful": "Safe-Subset hidden SC-VAC < Bundle hidden SC-VAC on that unit",
+    "scAucContributionSum": "sum over pruning events of (Safe-Subset - Bundle) SC-VAC x checkpoint trapezoid weight"
+  },
+  "totals": {
+    "pruningEvents": 219,
+    "harmful": 94,
+    "helpful": 0,
+    "neutral": 125,
+    "bundleAccepted": 336
+  },
+  "byDomain": {
+    "procurement": {
+      "organizations": 4,
+      "units": 240,
+      "bundleAccepted": 157,
+      "pruningEvents": 148,
+      "harmful": 94,
+      "helpful": 0,
+      "neutral": 54,
+      "organizationsWithHarm": 4
+    },
+    "support": {
+      "organizations": 4,
+      "units": 240,
+      "bundleAccepted": 179,
+      "pruningEvents": 71,
+      "harmful": 0,
+      "helpful": 0,
+      "neutral": 71,
+      "organizationsWithHarm": 0
+    }
+  },
+  "byOrganization": {
+    "procurement-apex": {
+      "domain": "procurement",
+      "units": 60,
+      "bundleAccepted": 34,
+      "pruningEvents": 30,
+      "harmful": 21,
+      "helpful": 0,
+      "neutral": 9,
+      "scAucContributionSum": -0.6666666666666665,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": -0.055555555555555546
+    },
+    "procurement-delta": {
+      "domain": "procurement",
+      "units": 60,
+      "bundleAccepted": 37,
+      "pruningEvents": 37,
+      "harmful": 25,
+      "helpful": 0,
+      "neutral": 12,
+      "scAucContributionSum": -0.7916666666666665,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": -0.06597222222222221
+    },
+    "procurement-grove": {
+      "domain": "procurement",
+      "units": 60,
+      "bundleAccepted": 44,
+      "pruningEvents": 39,
+      "harmful": 22,
+      "helpful": 0,
+      "neutral": 17,
+      "scAucContributionSum": -0.770833333333333,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": -0.06423611111111109
+    },
+    "procurement-mesa": {
+      "domain": "procurement",
+      "units": 60,
+      "bundleAccepted": 42,
+      "pruningEvents": 42,
+      "harmful": 26,
+      "helpful": 0,
+      "neutral": 16,
+      "scAucContributionSum": -0.8749999999999999,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": -0.07291666666666666
+    },
+    "support-beacon": {
+      "domain": "support",
+      "units": 60,
+      "bundleAccepted": 44,
+      "pruningEvents": 17,
+      "harmful": 0,
+      "helpful": 0,
+      "neutral": 17,
+      "scAucContributionSum": 0,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": 0
+    },
+    "support-cedar": {
+      "domain": "support",
+      "units": 60,
+      "bundleAccepted": 45,
+      "pruningEvents": 18,
+      "harmful": 0,
+      "helpful": 0,
+      "neutral": 18,
+      "scAucContributionSum": 0,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": 0
+    },
+    "support-harbor": {
+      "domain": "support",
+      "units": 60,
+      "bundleAccepted": 45,
+      "pruningEvents": 18,
+      "harmful": 0,
+      "helpful": 0,
+      "neutral": 18,
+      "scAucContributionSum": 0,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": 0
+    },
+    "support-orion": {
+      "domain": "support",
+      "units": 60,
+      "bundleAccepted": 45,
+      "pruningEvents": 18,
+      "harmful": 0,
+      "helpful": 0,
+      "neutral": 18,
+      "scAucContributionSum": 0,
+      "seedSeries": 12,
+      "scAucContributionPerSeries": 0
+    }
+  }
+}

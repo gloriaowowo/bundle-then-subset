@@ -1,0 +1,375 @@
+{
+  "candidate": {
+    "id": "access-quartz-access_provisioning-workflow",
+    "organizationId": "access-quartz",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-identity",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "workforce-verification",
+            "reason": "Identity not verified; automated entitlement prohibited."
+          }
+        ],
+        "provenance": [
+          "access-quartz-eligibility-policy"
+        ]
+      },
+      {
+        "id": "business-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "business"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 24
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "grant_application_entitlement",
+            "args": {
+              "entitlementRequest": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "identityRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskValue": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "resolve_entitlement_request",
+            "args": {
+              "entitlementRequest": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "granted"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-quartz-limit-v2",
+          "access-quartz-action-schema",
+          "access-quartz-status-schema",
+          "access-quartz-message-3",
+          "access-quartz-message-9"
+        ]
+      },
+      {
+        "id": "administrative-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "administrative"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 9
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "grant_application_entitlement",
+            "args": {
+              "entitlementRequest": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "identityRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskValue": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "resolve_entitlement_request",
+            "args": {
+              "entitlementRequest": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "granted"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-quartz-special-policy",
+          "access-quartz-action-schema",
+          "access-quartz-status-schema",
+          "access-quartz-message-3",
+          "access-quartz-message-9"
+        ]
+      },
+      {
+        "id": "fallback-escalate",
+        "when": {
+          "op": "not",
+          "arg": {
+            "op": "any",
+            "args": [
+              {
+                "op": "all",
+                "args": [
+                  {
+                    "op": "eq",
+                    "left": {
+                      "kind": "path",
+                      "path": "input.accessClass"
+                    },
+                    "right": {
+                      "kind": "literal",
+                      "value": "business"
+                    }
+                  },
+                  {
+                    "op": "lte",
+                    "left": {
+                      "kind": "path",
+                      "path": "input.riskScore"
+                    },
+                    "right": {
+                      "kind": "literal",
+                      "value": 24
+                    }
+                  }
+                ]
+              },
+              {
+                "op": "all",
+                "args": [
+                  {
+                    "op": "eq",
+                    "left": {
+                      "kind": "path",
+                      "path": "input.accessClass"
+                    },
+                    "right": {
+                      "kind": "literal",
+                      "value": "administrative"
+                    }
+                  },
+                  {
+                    "op": "lte",
+                    "left": {
+                      "kind": "path",
+                      "path": "input.riskScore"
+                    },
+                    "right": {
+                      "kind": "literal",
+                      "value": 9
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "workforce-verification",
+            "reason": "Request does not meet automatic eligibility criteria; manual review required."
+          }
+        ],
+        "provenance": [
+          "access-quartz-eligibility-policy",
+          "access-quartz-limit-v2",
+          "access-quartz-special-policy",
+          "access-quartz-message-4"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-quartz-eligibility-policy",
+      "access-quartz-limit-v2",
+      "access-quartz-special-policy",
+      "access-quartz-action-schema",
+      "access-quartz-status-schema",
+      "access-quartz-message-3",
+      "access-quartz-message-4",
+      "access-quartz-message-9"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "88ed45287463c39e4c67bce13e3427f46fbe0d15a053c06778e39e3c32a8c792"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_rejected",
+      "reason": "Invalid workflow artifact: workflow.rules[3].when.all requires a non-empty args array"
+    },
+    {
+      "sequence": 2,
+      "kind": "model_call",
+      "artifactId": "df77b4f48a509c041455d8a60181ac687d2c9aca7e136ade42cba188e7fa9bcd"
+    },
+    {
+      "sequence": 3,
+      "kind": "workflow_proposed",
+      "artifactId": "access-quartz-access_provisioning-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "da6042d3d9f213276c21d93000b0b45f350a2175a5d95d6e5211548c72a04af2"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "da6042d3d9f213276c21d93000b0b45f350a2175a5d95d6e5211548c72a04af2"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 3/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "ba7cd39148ebc1f50836ce9efd2de9b2dd9ae8377c2ae5ceafa7e90a4a748d76"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "da6042d3d9f213276c21d93000b0b45f350a2175a5d95d6e5211548c72a04af2"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

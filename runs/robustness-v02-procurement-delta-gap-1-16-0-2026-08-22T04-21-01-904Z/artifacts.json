@@ -1,0 +1,421 @@
+{
+  "candidate": {
+    "id": "procurement-delta-purchase-request-workflow",
+    "organizationId": "procurement-delta",
+    "taskFamily": "purchase_request",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "purchase_request"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-unapproved-vendor",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.vendorApproved"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "supplier-assurance",
+            "reason": "Vendor is not approved; route to supplier-assurance per policy."
+          }
+        ],
+        "provenance": [
+          "procurement-delta-vendor-policy",
+          "procurement-delta-message-6"
+        ]
+      },
+      {
+        "id": "rule-amount-within-agent-limit",
+        "when": {
+          "op": "lte",
+          "left": {
+            "kind": "path",
+            "path": "input.amount"
+          },
+          "right": {
+            "kind": "literal",
+            "value": 650
+          }
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "submit_purchase_order",
+            "args": {
+              "requestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "supplierKey": {
+                "kind": "path",
+                "path": "input.vendorId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_purchase_request_state",
+            "args": {
+              "requestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "ordered"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "procurement-delta-limit-v2",
+          "procurement-delta-message-1",
+          "procurement-delta-message-3",
+          "procurement-delta-message-7"
+        ]
+      },
+      {
+        "id": "rule-amount-requires-sourcing-manager",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 650
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 4200
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "sourcing_manager",
+            "reason": "Amount exceeds agent limit and is within sourcing manager approval range."
+          }
+        ],
+        "provenance": [
+          "procurement-delta-approval-policy",
+          "procurement-delta-message-5"
+        ]
+      },
+      {
+        "id": "rule-amount-requires-finance-director",
+        "when": {
+          "op": "gt",
+          "left": {
+            "kind": "path",
+            "path": "input.amount"
+          },
+          "right": {
+            "kind": "literal",
+            "value": 4200
+          }
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "finance_operations_director",
+            "reason": "Amount exceeds sourcing manager limit; requires finance operations director approval."
+          }
+        ],
+        "provenance": [
+          "procurement-delta-approval-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "procurement-delta-vendor-policy",
+      "procurement-delta-limit-v2",
+      "procurement-delta-approval-policy",
+      "procurement-delta-order-schema",
+      "procurement-delta-status-schema",
+      "procurement-delta-message-1",
+      "procurement-delta-message-2",
+      "procurement-delta-message-3",
+      "procurement-delta-message-5",
+      "procurement-delta-message-6",
+      "procurement-delta-message-7"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "0d7ac8cf7845c70db7f8971509fbd099f0e4df29bc9c5da26f0564266b0926ae"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "procurement-delta-purchase-request-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "id": "direct:full-8",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "bundle:full-8",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:full-8",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 3/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "4f1600778581a32a8c023660bbebe37770871c71b0751470ecb5c8f5db242ef7"
+      }
+    },
+    {
+      "id": "bundle:uniform-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 1/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "e2bb21fd2d3d10cc043b92338dbd3d20cc16697b18c2d86ceae8e742734c096f"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 1/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "101ff7edc5c2753756dff11a1e82009c3836ff1cd8aebd8f780c721733ad69d4"
+      }
+    },
+    {
+      "id": "bundle:uniform-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 2/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "4632396131138596638e4a27c1f25d8e6afa1e839f2e323d82ee59197dc9ce1b"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 1/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "101ff7edc5c2753756dff11a1e82009c3836ff1cd8aebd8f780c721733ad69d4"
+      }
+    },
+    {
+      "id": "bundle:uniform-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 2/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "4632396131138596638e4a27c1f25d8e6afa1e839f2e323d82ee59197dc9ce1b"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "2c7d5a2d3ae9e4bb026dbff2b8c96f8ca38796353a750e792f2530573e33b488"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 2/4 rules from the exact safe subset.",
+        "activeWorkflowHash": "2d43561830823b4f660f935dfbc9fe0bb4ae763c1441e267bc0d88d9852c3cc8"
+      }
+    }
+  ],
+  "notes": [
+    "Development output retains aggregate metrics only for parity with hidden evaluation."
+  ]
+}

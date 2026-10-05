@@ -1,0 +1,557 @@
+{
+  "candidate": {
+    "id": "support-cedar-support_credit-workflow",
+    "organizationId": "support-cedar",
+    "taskFamily": "support_credit",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "support_credit"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-account",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.verified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "identity-exceptions",
+            "reason": "Unverified accounts must never receive credits per support-cedar-identity-policy."
+          }
+        ],
+        "provenance": [
+          "support-cedar-identity-policy"
+        ]
+      },
+      {
+        "id": "standard-credit-within-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 45
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "create_service_adjustment",
+            "args": {
+              "memberId": {
+                "kind": "path",
+                "path": "input.customerId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "creditType": {
+                "kind": "literal",
+                "value": "standard"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "update_support_case",
+            "args": {
+              "ticketId": {
+                "kind": "path",
+                "path": "input.ticketId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "resolved"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "support-cedar-limit-v2",
+          "support-cedar-message-3"
+        ]
+      },
+      {
+        "id": "standard-credit-above-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 45
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "care_team_lead",
+            "reason": "Credit amount exceeds the standard automatic limit of $45 per support-cedar-limit-v2 and support-cedar-approval-policy."
+          }
+        ],
+        "provenance": [
+          "support-cedar-limit-v2",
+          "support-cedar-approval-policy"
+        ]
+      },
+      {
+        "id": "enterprise-credit-within-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "enterprise"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 180
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "create_service_adjustment",
+            "args": {
+              "memberId": {
+                "kind": "path",
+                "path": "input.customerId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "creditType": {
+                "kind": "literal",
+                "value": "enterprise"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "update_support_case",
+            "args": {
+              "ticketId": {
+                "kind": "path",
+                "path": "input.ticketId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "resolved"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "support-cedar-enterprise-policy",
+          "support-cedar-message-3"
+        ]
+      },
+      {
+        "id": "enterprise-credit-above-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "enterprise"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 180
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "care_team_lead",
+            "reason": "Credit amount exceeds the enterprise automatic limit of $180 per support-cedar-enterprise-policy and support-cedar-approval-policy."
+          }
+        ],
+        "provenance": [
+          "support-cedar-enterprise-policy",
+          "support-cedar-approval-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "support-cedar-identity-policy",
+      "support-cedar-limit-v2",
+      "support-cedar-enterprise-policy",
+      "support-cedar-approval-policy",
+      "support-cedar-message-3"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "57d7660a78ee8f9393a8cf748cb1a22372311e34c54bb2c670fd19534fb5d899"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "support-cedar-support_credit-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "id": "direct:full-8",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "bundle:full-8",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:full-8",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 5/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "bundle:uniform-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "dabcece6ca1b4d22f7ad1a6b66ba93ff768de320547cafaba79af818e5677916"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "9a7b4d592747ce91ace7cafaa0675badcb0417bf1669c0eb402e56a8b5a674cb"
+      }
+    },
+    {
+      "id": "bundle:uniform-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "4f98fd7806fbec80a9f921b2f7f8aad564ed2b27b05f14d09148d991cf9b199a"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "fe2b8a1fd9747f194ad4445ca8f23cc74df235a95d6d79ff53189bc89e031d2f"
+      }
+    },
+    {
+      "id": "bundle:uniform-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "4f98fd7806fbec80a9f921b2f7f8aad564ed2b27b05f14d09148d991cf9b199a"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "45628f215ae4764caa17e3e7d7a4f342c8d7b1ca4e83cec9192cabe50e544439"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 4/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "078555c4c92ab7ca4a95e2874af843269ba977296f567b899b6820657a6d8e88"
+      }
+    }
+  ],
+  "notes": [
+    "No task-level hidden traces, task IDs, grades, or failure strings are retained."
+  ]
+}

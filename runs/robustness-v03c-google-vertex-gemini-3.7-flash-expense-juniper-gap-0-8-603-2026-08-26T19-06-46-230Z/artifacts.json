@@ -1,0 +1,80 @@
+{
+  "candidate": null,
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "workflow_rejected",
+      "reason": "got status: RESOURCE_EXHAUSTED. {\"error\":{\"code\":429,\"message\":\"Resource exhausted. Please try again later. Please refer to https://cloud.google.com/vertex-ai/generative-ai/docs/error-code-429 for more details.\",\"status\":\"RESOURCE_EXHAUSTED\"}}"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_rejected",
+      "reason": "{\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 429,\\n    \\\"message\\\": \\\"Resource exhausted. Please try again later. Please refer to https://cloud.google.com/vertex-ai/generative-ai/docs/error-code-429 for more details.\\\",\\n    \\\"status\\\": \\\"RESOURCE_EXHAUSTED\\\"\\n  }\\n}\\n\",\"code\":429,\"status\":\"\"}}"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated.",
+        "route": "direct_abstained"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated.",
+        "route": "bundle_abstained"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated.",
+        "route": "safe-subset_abstained"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Neither the complete candidate nor a safe useful subset passed the verifier.",
+        "route": "complete_abstention"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

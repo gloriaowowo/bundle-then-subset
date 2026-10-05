@@ -1,0 +1,58 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-early-exit-verifier-evaluation-counts",
+  "addedFor": "Camera-ready, after the authors' post-acceptance critique (CLEA #74): BTS verifier work against stronger baselines than plain enumeration.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "unit": "verifier artifact evaluations (one rule subset run on the full eight-case verifier)",
+  "definitions": {
+    "safeSubset": "plain enumeration, 2^n-1 per candidate",
+    "bts": "1 if the bundle is accepted, else 1 + (2^n-1) (frozen code)",
+    "maxSubsetPlain": "plain enumeration, 2^n-1 per candidate",
+    "maxSubsetEarlyExit": "1 if the bundle is safe and passes all eight verifier cases, else 2^n-1",
+    "btsDescend": "1 if accepted, else 1 + evaluations of the decreasing-size search",
+    "btsGreedy": "1 if accepted, else 1 + evaluations of backward elimination"
+  },
+  "arms": {
+    "v03_deepseek": {
+      "candidates": 381,
+      "bundleAccepted": 311,
+      "bundleSafeAllPass": 226,
+      "safeSubset": 9315,
+      "bts": 1063,
+      "maxSubsetPlain": 9315,
+      "maxSubsetEarlyExit": 2159,
+      "btsDescend": 626,
+      "btsGreedy": 620,
+      "btsSavingVsSafeSubset": 0.885882984433709,
+      "btsSavingVsMaxSubsetEarlyExit": 0.50764242704956,
+      "btsExtraVsDescend": 0.6980830670926517,
+      "btsExtraVsGreedy": 0.7145161290322581,
+      "secondPathStoredRecords": {
+        "safeSubset": 9315,
+        "bts": 1063,
+        "maxSubsetEarlyExit": 2159
+      }
+    },
+    "v03c_gemini": {
+      "candidates": 383,
+      "bundleAccepted": 300,
+      "bundleSafeAllPass": 251,
+      "safeSubset": 5133,
+      "bts": 952,
+      "maxSubsetPlain": 5133,
+      "maxSubsetEarlyExit": 1171,
+      "btsDescend": 629,
+      "btsGreedy": 629,
+      "btsSavingVsSafeSubset": 0.8145334112604714,
+      "btsSavingVsMaxSubsetEarlyExit": 0.18701964133219473,
+      "btsExtraVsDescend": 0.5135135135135136,
+      "btsExtraVsGreedy": 0.5135135135135136,
+      "secondPathStoredRecords": {
+        "safeSubset": 5133,
+        "bts": 952,
+        "maxSubsetEarlyExit": 1171
+      }
+    }
+  }
+}

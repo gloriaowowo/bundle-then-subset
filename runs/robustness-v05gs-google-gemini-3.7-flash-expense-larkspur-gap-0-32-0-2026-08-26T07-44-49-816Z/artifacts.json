@@ -1,0 +1,335 @@
+{
+  "candidate": {
+    "id": "expense-larkspur-reimbursement-workflow",
+    "organizationId": "expense-larkspur",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-unverified-receipt",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-audit-desk",
+            "reason": "Request without a verified receipt must be routed to receipt-audit-desk."
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-eligibility-policy"
+        ]
+      },
+      {
+        "id": "rule-standard-travel-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard_travel"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 140
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "disburse_expense_refund",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "fieldReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "refundAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "staffKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_field_report",
+            "args": {
+              "fieldReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "refunded"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-limit-v2",
+          "expense-larkspur-action-schema",
+          "expense-larkspur-status-schema",
+          "expense-larkspur-completion-policy"
+        ]
+      },
+      {
+        "id": "rule-client-event-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "client_event"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 560
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "disburse_expense_refund",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "fieldReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "refundAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "staffKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_field_report",
+            "args": {
+              "fieldReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "refunded"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-special-policy",
+          "expense-larkspur-action-schema",
+          "expense-larkspur-status-schema",
+          "expense-larkspur-completion-policy"
+        ]
+      },
+      {
+        "id": "rule-over-limit-approval",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "field_finance_manager",
+            "reason": "Eligible request above threshold requires field_finance_manager approval."
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-approval-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-larkspur-eligibility-policy",
+      "expense-larkspur-limit-v2",
+      "expense-larkspur-approval-policy",
+      "expense-larkspur-special-policy",
+      "expense-larkspur-action-schema",
+      "expense-larkspur-status-schema",
+      "expense-larkspur-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "workflow_rejected",
+      "reason": "{\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"\"}}"
+    },
+    {
+      "sequence": 1,
+      "kind": "model_call",
+      "artifactId": "162d593cf5b14aeff048204e5e243b21b729d8b374d3092e38f7bcd2dda1848f"
+    },
+    {
+      "sequence": 2,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-larkspur-reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "3c8eb41ec1875d1c905e0db9e5427cf5e377de2b43ea4074cd40478c1a406cc4"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "3c8eb41ec1875d1c905e0db9e5427cf5e377de2b43ea4074cd40478c1a406cc4"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 3/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "62f799ad7949a9a18776420437098fe102df188eededcff02d614bb67a789b71"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "3c8eb41ec1875d1c905e0db9e5427cf5e377de2b43ea4074cd40478c1a406cc4"
+      }
+    }
+  ],
+  "notes": [
+    "Development artifacts use the same aggregate-only schema as hidden evaluation."
+  ]
+}

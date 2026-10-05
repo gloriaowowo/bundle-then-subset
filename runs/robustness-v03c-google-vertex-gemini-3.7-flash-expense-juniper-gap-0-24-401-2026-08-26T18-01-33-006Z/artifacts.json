@@ -1,0 +1,410 @@
+{
+  "candidate": {
+    "id": "expense-juniper-reimbursement-workflow",
+    "organizationId": "expense-juniper",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-receipt-escalation",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-exceptions",
+            "reason": "A request without a verified receipt must be routed to receipt-exceptions."
+          }
+        ],
+        "provenance": [
+          "expense-juniper-eligibility-policy"
+        ]
+      },
+      {
+        "id": "regional-approval-above-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "regional"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 95
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "travel_finance_manager",
+            "reason": "Regional expense requests above threshold 95 require travel_finance_manager approval."
+          }
+        ],
+        "provenance": [
+          "expense-juniper-limit-v2",
+          "expense-juniper-approval-policy"
+        ]
+      },
+      {
+        "id": "global-approval-above-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "global"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 390
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "travel_finance_manager",
+            "reason": "Global expense requests above threshold 390 require travel_finance_manager approval."
+          }
+        ],
+        "provenance": [
+          "expense-juniper-special-policy",
+          "expense-juniper-approval-policy"
+        ]
+      },
+      {
+        "id": "auto-reimburse-regional",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "regional"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 95
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "create_travel_reimbursement",
+            "args": {
+              "expenseId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "personId": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reimbursementAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_expense_case_state",
+            "args": {
+              "expenseId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "settled"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-juniper-limit-v2",
+          "expense-juniper-action-schema",
+          "expense-juniper-status-schema",
+          "expense-juniper-completion-policy"
+        ]
+      },
+      {
+        "id": "auto-reimburse-global",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "global"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 390
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "create_travel_reimbursement",
+            "args": {
+              "expenseId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "personId": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reimbursementAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_expense_case_state",
+            "args": {
+              "expenseId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "settled"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-juniper-special-policy",
+          "expense-juniper-action-schema",
+          "expense-juniper-status-schema",
+          "expense-juniper-completion-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-juniper-eligibility-policy",
+      "expense-juniper-limit-v2",
+      "expense-juniper-approval-policy",
+      "expense-juniper-special-policy",
+      "expense-juniper-action-schema",
+      "expense-juniper-status-schema",
+      "expense-juniper-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "cb160b733869039103fea89f771f5de860fc33995409822e9425475453dfc0bd"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-juniper-reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "d3e24420771e55044b78591570152005ca0fe10931a3184ef8f14a14af91e2a5"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "d3e24420771e55044b78591570152005ca0fe10931a3184ef8f14a14af91e2a5"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 5/5 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "d3e24420771e55044b78591570152005ca0fe10931a3184ef8f14a14af91e2a5"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "d3e24420771e55044b78591570152005ca0fe10931a3184ef8f14a14af91e2a5"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

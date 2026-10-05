@@ -1,0 +1,418 @@
+{
+  "candidate": {
+    "id": "expense-meridian-expense_reimbursement-workflow",
+    "organizationId": "expense-meridian",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-invalid-receipt",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "evidence-validation",
+            "reason": "Receipt not verified; automated payment prohibited by policy."
+          }
+        ],
+        "provenance": [
+          "expense-meridian-eligibility-policy"
+        ]
+      },
+      {
+        "id": "rule-routine-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "routine"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 225
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "release_expense_payment",
+            "args": {
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "employeeRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "paymentAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "update_report_disposition",
+            "args": {
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "released"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-meridian-limit-v2",
+          "expense-meridian-action-schema",
+          "expense-meridian-status-schema",
+          "expense-meridian-message-3",
+          "expense-meridian-completion-policy",
+          "expense-meridian-message-9"
+        ]
+      },
+      {
+        "id": "rule-routine-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "routine"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 225
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "expense_control_owner",
+            "reason": "Routine request exceeds automatic threshold; approval required before payment."
+          }
+        ],
+        "provenance": [
+          "expense-meridian-approval-policy",
+          "expense-meridian-limit-v2"
+        ]
+      },
+      {
+        "id": "rule-executive-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "executive_travel"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 900
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "release_expense_payment",
+            "args": {
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "employeeRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "paymentAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "update_report_disposition",
+            "args": {
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "released"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-meridian-special-policy",
+          "expense-meridian-action-schema",
+          "expense-meridian-status-schema",
+          "expense-meridian-message-3",
+          "expense-meridian-completion-policy",
+          "expense-meridian-message-9"
+        ]
+      },
+      {
+        "id": "rule-executive-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "executive_travel"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 900
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "expense_control_owner",
+            "reason": "Executive travel request exceeds automatic threshold; approval required before payment."
+          }
+        ],
+        "provenance": [
+          "expense-meridian-approval-policy",
+          "expense-meridian-special-policy"
+        ]
+      },
+      {
+        "id": "rule-unknown-class",
+        "when": {
+          "op": "not",
+          "arg": {
+            "op": "any",
+            "args": [
+              {
+                "op": "eq",
+                "left": {
+                  "kind": "path",
+                  "path": "input.expenseClass"
+                },
+                "right": {
+                  "kind": "literal",
+                  "value": "routine"
+                }
+              },
+              {
+                "op": "eq",
+                "left": {
+                  "kind": "path",
+                  "path": "input.expenseClass"
+                },
+                "right": {
+                  "kind": "literal",
+                  "value": "executive_travel"
+                }
+              }
+            ]
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "evidence-validation",
+            "reason": "Unknown expense class; cannot determine applicable policy."
+          }
+        ],
+        "provenance": [
+          "expense-meridian-lookup-schema",
+          "expense-meridian-message-5"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-meridian-eligibility-policy",
+      "expense-meridian-limit-v2",
+      "expense-meridian-action-schema",
+      "expense-meridian-status-schema",
+      "expense-meridian-message-3",
+      "expense-meridian-completion-policy",
+      "expense-meridian-special-policy",
+      "expense-meridian-approval-policy",
+      "expense-meridian-lookup-schema",
+      "expense-meridian-message-5",
+      "expense-meridian-message-9"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "aa98c73ca0f5f76ba92de4714564c753c68ecf0e3ccdc7b89e3a508a5f70236f"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-meridian-expense_reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 6,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "c44670a70a9ba59d929ae23d519c7e207a4a8f2c2ab5ac89fcfbe7ef150ba30a"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 6,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "c44670a70a9ba59d929ae23d519c7e207a4a8f2c2ab5ac89fcfbe7ef150ba30a"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 63,
+        "reason": "Activated 5/6 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "71d2772ed63803d7a17353b626fd594cd00a95b2f711c4ef2c1d287130e94cc3"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 6,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "c44670a70a9ba59d929ae23d519c7e207a4a8f2c2ab5ac89fcfbe7ef150ba30a"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

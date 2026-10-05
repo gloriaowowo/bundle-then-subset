@@ -1,0 +1,566 @@
+{
+  "candidate": {
+    "id": "support-beacon-support_credit-workflow",
+    "organizationId": "support-beacon",
+    "taskFamily": "support_credit",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "support_credit"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-account",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.verified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "account-trust-review",
+            "reason": "Unverified accounts must never receive credits; route them to account-trust-review."
+          }
+        ],
+        "provenance": [
+          "support-beacon-identity-policy",
+          "support-beacon-message-2"
+        ]
+      },
+      {
+        "id": "standard-credit-within-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 60
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "post_account_adjustment",
+            "args": {
+              "accountKey": {
+                "kind": "path",
+                "path": "input.customerId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "creditType": {
+                "kind": "literal",
+                "value": "refund_credit"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_case_outcome",
+            "args": {
+              "ticketId": {
+                "kind": "path",
+                "path": "input.ticketId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "resolved"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "support-beacon-limit-v2",
+          "support-beacon-message-14",
+          "support-beacon-resolution-policy",
+          "support-beacon-message-3"
+        ]
+      },
+      {
+        "id": "standard-credit-above-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 60
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "support_supervisor",
+            "reason": "Credits above an applicable automatic limit require support_supervisor approval."
+          }
+        ],
+        "provenance": [
+          "support-beacon-approval-policy",
+          "support-beacon-message-15"
+        ]
+      },
+      {
+        "id": "enterprise-credit-within-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "enterprise"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 275
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "post_account_adjustment",
+            "args": {
+              "accountKey": {
+                "kind": "path",
+                "path": "input.customerId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "creditType": {
+                "kind": "literal",
+                "value": "service_credit"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_case_outcome",
+            "args": {
+              "ticketId": {
+                "kind": "path",
+                "path": "input.ticketId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "resolved"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "support-beacon-enterprise-policy",
+          "support-beacon-message-13",
+          "support-beacon-resolution-policy",
+          "support-beacon-message-3"
+        ]
+      },
+      {
+        "id": "enterprise-credit-above-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.verified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.tier"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "enterprise"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 275
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "support_supervisor",
+            "reason": "Credits above an applicable automatic limit require support_supervisor approval."
+          }
+        ],
+        "provenance": [
+          "support-beacon-approval-policy",
+          "support-beacon-message-15"
+        ]
+      }
+    ],
+    "provenance": [
+      "support-beacon-identity-policy",
+      "support-beacon-limit-v2",
+      "support-beacon-enterprise-policy",
+      "support-beacon-approval-policy",
+      "support-beacon-resolution-policy",
+      "support-beacon-message-13",
+      "support-beacon-message-14",
+      "support-beacon-message-15",
+      "support-beacon-message-3"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "1a5a2dde3c061619dbc26a872d23799003ce67aa817712469450bd44d0ead41b"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "support-beacon-support_credit-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "id": "direct:full-8",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "bundle:full-8",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:full-8",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 5/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "bundle:uniform-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "abf250c7566bc876464acb8b2266fc3a5793483bf55b86cfa198e647a4060e59"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "1ba748d4618ecfe103cd06b2e8bd9d326af3090c382947308d8e771972e891b4"
+      }
+    },
+    {
+      "id": "bundle:uniform-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "57299dfca8fdc22735ea467baaefe20a63e9c073d482d3d5df96af9896edc9da"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "dad2f1152f551bef6412803a36dd1edaaae7e100221a41021950b4d8fd823f0c"
+      }
+    },
+    {
+      "id": "bundle:uniform-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 3/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "4b29378ab43bf852700d130c2370cdeb268583dd2d9bb7b5ad8b991d8912a4fb"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "b6ca212a8c36579169463f487f4b23bec2a45f03921414ab52e06c277982fc7e"
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 4/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "1745834c67677fc6799825bb9e76a54c9c775568c28660ee32c4b2f2b6a9995c"
+      }
+    }
+  ],
+  "notes": [
+    "No task-level hidden traces, task IDs, grades, or failure strings are retained."
+  ]
+}

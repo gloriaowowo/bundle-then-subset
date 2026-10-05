@@ -1,0 +1,1054 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-camera-ready-verifier-work-accounting",
+  "addedFor": "Camera-ready response to reviews (CLEA #74); not part of any preregistered protocol.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "costModel": {
+    "bundle": "1 artifact evaluation per candidate",
+    "safeSubset": "2^n - 1 artifact evaluations per candidate",
+    "bts": "1 if the full bundle is accepted, else 1 + (2^n - 1)",
+    "reductionWithinRuleCount": "a - 1/(2^n - 1), where a is the bundle acceptance rate among n-rule candidates",
+    "unit": "One artifact evaluation runs the candidate (or subset) on every development case of the panel."
+  },
+  "arms": {
+    "v02_deepseek": {
+      "label": "v0.2 DeepSeek (discovery; BTS reconstructed post hoc)",
+      "units": 480,
+      "candidateUnits": 382,
+      "bundleAccepted": 336,
+      "acceptRate": 0.8795811518324608,
+      "acceptedPassingAllVerifierCases": 228,
+      "ruleCountDistribution": {
+        "2": 32,
+        "3": 45,
+        "4": 161,
+        "5": 141,
+        "6": 3
+      },
+      "ruleCountRange": [
+        2,
+        6
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 382,
+        "safeSubset": 7386,
+        "bts": 680,
+        "btsReduction": 0.9079339290549688,
+        "btsIfFullSetNotRetestedOnRejection": 634,
+        "btsReductionIfFullSetNotRetested": 0.9141619279718386
+      },
+      "byRuleCount": [
+        {
+          "rules": 2,
+          "candidates": 32,
+          "bundleAccepted": 0,
+          "acceptRate": 0,
+          "safeSubsetEvals": 96,
+          "btsEvals": 128,
+          "bundleEvals": 32,
+          "reduction": -0.33333333333333326,
+          "closedFormReduction": -0.3333333333333333
+        },
+        {
+          "rules": 3,
+          "candidates": 45,
+          "bundleAccepted": 42,
+          "acceptRate": 0.9333333333333333,
+          "safeSubsetEvals": 315,
+          "btsEvals": 66,
+          "bundleEvals": 45,
+          "reduction": 0.7904761904761904,
+          "closedFormReduction": 0.7904761904761906
+        },
+        {
+          "rules": 4,
+          "candidates": 161,
+          "bundleAccepted": 151,
+          "acceptRate": 0.937888198757764,
+          "safeSubsetEvals": 2415,
+          "btsEvals": 311,
+          "bundleEvals": 161,
+          "reduction": 0.8712215320910973,
+          "closedFormReduction": 0.8712215320910973
+        },
+        {
+          "rules": 5,
+          "candidates": 141,
+          "bundleAccepted": 140,
+          "acceptRate": 0.9929078014184397,
+          "safeSubsetEvals": 4371,
+          "btsEvals": 172,
+          "bundleEvals": 141,
+          "reduction": 0.9606497369023107,
+          "closedFormReduction": 0.9606497369023107
+        },
+        {
+          "rules": 6,
+          "candidates": 3,
+          "bundleAccepted": 3,
+          "acceptRate": 1,
+          "safeSubsetEvals": 189,
+          "btsEvals": 3,
+          "bundleEvals": 3,
+          "reduction": 0.9841269841269842,
+          "closedFormReduction": 0.9841269841269842
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 94,
+          "bundleAccepted": 64,
+          "safeSubsetEvals": 958,
+          "btsEvals": 316
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 96,
+          "bundleAccepted": 80,
+          "safeSubsetEvals": 2052,
+          "btsEvals": 172
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 96,
+          "bundleAccepted": 96,
+          "safeSubsetEvals": 2168,
+          "btsEvals": 96
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 96,
+          "bundleAccepted": 96,
+          "safeSubsetEvals": 2208,
+          "btsEvals": 96
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 1566,
+          "bundle": 1448,
+          "safeSubset": 1219,
+          "bts": 1516
+        },
+        "acceptedUnits": {
+          "units": 336,
+          "bundleAndBts": 1448,
+          "safeSubset": 1151,
+          "extraRulesKeptByBundleAndBts": 297,
+          "relativeIncrease": 0.258036490008688,
+          "safeSubsetPrunedUnits": 219
+        },
+        "rejectedUnits": {
+          "units": 46,
+          "recoveredBySubset": 46
+        }
+      }
+    },
+    "v03_deepseek": {
+      "label": "v0.3 DeepSeek (confirmatory)",
+      "units": 480,
+      "candidateUnits": 381,
+      "bundleAccepted": 311,
+      "acceptRate": 0.8162729658792651,
+      "acceptedPassingAllVerifierCases": 226,
+      "ruleCountDistribution": {
+        "3": 68,
+        "4": 112,
+        "5": 172,
+        "6": 29
+      },
+      "ruleCountRange": [
+        3,
+        6
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 381,
+        "safeSubset": 9315,
+        "bts": 1063,
+        "btsReduction": 0.885882984433709,
+        "btsIfFullSetNotRetestedOnRejection": 993,
+        "btsReductionIfFullSetNotRetested": 0.8933977455716586
+      },
+      "byRuleCount": [
+        {
+          "rules": 3,
+          "candidates": 68,
+          "bundleAccepted": 20,
+          "acceptRate": 0.29411764705882354,
+          "safeSubsetEvals": 476,
+          "btsEvals": 404,
+          "bundleEvals": 68,
+          "reduction": 0.1512605042016807,
+          "closedFormReduction": 0.1512605042016807
+        },
+        {
+          "rules": 4,
+          "candidates": 112,
+          "bundleAccepted": 91,
+          "acceptRate": 0.8125,
+          "safeSubsetEvals": 1680,
+          "btsEvals": 427,
+          "bundleEvals": 112,
+          "reduction": 0.7458333333333333,
+          "closedFormReduction": 0.7458333333333333
+        },
+        {
+          "rules": 5,
+          "candidates": 172,
+          "bundleAccepted": 171,
+          "acceptRate": 0.9941860465116279,
+          "safeSubsetEvals": 5332,
+          "btsEvals": 203,
+          "bundleEvals": 172,
+          "reduction": 0.9619279819954989,
+          "closedFormReduction": 0.9619279819954989
+        },
+        {
+          "rules": 6,
+          "candidates": 29,
+          "bundleAccepted": 29,
+          "acceptRate": 1,
+          "safeSubsetEvals": 1827,
+          "btsEvals": 29,
+          "bundleEvals": 29,
+          "reduction": 0.9841269841269842,
+          "closedFormReduction": 0.9841269841269842
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 95,
+          "bundleAccepted": 27,
+          "safeSubsetEvals": 905,
+          "btsEvals": 747
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 94,
+          "bundleAccepted": 92,
+          "safeSubsetEvals": 2386,
+          "btsEvals": 124
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 96,
+          "bundleAccepted": 96,
+          "safeSubsetEvals": 2824,
+          "btsEvals": 96
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 96,
+          "bundleAccepted": 96,
+          "safeSubsetEvals": 3200,
+          "btsEvals": 96
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 1686,
+          "bundle": 1453,
+          "safeSubset": 1448,
+          "bts": 1575
+        },
+        "acceptedUnits": {
+          "units": 311,
+          "bundleAndBts": 1453,
+          "safeSubset": 1326,
+          "extraRulesKeptByBundleAndBts": 127,
+          "relativeIncrease": 0.09577677224736059,
+          "safeSubsetPrunedUnits": 112
+        },
+        "rejectedUnits": {
+          "units": 70,
+          "recoveredBySubset": 70
+        }
+      },
+      "unitLevelScVac": {
+        "btsMinusBundle": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 410,
+            "higher": 70
+          },
+          "acceptedUnits": {
+            "lower": 0,
+            "equal": 311,
+            "higher": 0
+          },
+          "recoveryUnits": {
+            "lower": 0,
+            "equal": 0,
+            "higher": 70
+          },
+          "noReleaseUnits": {
+            "lower": 0,
+            "equal": 99,
+            "higher": 0
+          },
+          "noReleaseUnitCount": 99
+        },
+        "btsMinusSafeSubset": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 480,
+            "higher": 0
+          }
+        }
+      }
+    },
+    "v03c_gemini": {
+      "label": "v0.3c Gemini (confirmatory cross-model)",
+      "units": 480,
+      "candidateUnits": 383,
+      "bundleAccepted": 300,
+      "acceptRate": 0.783289817232376,
+      "acceptedPassingAllVerifierCases": 251,
+      "ruleCountDistribution": {
+        "2": 3,
+        "3": 128,
+        "4": 224,
+        "5": 28
+      },
+      "ruleCountRange": [
+        2,
+        5
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 383,
+        "safeSubset": 5133,
+        "bts": 952,
+        "btsReduction": 0.8145334112604714,
+        "btsIfFullSetNotRetestedOnRejection": 869,
+        "btsReductionIfFullSetNotRetested": 0.8307032924215858
+      },
+      "byRuleCount": [
+        {
+          "rules": 2,
+          "candidates": 3,
+          "bundleAccepted": 0,
+          "acceptRate": 0,
+          "safeSubsetEvals": 9,
+          "btsEvals": 12,
+          "bundleEvals": 3,
+          "reduction": -0.33333333333333326,
+          "closedFormReduction": -0.3333333333333333
+        },
+        {
+          "rules": 3,
+          "candidates": 128,
+          "bundleAccepted": 48,
+          "acceptRate": 0.375,
+          "safeSubsetEvals": 896,
+          "btsEvals": 688,
+          "bundleEvals": 128,
+          "reduction": 0.2321428571428571,
+          "closedFormReduction": 0.23214285714285715
+        },
+        {
+          "rules": 4,
+          "candidates": 224,
+          "bundleAccepted": 224,
+          "acceptRate": 1,
+          "safeSubsetEvals": 3360,
+          "btsEvals": 224,
+          "bundleEvals": 224,
+          "reduction": 0.9333333333333333,
+          "closedFormReduction": 0.9333333333333333
+        },
+        {
+          "rules": 5,
+          "candidates": 28,
+          "bundleAccepted": 28,
+          "acceptRate": 1,
+          "safeSubsetEvals": 868,
+          "btsEvals": 28,
+          "bundleEvals": 28,
+          "reduction": 0.967741935483871,
+          "closedFormReduction": 0.967741935483871
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 96,
+          "bundleAccepted": 13,
+          "safeSubsetEvals": 660,
+          "btsEvals": 665
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 96,
+          "bundleAccepted": 96,
+          "safeSubsetEvals": 1264,
+          "btsEvals": 96
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 96,
+          "bundleAccepted": 96,
+          "safeSubsetEvals": 1592,
+          "btsEvals": 96
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 95,
+          "bundleAccepted": 95,
+          "safeSubsetEvals": 1617,
+          "btsEvals": 95
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 1426,
+          "bundle": 1180,
+          "safeSubset": 1322,
+          "bts": 1335
+        },
+        "acceptedUnits": {
+          "units": 300,
+          "bundleAndBts": 1180,
+          "safeSubset": 1167,
+          "extraRulesKeptByBundleAndBts": 13,
+          "relativeIncrease": 0.011139674378748854,
+          "safeSubsetPrunedUnits": 13
+        },
+        "rejectedUnits": {
+          "units": 83,
+          "recoveredBySubset": 83
+        }
+      },
+      "unitLevelScVac": {
+        "btsMinusBundle": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 397,
+            "higher": 83
+          },
+          "acceptedUnits": {
+            "lower": 0,
+            "equal": 300,
+            "higher": 0
+          },
+          "recoveryUnits": {
+            "lower": 0,
+            "equal": 0,
+            "higher": 83
+          },
+          "noReleaseUnits": {
+            "lower": 0,
+            "equal": 97,
+            "higher": 0
+          },
+          "noReleaseUnitCount": 97
+        },
+        "btsMinusSafeSubset": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 480,
+            "higher": 0
+          }
+        }
+      }
+    },
+    "v05_deepseek": {
+      "label": "v0.5 DeepSeek approval-blind stress",
+      "units": 90,
+      "candidateUnits": 72,
+      "bundleAccepted": 66,
+      "acceptRate": 0.9166666666666666,
+      "acceptedPassingAllVerifierCases": 54,
+      "ruleCountDistribution": {
+        "3": 16,
+        "4": 6,
+        "5": 26,
+        "6": 24
+      },
+      "ruleCountRange": [
+        3,
+        6
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 72,
+        "safeSubset": 2520,
+        "bts": 122,
+        "btsReduction": 0.9515873015873015,
+        "btsIfFullSetNotRetestedOnRejection": 116,
+        "btsReductionIfFullSetNotRetested": 0.9539682539682539
+      },
+      "byRuleCount": [
+        {
+          "rules": 3,
+          "candidates": 16,
+          "bundleAccepted": 11,
+          "acceptRate": 0.6875,
+          "safeSubsetEvals": 112,
+          "btsEvals": 51,
+          "bundleEvals": 16,
+          "reduction": 0.5446428571428572,
+          "closedFormReduction": 0.5446428571428572
+        },
+        {
+          "rules": 4,
+          "candidates": 6,
+          "bundleAccepted": 5,
+          "acceptRate": 0.8333333333333334,
+          "safeSubsetEvals": 90,
+          "btsEvals": 21,
+          "bundleEvals": 6,
+          "reduction": 0.7666666666666666,
+          "closedFormReduction": 0.7666666666666667
+        },
+        {
+          "rules": 5,
+          "candidates": 26,
+          "bundleAccepted": 26,
+          "acceptRate": 1,
+          "safeSubsetEvals": 806,
+          "btsEvals": 26,
+          "bundleEvals": 26,
+          "reduction": 0.967741935483871,
+          "closedFormReduction": 0.967741935483871
+        },
+        {
+          "rules": 6,
+          "candidates": 24,
+          "bundleAccepted": 24,
+          "acceptRate": 1,
+          "safeSubsetEvals": 1512,
+          "btsEvals": 24,
+          "bundleEvals": 24,
+          "reduction": 0.9841269841269842,
+          "closedFormReduction": 0.9841269841269842
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 18,
+          "bundleAccepted": 12,
+          "safeSubsetEvals": 142,
+          "btsEvals": 68
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 894,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 750,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 734,
+          "btsEvals": 18
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 346,
+          "bundle": 327,
+          "safeSubset": 182,
+          "bts": 335
+        },
+        "acceptedUnits": {
+          "units": 66,
+          "bundleAndBts": 327,
+          "safeSubset": 174,
+          "extraRulesKeptByBundleAndBts": 153,
+          "relativeIncrease": 0.8793103448275863,
+          "safeSubsetPrunedUnits": 66
+        },
+        "rejectedUnits": {
+          "units": 6,
+          "recoveredBySubset": 6
+        }
+      },
+      "unitLevelScVac": {
+        "btsMinusBundle": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 84,
+            "higher": 6
+          },
+          "acceptedUnits": {
+            "lower": 0,
+            "equal": 66,
+            "higher": 0
+          },
+          "recoveryUnits": {
+            "lower": 0,
+            "equal": 0,
+            "higher": 6
+          },
+          "noReleaseUnits": {
+            "lower": 0,
+            "equal": 18,
+            "higher": 0
+          },
+          "noReleaseUnitCount": 18
+        },
+        "btsMinusSafeSubset": {
+          "allUnits": {
+            "lower": 10,
+            "equal": 24,
+            "higher": 56
+          }
+        }
+      }
+    },
+    "v05b_deepseek": {
+      "label": "v0.5b DeepSeek escalation-blind stress",
+      "units": 90,
+      "candidateUnits": 72,
+      "bundleAccepted": 56,
+      "acceptRate": 0.7777777777777778,
+      "acceptedPassingAllVerifierCases": 54,
+      "ruleCountDistribution": {
+        "3": 16,
+        "4": 6,
+        "5": 25,
+        "6": 25
+      },
+      "ruleCountRange": [
+        3,
+        6
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 72,
+        "safeSubset": 2552,
+        "bts": 200,
+        "btsReduction": 0.9216300940438872,
+        "btsIfFullSetNotRetestedOnRejection": 184,
+        "btsReductionIfFullSetNotRetested": 0.9278996865203761
+      },
+      "byRuleCount": [
+        {
+          "rules": 3,
+          "candidates": 16,
+          "bundleAccepted": 2,
+          "acceptRate": 0.125,
+          "safeSubsetEvals": 112,
+          "btsEvals": 114,
+          "bundleEvals": 16,
+          "reduction": -0.017857142857142794,
+          "closedFormReduction": -0.01785714285714285
+        },
+        {
+          "rules": 4,
+          "candidates": 6,
+          "bundleAccepted": 4,
+          "acceptRate": 0.6666666666666666,
+          "safeSubsetEvals": 90,
+          "btsEvals": 36,
+          "bundleEvals": 6,
+          "reduction": 0.6,
+          "closedFormReduction": 0.6
+        },
+        {
+          "rules": 5,
+          "candidates": 25,
+          "bundleAccepted": 25,
+          "acceptRate": 1,
+          "safeSubsetEvals": 775,
+          "btsEvals": 25,
+          "bundleEvals": 25,
+          "reduction": 0.967741935483871,
+          "closedFormReduction": 0.967741935483871
+        },
+        {
+          "rules": 6,
+          "candidates": 25,
+          "bundleAccepted": 25,
+          "acceptRate": 1,
+          "safeSubsetEvals": 1575,
+          "btsEvals": 25,
+          "bundleEvals": 25,
+          "reduction": 0.9841269841269842,
+          "closedFormReduction": 0.9841269841269842
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 18,
+          "bundleAccepted": 2,
+          "safeSubsetEvals": 142,
+          "btsEvals": 146
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 894,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 782,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 734,
+          "btsEvals": 18
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 347,
+          "bundle": 297,
+          "safeSubset": 225,
+          "bts": 310
+        },
+        "acceptedUnits": {
+          "units": 56,
+          "bundleAndBts": 297,
+          "safeSubset": 212,
+          "extraRulesKeptByBundleAndBts": 85,
+          "relativeIncrease": 0.40094339622641506,
+          "safeSubsetPrunedUnits": 56
+        },
+        "rejectedUnits": {
+          "units": 16,
+          "recoveredBySubset": 13
+        }
+      },
+      "unitLevelScVac": {
+        "btsMinusBundle": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 77,
+            "higher": 13
+          },
+          "acceptedUnits": {
+            "lower": 0,
+            "equal": 56,
+            "higher": 0
+          },
+          "recoveryUnits": {
+            "lower": 0,
+            "equal": 0,
+            "higher": 13
+          },
+          "noReleaseUnits": {
+            "lower": 0,
+            "equal": 21,
+            "higher": 0
+          },
+          "noReleaseUnitCount": 21
+        },
+        "btsMinusSafeSubset": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 34,
+            "higher": 56
+          }
+        }
+      }
+    },
+    "v05g_gemini": {
+      "label": "v0.5g Gemini approval-blind stress",
+      "units": 90,
+      "candidateUnits": 72,
+      "bundleAccepted": 66,
+      "acceptRate": 0.9166666666666666,
+      "acceptedPassingAllVerifierCases": 54,
+      "ruleCountDistribution": {
+        "3": 20,
+        "4": 44,
+        "5": 8
+      },
+      "ruleCountRange": [
+        3,
+        5
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 72,
+        "safeSubset": 1048,
+        "bts": 114,
+        "btsReduction": 0.8912213740458015,
+        "btsIfFullSetNotRetestedOnRejection": 108,
+        "btsReductionIfFullSetNotRetested": 0.8969465648854962
+      },
+      "byRuleCount": [
+        {
+          "rules": 3,
+          "candidates": 20,
+          "bundleAccepted": 14,
+          "acceptRate": 0.7,
+          "safeSubsetEvals": 140,
+          "btsEvals": 62,
+          "bundleEvals": 20,
+          "reduction": 0.5571428571428572,
+          "closedFormReduction": 0.5571428571428572
+        },
+        {
+          "rules": 4,
+          "candidates": 44,
+          "bundleAccepted": 44,
+          "acceptRate": 1,
+          "safeSubsetEvals": 660,
+          "btsEvals": 44,
+          "bundleEvals": 44,
+          "reduction": 0.9333333333333333,
+          "closedFormReduction": 0.9333333333333333
+        },
+        {
+          "rules": 5,
+          "candidates": 8,
+          "bundleAccepted": 8,
+          "acceptRate": 1,
+          "safeSubsetEvals": 248,
+          "btsEvals": 8,
+          "bundleEvals": 8,
+          "reduction": 0.967741935483871,
+          "closedFormReduction": 0.967741935483871
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 18,
+          "bundleAccepted": 12,
+          "safeSubsetEvals": 126,
+          "btsEvals": 60
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 334,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 302,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 286,
+          "btsEvals": 18
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 276,
+          "bundle": 258,
+          "safeSubset": 153,
+          "bts": 264
+        },
+        "acceptedUnits": {
+          "units": 66,
+          "bundleAndBts": 258,
+          "safeSubset": 147,
+          "extraRulesKeptByBundleAndBts": 111,
+          "relativeIncrease": 0.7551020408163265,
+          "safeSubsetPrunedUnits": 66
+        },
+        "rejectedUnits": {
+          "units": 6,
+          "recoveredBySubset": 6
+        }
+      },
+      "unitLevelScVac": {
+        "btsMinusBundle": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 84,
+            "higher": 6
+          },
+          "acceptedUnits": {
+            "lower": 0,
+            "equal": 66,
+            "higher": 0
+          },
+          "recoveryUnits": {
+            "lower": 0,
+            "equal": 0,
+            "higher": 6
+          },
+          "noReleaseUnits": {
+            "lower": 0,
+            "equal": 18,
+            "higher": 0
+          },
+          "noReleaseUnitCount": 18
+        },
+        "btsMinusSafeSubset": {
+          "allUnits": {
+            "lower": 9,
+            "equal": 24,
+            "higher": 57
+          }
+        }
+      }
+    },
+    "v05bg_gemini": {
+      "label": "v0.5bg Gemini escalation-blind stress",
+      "units": 90,
+      "candidateUnits": 72,
+      "bundleAccepted": 57,
+      "acceptRate": 0.7916666666666666,
+      "acceptedPassingAllVerifierCases": 54,
+      "ruleCountDistribution": {
+        "3": 20,
+        "4": 44,
+        "5": 8
+      },
+      "ruleCountRange": [
+        3,
+        5
+      ],
+      "verifierArtifactEvals": {
+        "bundle": 72,
+        "safeSubset": 1048,
+        "bts": 177,
+        "btsReduction": 0.8311068702290076,
+        "btsIfFullSetNotRetestedOnRejection": 162,
+        "btsReductionIfFullSetNotRetested": 0.8454198473282443
+      },
+      "byRuleCount": [
+        {
+          "rules": 3,
+          "candidates": 20,
+          "bundleAccepted": 5,
+          "acceptRate": 0.25,
+          "safeSubsetEvals": 140,
+          "btsEvals": 125,
+          "bundleEvals": 20,
+          "reduction": 0.1071428571428571,
+          "closedFormReduction": 0.10714285714285715
+        },
+        {
+          "rules": 4,
+          "candidates": 44,
+          "bundleAccepted": 44,
+          "acceptRate": 1,
+          "safeSubsetEvals": 660,
+          "btsEvals": 44,
+          "bundleEvals": 44,
+          "reduction": 0.9333333333333333,
+          "closedFormReduction": 0.9333333333333333
+        },
+        {
+          "rules": 5,
+          "candidates": 8,
+          "bundleAccepted": 8,
+          "acceptRate": 1,
+          "safeSubsetEvals": 248,
+          "btsEvals": 8,
+          "bundleEvals": 8,
+          "reduction": 0.967741935483871,
+          "closedFormReduction": 0.967741935483871
+        }
+      ],
+      "byCheckpoint": [
+        {
+          "checkpoint": 8,
+          "candidates": 18,
+          "bundleAccepted": 3,
+          "safeSubsetEvals": 126,
+          "btsEvals": 123
+        },
+        {
+          "checkpoint": 16,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 334,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 24,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 302,
+          "btsEvals": 18
+        },
+        {
+          "checkpoint": 32,
+          "candidates": 18,
+          "bundleAccepted": 18,
+          "safeSubsetEvals": 286,
+          "btsEvals": 18
+        }
+      ],
+      "releasedRules": {
+        "allUnits": {
+          "direct": 276,
+          "bundle": 231,
+          "safeSubset": 180,
+          "bts": 240
+        },
+        "acceptedUnits": {
+          "units": 57,
+          "bundleAndBts": 231,
+          "safeSubset": 171,
+          "extraRulesKeptByBundleAndBts": 60,
+          "relativeIncrease": 0.3508771929824561,
+          "safeSubsetPrunedUnits": 57
+        },
+        "rejectedUnits": {
+          "units": 15,
+          "recoveredBySubset": 9
+        }
+      },
+      "unitLevelScVac": {
+        "btsMinusBundle": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 81,
+            "higher": 9
+          },
+          "acceptedUnits": {
+            "lower": 0,
+            "equal": 57,
+            "higher": 0
+          },
+          "recoveryUnits": {
+            "lower": 0,
+            "equal": 0,
+            "higher": 9
+          },
+          "noReleaseUnits": {
+            "lower": 0,
+            "equal": 24,
+            "higher": 0
+          },
+          "noReleaseUnitCount": 24
+        },
+        "btsMinusSafeSubset": {
+          "allUnits": {
+            "lower": 0,
+            "equal": 33,
+            "higher": 57
+          }
+        }
+      }
+    }
+  },
+  "generatedRuleCountRangeAcrossArms": [
+    2,
+    6
+  ]
+}

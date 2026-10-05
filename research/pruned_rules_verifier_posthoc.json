@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-pruned-rule-verifier-behaviour",
+  "addedFor": "Camera-ready, after the authors' post-acceptance critique (CLEA #74): Safe-Subset's pruned rules on the verifier cases.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "arms": {
+    "v03_deepseek": {
+      "acceptedBundles": 311,
+      "acceptedBundlesAllPass": 226,
+      "acceptedBundlesFailingSomeCase": 85,
+      "unitsWithPrunedRules": 112,
+      "unitsWithFiringFailingPrunedRule": 82,
+      "prunedRules": 127,
+      "firesAndFails": 96,
+      "firesAllPass": 0,
+      "matchesButShadowed": 0,
+      "verifierUnmatched": 31,
+      "dead": 31,
+      "verifierFiringsOfPrunedRules": 212,
+      "verifierFiringsOfPrunedRulesPassing": 0,
+      "failingFiringsByOutcome": {
+        "escalation": 114,
+        "approval": 74,
+        "tool+tool": 18,
+        "abstention": 6
+      }
+    },
+    "v03c_gemini": {
+      "acceptedBundles": 300,
+      "acceptedBundlesAllPass": 251,
+      "acceptedBundlesFailingSomeCase": 49,
+      "unitsWithPrunedRules": 13,
+      "unitsWithFiringFailingPrunedRule": 13,
+      "prunedRules": 13,
+      "firesAndFails": 13,
+      "firesAllPass": 0,
+      "matchesButShadowed": 0,
+      "verifierUnmatched": 0,
+      "dead": 0,
+      "verifierFiringsOfPrunedRules": 47,
+      "verifierFiringsOfPrunedRulesPassing": 0,
+      "failingFiringsByOutcome": {
+        "tool": 9,
+        "abstention": 12,
+        "approval": 26
+      }
+    },
+    "v05_deepseek": {
+      "acceptedBundles": 66,
+      "acceptedBundlesAllPass": 54,
+      "acceptedBundlesFailingSomeCase": 12,
+      "unitsWithPrunedRules": 66,
+      "unitsWithFiringFailingPrunedRule": 12,
+      "prunedRules": 153,
+      "firesAndFails": 13,
+      "firesAllPass": 0,
+      "matchesButShadowed": 0,
+      "verifierUnmatched": 140,
+      "dead": 26,
+      "verifierFiringsOfPrunedRules": 78,
+      "verifierFiringsOfPrunedRulesPassing": 0,
+      "failingFiringsByOutcome": {
+        "tool+tool": 74,
+        "tool": 4
+      }
+    },
+    "v05b_deepseek": {
+      "acceptedBundles": 56,
+      "acceptedBundlesAllPass": 54,
+      "acceptedBundlesFailingSomeCase": 2,
+      "unitsWithPrunedRules": 56,
+      "unitsWithFiringFailingPrunedRule": 2,
+      "prunedRules": 85,
+      "firesAndFails": 2,
+      "firesAllPass": 0,
+      "matchesButShadowed": 0,
+      "verifierUnmatched": 83,
+      "dead": 27,
+      "verifierFiringsOfPrunedRules": 8,
+      "verifierFiringsOfPrunedRulesPassing": 0,
+      "failingFiringsByOutcome": {
+        "tool": 4,
+        "tool+tool": 4
+      }
+    },
+    "v05g_gemini": {
+      "acceptedBundles": 66,
+      "acceptedBundlesAllPass": 54,
+      "acceptedBundlesFailingSomeCase": 12,
+      "unitsWithPrunedRules": 66,
+      "unitsWithFiringFailingPrunedRule": 12,
+      "prunedRules": 111,
+      "firesAndFails": 12,
+      "firesAllPass": 0,
+      "matchesButShadowed": 5,
+      "verifierUnmatched": 94,
+      "dead": 0,
+      "verifierFiringsOfPrunedRules": 75,
+      "verifierFiringsOfPrunedRulesPassing": 0,
+      "failingFiringsByOutcome": {
+        "tool+tool": 54,
+        "tool": 21
+      }
+    },
+    "v05bg_gemini": {
+      "acceptedBundles": 57,
+      "acceptedBundlesAllPass": 54,
+      "acceptedBundlesFailingSomeCase": 3,
+      "unitsWithPrunedRules": 57,
+      "unitsWithFiringFailingPrunedRule": 3,
+      "prunedRules": 60,
+      "firesAndFails": 3,
+      "firesAllPass": 0,
+      "matchesButShadowed": 0,
+      "verifierUnmatched": 57,
+      "dead": 0,
+      "verifierFiringsOfPrunedRules": 12,
+      "verifierFiringsOfPrunedRulesPassing": 0,
+      "failingFiringsByOutcome": {
+        "tool+tool": 12
+      }
+    }
+  }
+}

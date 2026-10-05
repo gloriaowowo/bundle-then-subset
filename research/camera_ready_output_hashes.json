@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "camera-ready-output-hashes",
+  "modelCalls": 0,
+  "note": "SHA-256 of every camera-ready analysis output and emitted LaTeX file; figure PDF hashes depend on local fonts and are reported only.",
+  "enforced": {
+    "research/robustness_v04_mask_distribution.json": "900565e28ad03305e186ab8924ee23ff1e2d5e66526baf2e3fdadb30494abdf9",
+    "research/robustness_v04_mask_distribution_per_mask.csv": "dcb07db5910299e93cb0cc4c2415ac92ab577c4d767d53a023df076a522fbb62",
+    "research/retention_cost_accounting.json": "87aa16ca8c500ad2c90a980f7da84596234a1f7865fe8627396f11d729f00734",
+    "research/robustness_max_subset_baseline.json": "e17c6c6ecf9927c7c809c06bc87f5d1ef5517f5dbc71052afd9d41d9aeb1d96d",
+    "research/recovery_variants_posthoc.json": "88a6f8d33b0e63d93ee43ad217729ebb4d12ce5249f7479e415d185132dea780",
+    "research/early_exit_eval_counts.json": "d697a0efcdf0b791bcb27ed147e941ae42f8d0c9eed228b5a06bba19d0b62d8b",
+    "research/max_subset_masks_posthoc.json": "279a8bab2d1bb862870ef1672feaf7912142330944b6774906c18477d3a6a2eb",
+    "research/pruned_rules_verifier_posthoc.json": "993813587c6071ff368976c8db64f517b9743815e1be7fa978d5742dc5bd029a",
+    "research/verifier_work_by_rulecount.json": "98c8955ff47a1b675c0d4fb2ef3b61ae89988a00790ee9786aeadc1a9b532ae2",
+    "research/full_verifier_separation.json": "0a6a7cb8fdf20fb0d57da20a40ed53d097005ad450b6c76a0b5bbf69433b9c6d",
+    "research/robustness_cross_model_concordance.json": "db5ddbd672deb98447c2dedf800e3515e30bf359eec0cf1cc001b456bb0ce5aa",
+    "research/stress_arm_cache_pairing.json": "d5ed1fc004dd5b610fd61c8ae930e729cb271fba39b7c1e4c1fddd900667a16c",
+    "research/v02_pruning_by_domain.json": "606a7acad00a90a2c56f9e4f3b9e9fbaf460421e7ebec9f423b9ceffc7192513",
+    "research/h3_by_organization_posthoc.json": "6afc62de08219f80a3cf750d1ae0d1301069a1ecf802f1b2b25f34ecbc51a1b6",
+    "research/robustness_v03_deepseek_hidden_summary.json": "05f215239e2e0e8fd1befa509929e2490a4637bc8151a3a4a36b58cee85736e7",
+    "research/robustness_v04_existing_data_diagnostics.json": "da0d5b61faf80446f8c1dd022cb0b70bfd9b8270601297d1354f685c1c4ca5a9",
+    "research/robustness_v04_verifier_ablation.json": "6bd020ef3e42088b3dc10c3191d345167df47236710677c5044c2b88b9aaa6bb",
+    "paper/latex/results_cr.tex": "5b89b01989e9a09f16cec472e874235dbad924ed17d126047a77302b0bb50cfb",
+    "paper/latex/cr_table_masks.tex": "199393b5ad9695dab0e01a404fbde4767bdff61b5cc3fc2e73232467fdeec062",
+    "paper/latex/cr_table_verifier_work.tex": "9b458efcd7808f6ee771a71ff149ff53e5602824a9f3bf7267280d265f3c337a",
+    "paper/latex/cr_table_retention.tex": "791bba0350be7166b11c238f00d6d947179372037d12dc19ba6462a1b1294660"
+  },
+  "reportedOnly": {
+    "paper/figures/robustness_v04.pdf": "a8c5ada28478baa8b0a89a5ebf4c90d6ca35d4b77f7cee396b9e56d750e83cd6",
+    "paper/figures/mask_paired.pdf": "a1893dc4ba87aed0137b1e788f1498b21abb8f7b4679f8e6d0687456ff1dc74f"
+  }
+}

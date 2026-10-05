@@ -1,0 +1,1384 @@
+{
+  "schemaVersion": 1,
+  "benchmarkId": "enterprise-rsi-hierarchical-release-v0.3",
+  "mode": "hidden",
+  "provider": "google",
+  "modelId": "gemini-3.7-flash",
+  "billableCostUsd": 0.24006149999999998,
+  "completed": {
+    "expense-aurora:gap-0:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-0-401-2026-08-26T05-13-56-701Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-0:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-16-401-2026-08-26T05-14-00-026Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.004569,
+      "attempts": 1
+    },
+    "expense-aurora:gap-0:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-24-401-2026-08-26T05-14-28-831Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0044985,
+      "attempts": 2
+    },
+    "expense-aurora:gap-1:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-0-401-2026-08-26T05-19-29-506Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-1:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-8-401-2026-08-26T05-25-18-219Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0099675,
+      "attempts": 1
+    },
+    "expense-aurora:gap-1:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-16-401-2026-08-26T05-25-16-674Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00437775,
+      "attempts": 1
+    },
+    "expense-aurora:gap-0:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-32-401-2026-08-26T05-30-47-079Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00610575,
+      "attempts": 1
+    },
+    "expense-aurora:gap-1:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-24-401-2026-08-26T05-31-46-603Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.004476,
+      "attempts": 2
+    },
+    "expense-aurora:gap-1:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-32-401-2026-08-26T05-37-15-575Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00528825,
+      "attempts": 2
+    },
+    "expense-aurora:gap-2:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-0-401-2026-08-26T05-36-47-109Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-2:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-8-401-2026-08-26T05-36-47-135Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-2:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-24-401-2026-08-26T05-47-34-268Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.004843500000000001,
+      "attempts": 1
+    },
+    "expense-aurora:gap-2:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-32-401-2026-08-26T05-47-33-931Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.005502,
+      "attempts": 1
+    },
+    "expense-aurora:gap-2:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-16-401-2026-08-26T05-53-32-009Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0051165,
+      "attempts": 1
+    },
+    "expense-aurora:gap-3:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-0-401-2026-08-26T05-53-24-891Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-3:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-8-401-2026-08-26T05-53-24-912Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-3:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-16-401-2026-08-26T05-59-21-303Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-3:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-24-401-2026-08-26T05-59-24-564Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00447375,
+      "attempts": 1
+    },
+    "expense-aurora:gap-3:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-32-401-2026-08-26T05-59-24-618Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.005247,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-0:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-0-401-2026-08-26T06-04-52-334Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-0:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-8-401-2026-08-26T06-05-23-613Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0026295,
+      "attempts": 2
+    },
+    "expense-cobalt:gap-0:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-16-401-2026-08-26T06-10-45-619Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-aurora:gap-0:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T06-17-26-230Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00672675,
+      "attempts": 2
+    },
+    "expense-cobalt:gap-0:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-32-401-2026-08-26T06-17-07-287Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.005112,
+      "attempts": 2
+    },
+    "expense-cobalt:gap-1:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-0-401-2026-08-26T06-16-37-152Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-1:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-16-401-2026-08-26T06-22-29-848Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0040875,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-1:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-24-401-2026-08-26T06-22-45-443Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.006184500000000001,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-1:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-8-401-2026-08-26T06-29-00-682Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.002862,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-2:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-0-401-2026-08-26T06-28-48-720Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-1:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-32-401-2026-08-26T06-37-30-486Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.005216999999999999,
+      "attempts": 2
+    },
+    "expense-cobalt:gap-2:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-8-401-2026-08-26T06-36-47-937Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-2:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-16-401-2026-08-26T06-36-55-421Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00450675,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-2:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-24-401-2026-08-26T06-44-37-034Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00516075,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-3:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-0-401-2026-08-26T06-44-33-006Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-0:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-52-47-799Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.008989500000000001,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-3:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-8-401-2026-08-26T06-52-38-090Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-3:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-16-401-2026-08-26T06-52-38-100Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-3:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-24-401-2026-08-26T07-02-37-373Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.004539,
+      "attempts": 2
+    },
+    "expense-cobalt:gap-3:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-32-401-2026-08-26T07-04-17-569Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00540075,
+      "attempts": 2
+    },
+    "expense-juniper:gap-0:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-0-401-2026-08-26T07-00-27-356Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-cobalt:gap-2:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T07-12-24-227Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00510825,
+      "attempts": 2
+    },
+    "expense-juniper:gap-0:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-24-401-2026-08-26T07-12-51-394Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.008865000000000001,
+      "attempts": 2
+    },
+    "expense-juniper:gap-0:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-16-401-2026-08-26T07-21-01-787Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0038580000000000003,
+      "attempts": 1
+    },
+    "expense-juniper:gap-0:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-32-401-2026-08-26T07-22-13-327Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0051135,
+      "attempts": 1
+    },
+    "expense-juniper:gap-1:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-0-401-2026-08-26T07-20-58-633Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-juniper:gap-0:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-41-38-002Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0044392500000000005,
+      "attempts": 2
+    },
+    "expense-juniper:gap-1:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-24-401-2026-08-26T08-08-21-081Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-juniper:gap-2:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-0-401-2026-08-26T09-47-15-462Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-juniper:gap-2:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-8-401-2026-08-26T17-21-35-764Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00274125,
+      "attempts": 2
+    },
+    "expense-juniper:gap-1:8:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T17-32-00-429Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-juniper:gap-1:16:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T17-36-32-988Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.004859250000000001,
+      "attempts": 2
+    },
+    "expense-juniper:gap-1:32:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T17-36-11-774Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0105945,
+      "attempts": 2
+    },
+    "expense-juniper:gap-2:24:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-24-401-2026-08-26T17-41-24-332Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00465,
+      "attempts": 1
+    },
+    "expense-juniper:gap-3:0:401": {
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-3-0-401-2026-08-26T17-40-47-269Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    }
+  },
+  "infrastructureFailures": [
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-14-02-290Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00296925
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-14-24-568Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-24-401-2026-08-26T05-14-04-006Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-19-35-428Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-19-59-630Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-32-401-2026-08-26T05-19-46-902Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.004707
+    },
+    {
+      "key": "expense-aurora:gap-0:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-32-401-2026-08-26T05-20-10-187Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-8-401-2026-08-26T05-19-34-507Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-8-401-2026-08-26T05-20-01-339Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-25-18-748Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-25-41-833Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-32-401-2026-08-26T05-25-17-638Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-32-401-2026-08-26T05-25-41-837Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-30-47-639Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-31-13-642Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-1:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-24-401-2026-08-26T05-31-22-571Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-32-401-2026-08-26T05-30-47-433Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-32-401-2026-08-26T05-31-13-137Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-36-49-683Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-37-12-401Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-32-401-2026-08-26T05-36-50-537Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-47-33-936Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-47-57-760Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-2:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-16-401-2026-08-26T05-47-42-181Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.0036915
+    },
+    {
+      "key": "expense-aurora:gap-2:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-16-401-2026-08-26T05-48-24-025Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-53-42-447Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-54-20-453Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-59-26-583Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T05-59-51-586Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T06-05-05-496Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T06-05-36-133Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-8-401-2026-08-26T06-05-00-939Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-16-401-2026-08-26T06-05-02-306Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.011831250000000001
+    },
+    {
+      "key": "expense-cobalt:gap-0:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-16-401-2026-08-26T06-05-26-122Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T06-10-50-735Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T06-11-16-544Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-10-55-181Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-11-36-561Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-32-401-2026-08-26T06-11-02-999Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00927825
+    },
+    {
+      "key": "expense-cobalt:gap-0:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-32-401-2026-08-26T06-11-32-331Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-aurora:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-401-2026-08-26T06-16-48-460Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-16-48-205Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-17-17-950Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.005022
+    },
+    {
+      "key": "expense-cobalt:gap-0:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-32-401-2026-08-26T06-16-44-266Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-22-30-173Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-22-53-271Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-8-401-2026-08-26T06-22-37-210Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.0027795
+    },
+    {
+      "key": "expense-cobalt:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-8-401-2026-08-26T06-23-02-336Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-28-54-001Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-29-19-729Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-32-401-2026-08-26T06-29-03-201Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-32-401-2026-08-26T06-29-47-076Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-37-06-507Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-37-32-267Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-1-32-401-2026-08-26T06-37-02-889Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-44-36-423Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-0:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-0-24-401-2026-08-26T06-45-01-035Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T06-45-03-694Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00492075
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T06-45-37-173Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T06-53-00-277Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T06-53-26-579Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T07-00-40-534Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T07-01-13-913Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-3:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-24-401-2026-08-26T07-01-00-165Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-3:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-3-32-401-2026-08-26T07-02-39-099Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-cobalt:gap-2:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-cobalt-gap-2-32-401-2026-08-26T07-11-39-616Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-12-02-889Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-13-44-575Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-16-401-2026-08-26T07-12-28-590Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-16-401-2026-08-26T07-13-57-702Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-24-401-2026-08-26T07-12-24-694Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00447375
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-21-20-855Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00268425
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-21-57-654Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-31-03-123Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-32-25-844Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T07-30-24-270Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T07-33-24-215Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T07-30-03-194Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T07-31-46-376Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-24-401-2026-08-26T07-31-01-630Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00493125
+    },
+    {
+      "key": "expense-juniper:gap-1:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-24-401-2026-08-26T07-33-11-346Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-0:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-0-8-401-2026-08-26T07-40-55-524Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T07-42-12-849Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T07-43-29-358Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T07-42-17-467Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T07-43-19-868Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:24:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-24-401-2026-08-26T07-40-56-598Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:24:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-24-401-2026-08-26T07-42-17-706Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T08-13-59-304Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T08-37-37-652Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T08-10-48-835Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T08-19-44-250Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T08-14-26-073Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T08-37-37-652Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T10-08-18-704Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T11-01-39-779Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T10-08-18-621Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T11-19-27-689Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T10-21-06-296Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T11-01-59-698Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T15-53-53-286Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T16-57-42-321Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T15-40-39-837Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T15-53-52-758Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T15-53-53-300Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T16-57-41-944Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-8-401-2026-08-26T15-53-53-281Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-8-401-2026-08-26T16-57-42-454Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T17-01-35-487Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T17-04-12-665Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00595125
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T17-09-49-267Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T17-14-17-104Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T17-07-33-620Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T17-13-20-509Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-8-401-2026-08-26T17-08-03-031Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-8-401-2026-08-26T17-13-14-952Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T17-19-29-541Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:8:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-8-401-2026-08-26T17-22-04-172Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T17-26-00-479Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T17-28-59-565Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T17-18-15-192Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T17-23-00-140Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:8:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-8-401-2026-08-26T17-20-05-074Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 1,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-16-401-2026-08-26T17-34-21-956Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-1:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-1-32-401-2026-08-26T17-35-16-566Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00504975
+    },
+    {
+      "key": "expense-juniper:gap-2:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-16-401-2026-08-26T17-34-28-069Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-16-401-2026-08-26T17-37-46-555Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:16:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-16-401-2026-08-26T17-44-02-361Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:16:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-16-401-2026-08-26T17-46-16-949Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:32:401",
+      "attempt": 1,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-32-401-2026-08-26T17-44-15-338Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0
+    },
+    {
+      "key": "expense-juniper:gap-2:32:401",
+      "attempt": 2,
+      "runId": "robustness-v03b-google-gemini-3.7-flash-expense-juniper-gap-2-32-401-2026-08-26T17-46-23-742Z",
+      "runStatus": "infrastructure_failure",
+      "providerCalls": 2,
+      "billableCostUsd": 0.00518475
+    }
+  ]
+}

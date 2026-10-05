@@ -1,0 +1,398 @@
+{
+  "candidate": {
+    "id": "expense-cobalt-expense_reimbursement-workflow",
+    "organizationId": "expense-cobalt",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-invalid-documentation",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "documentation-assurance",
+            "reason": "Request lacks validated documentation; automated repayment is prohibited."
+          }
+        ],
+        "provenance": [
+          "expense-cobalt-eligibility-policy"
+        ]
+      },
+      {
+        "id": "rule-local-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "local"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 160
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "post_employee_repayment",
+            "args": {
+              "claimKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "workerRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "claimAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "finalize_expense_claim",
+            "args": {
+              "claimKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "paid"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-cobalt-limit-v2",
+          "expense-cobalt-action-schema",
+          "expense-cobalt-status-schema",
+          "expense-cobalt-message-3",
+          "expense-cobalt-message-8",
+          "expense-cobalt-message-13",
+          "expense-cobalt-completion-policy"
+        ]
+      },
+      {
+        "id": "rule-cross-border-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "cross_border"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 620
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "post_employee_repayment",
+            "args": {
+              "claimKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "workerRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "claimAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "finalize_expense_claim",
+            "args": {
+              "claimKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "paid"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-cobalt-special-policy",
+          "expense-cobalt-action-schema",
+          "expense-cobalt-status-schema",
+          "expense-cobalt-message-3",
+          "expense-cobalt-message-8",
+          "expense-cobalt-message-13",
+          "expense-cobalt-completion-policy"
+        ]
+      },
+      {
+        "id": "rule-approval-required",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "any",
+              "args": [
+                {
+                  "op": "all",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.expenseClass"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": "local"
+                      }
+                    },
+                    {
+                      "op": "gt",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.amount"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": 160
+                      }
+                    }
+                  ]
+                },
+                {
+                  "op": "all",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.expenseClass"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": "cross_border"
+                      }
+                    },
+                    {
+                      "op": "gt",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.amount"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": 620
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "reimbursement_lead",
+            "reason": "Eligible request exceeds the applicable automatic threshold; approval is required before repayment."
+          }
+        ],
+        "provenance": [
+          "expense-cobalt-approval-policy",
+          "expense-cobalt-limit-v2",
+          "expense-cobalt-special-policy",
+          "expense-cobalt-message-14"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-cobalt-eligibility-policy",
+      "expense-cobalt-limit-v2",
+      "expense-cobalt-limit-v1",
+      "expense-cobalt-action-schema",
+      "expense-cobalt-status-schema",
+      "expense-cobalt-message-1",
+      "expense-cobalt-message-2",
+      "expense-cobalt-message-3",
+      "expense-cobalt-message-4",
+      "expense-cobalt-special-policy",
+      "expense-cobalt-lookup-schema",
+      "expense-cobalt-message-5",
+      "expense-cobalt-message-6",
+      "expense-cobalt-message-7",
+      "expense-cobalt-message-8",
+      "expense-cobalt-message-9",
+      "expense-cobalt-completion-policy",
+      "expense-cobalt-audit-schema",
+      "expense-cobalt-approval-policy",
+      "expense-cobalt-message-10",
+      "expense-cobalt-message-11",
+      "expense-cobalt-message-12",
+      "expense-cobalt-message-13",
+      "expense-cobalt-message-14"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "2ccd6e2cff9f02bfdf0231f5bfd427fbf8446b1d19123d78876bb4ef5dfcff8e"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-cobalt-expense_reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "988a763c526cdb1259d9c6efd3aeabe5184dc4b71537114af1a6fe45c88cd1e2"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "988a763c526cdb1259d9c6efd3aeabe5184dc4b71537114af1a6fe45c88cd1e2"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 4/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "988a763c526cdb1259d9c6efd3aeabe5184dc4b71537114af1a6fe45c88cd1e2"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "988a763c526cdb1259d9c6efd3aeabe5184dc4b71537114af1a6fe45c88cd1e2"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "candidate": {
+    "id": "expense-aurora-reimbursement-workflow",
+    "organizationId": "expense-aurora",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-receipt-review",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-integrity-review",
+            "reason": "Unverified receipt requires integrity review"
+          }
+        ],
+        "provenance": [
+          "expense-aurora-eligibility-policy"
+        ]
+      },
+      {
+        "id": "domestic-auto-reimburse",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "domestic"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 125
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_expense_reimbursement",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "employeeKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_expense_report",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "reimbursed"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-action-schema",
+          "expense-aurora-status-schema",
+          "expense-aurora-message-3"
+        ]
+      },
+      {
+        "id": "manual-approval-required",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "any",
+              "args": [
+                {
+                  "op": "neq",
+                  "left": {
+                    "kind": "path",
+                    "path": "input.expenseClass"
+                  },
+                  "right": {
+                    "kind": "literal",
+                    "value": "domestic"
+                  }
+                },
+                {
+                  "op": "gt",
+                  "left": {
+                    "kind": "path",
+                    "path": "input.amount"
+                  },
+                  "right": {
+                    "kind": "literal",
+                    "value": 125
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "manager",
+            "reason": "Requests exceeding limit or non-domestic require approval"
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-message-2"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-aurora-eligibility-policy",
+      "expense-aurora-limit-v2",
+      "expense-aurora-action-schema",
+      "expense-aurora-status-schema",
+      "expense-aurora-message-2",
+      "expense-aurora-message-3"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "workflow_rejected",
+      "reason": "{\"error\":{\"message\":\"{\\n  \\\"error\\\": {\\n    \\\"code\\\": 503,\\n    \\\"message\\\": \\\"This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.\\\",\\n    \\\"status\\\": \\\"UNAVAILABLE\\\"\\n  }\\n}\\n\",\"code\":503,\"status\":\"\"}}"
+    },
+    {
+      "sequence": 1,
+      "kind": "model_call",
+      "artifactId": "79ca758fe15ffb72331c5363f69732e316ccf767b76e924e4867ecc0e71d5b0a"
+    },
+    {
+      "sequence": 2,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-aurora-reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "45a33b641fce04431bf36ecb3a2bdc9186ea0b26cfd30131070352c7ff005f81"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "45a33b641fce04431bf36ecb3a2bdc9186ea0b26cfd30131070352c7ff005f81"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 7,
+        "reason": "Activated 2/3 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "a3ad100891e3b66883e2010078db9149c0df927d98ae8c61a23f5b2c24b9384a"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "45a33b641fce04431bf36ecb3a2bdc9186ea0b26cfd30131070352c7ff005f81"
+      }
+    }
+  ],
+  "notes": [
+    "Development artifacts use the same aggregate-only schema as hidden evaluation."
+  ]
+}

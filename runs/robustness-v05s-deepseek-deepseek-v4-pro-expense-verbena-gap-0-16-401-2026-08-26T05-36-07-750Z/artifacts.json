@@ -1,0 +1,440 @@
+{
+  "candidate": {
+    "id": "expense-verbena-expense_reimbursement-workflow",
+    "organizationId": "expense-verbena",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-verify-receipt",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "program-evidence-review",
+            "reason": "Receipt not verified; automated repayment prohibited."
+          }
+        ],
+        "provenance": [
+          "expense-verbena-eligibility-policy"
+        ]
+      },
+      {
+        "id": "rule-sponsored-event-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "sponsored_event"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 720
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_program_repayment",
+            "args": {
+              "programReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "memberRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "repaymentAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "literal",
+                "value": "sponsored_event"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "finalize_program_report",
+            "args": {
+              "programReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "repaid"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-verbena-special-policy",
+          "expense-verbena-action-schema",
+          "expense-verbena-status-schema",
+          "expense-verbena-message-3"
+        ]
+      },
+      {
+        "id": "rule-program-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "program"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 185
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_program_repayment",
+            "args": {
+              "programReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "memberRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "repaymentAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "literal",
+                "value": "program"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "finalize_program_report",
+            "args": {
+              "programReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "repaid"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-verbena-limit-v2",
+          "expense-verbena-action-schema",
+          "expense-verbena-status-schema",
+          "expense-verbena-message-3"
+        ]
+      },
+      {
+        "id": "rule-program-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "program"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 185
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "program_finance_owner",
+            "reason": "Amount exceeds automatic threshold; approval required before repayment."
+          }
+        ],
+        "provenance": [
+          "expense-verbena-approval-policy",
+          "expense-verbena-limit-v2"
+        ]
+      },
+      {
+        "id": "rule-sponsored-event-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "sponsored_event"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 720
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "program_finance_owner",
+            "reason": "Amount exceeds sponsored_event automatic threshold; approval required."
+          }
+        ],
+        "provenance": [
+          "expense-verbena-special-policy",
+          "expense-verbena-approval-policy"
+        ]
+      },
+      {
+        "id": "rule-unknown-class",
+        "when": {
+          "op": "not",
+          "arg": {
+            "op": "in",
+            "left": {
+              "kind": "path",
+              "path": "input.expenseClass"
+            },
+            "right": {
+              "kind": "literal",
+              "value": [
+                "program",
+                "sponsored_event"
+              ]
+            }
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "program-evidence-review",
+            "reason": "Unknown expense class; manual review required."
+          }
+        ],
+        "provenance": [
+          "expense-verbena-lookup-schema"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-verbena-eligibility-policy",
+      "expense-verbena-limit-v2",
+      "expense-verbena-approval-policy",
+      "expense-verbena-special-policy",
+      "expense-verbena-action-schema",
+      "expense-verbena-status-schema",
+      "expense-verbena-message-3"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "972f202314a9877e46e128fe60a1f53ab427182764040116c682bb060d3cf88a"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-verbena-expense_reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 6,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "9896633073a5d92691d2c8e843616e76097504aa013c9b252ae1e5dc41e702a0"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 6,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "9896633073a5d92691d2c8e843616e76097504aa013c9b252ae1e5dc41e702a0"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 63,
+        "reason": "Activated 3/6 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "49c62d9a90027951f423a00b6b6047d9011d343f1d0b8e097e62afdb038bc9d3"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 6,
+        "promotedRuleCount": 6,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "9896633073a5d92691d2c8e843616e76097504aa013c9b252ae1e5dc41e702a0"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

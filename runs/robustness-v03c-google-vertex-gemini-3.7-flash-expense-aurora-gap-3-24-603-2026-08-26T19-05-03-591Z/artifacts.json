@@ -1,0 +1,396 @@
+{
+  "candidate": {
+    "id": "expense-aurora-reimbursement-flow",
+    "organizationId": "expense-aurora",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "check-receipt-verification",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-integrity-review",
+            "reason": "Receipt is not verified"
+          }
+        ],
+        "provenance": [
+          "expense-aurora-eligibility-policy"
+        ]
+      },
+      {
+        "id": "process-domestic-reimbursement",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "domestic"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 125
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_expense_reimbursement",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "employeeKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_expense_report",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "reimbursed"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-action-schema",
+          "expense-aurora-status-schema",
+          "expense-aurora-completion-policy"
+        ]
+      },
+      {
+        "id": "process-international-reimbursement",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "international"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 480
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_expense_reimbursement",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "employeeKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_expense_report",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "reimbursed"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-aurora-special-policy",
+          "expense-aurora-action-schema",
+          "expense-aurora-status-schema",
+          "expense-aurora-completion-policy"
+        ]
+      },
+      {
+        "id": "require-approval-over-threshold",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "any",
+              "args": [
+                {
+                  "op": "all",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.expenseClass"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": "domestic"
+                      }
+                    },
+                    {
+                      "op": "gt",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.amount"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": 125
+                      }
+                    }
+                  ]
+                },
+                {
+                  "op": "all",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.expenseClass"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": "international"
+                      }
+                    },
+                    {
+                      "op": "gt",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.amount"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": 480
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "expense_operations_manager",
+            "reason": "Expense amount exceeds automatic threshold"
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-special-policy",
+          "expense-aurora-message-2",
+          "expense-aurora-message-15"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-aurora-eligibility-policy",
+      "expense-aurora-limit-v2",
+      "expense-aurora-special-policy",
+      "expense-aurora-completion-policy",
+      "expense-aurora-action-schema",
+      "expense-aurora-status-schema"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "59247231343737ea29e4d648e1a0b5fdbc428a184399e281c6082f3ace524382"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-aurora-reimbursement-flow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "e1758ce2c8003c83b0d249e00448f4e09fa4131f7147909f6cc9ea4fcea96d9a"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "e1758ce2c8003c83b0d249e00448f4e09fa4131f7147909f6cc9ea4fcea96d9a"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 4/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "e1758ce2c8003c83b0d249e00448f4e09fa4131f7147909f6cc9ea4fcea96d9a"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "e1758ce2c8003c83b0d249e00448f4e09fa4131f7147909f6cc9ea4fcea96d9a"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

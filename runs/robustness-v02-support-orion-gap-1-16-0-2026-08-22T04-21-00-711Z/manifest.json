@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "runId": "robustness-v02-support-orion-gap-1-16-0-2026-08-22T04-21-00-711Z",
+  "createdAt": "2026-08-22T04:21:00.711Z",
+  "benchmarkId": "orgboot-synth-robustness-v0.2",
+  "method": "shared-candidate-multi-gate",
+  "model": {
+    "provider": "deepseek",
+    "id": "deepseek-v4-pro",
+    "temperature": 0,
+    "reasoning": "off",
+    "jsonMode": true
+  },
+  "hashes": {
+    "benchmark": "519fefabf15f1852b6e828ca2819e54180506a7d6c7c2ef2b72cc69982b69dcb",
+    "promptContract": "81576c99f850cf0114e66d69299b0d74d7259a79a7dc4108175e550d1738918b",
+    "implementation": "cdf6ae5ef0e036ce30de5a145cb83d4d34e61c52f7d861fe1c989fe8f8f72dc7",
+    "aggregate": "2de016b02a117202078f1ebaf0e9febf7ec0c60b6d7e0405eb635b27f3d8feff",
+    "artifacts": "a2aba18b8f4471c1a69285f6dd8a2b218d8e3427bb964b170fdd0510253849cd"
+  },
+  "metrics": {
+    "candidateGenerated": 1,
+    "logicalModelCalls": 1,
+    "providerCalls": 0,
+    "attributedCostUsd": 0.0018037710000000002,
+    "billableCostUsd": 0
+  },
+  "modelCalls": 1,
+  "modelRequestMade": false,
+  "notes": [
+    "One candidate and syntax-repair budget are shared by all release gates.",
+    "Gate feedback never changes the candidate.",
+    "Exploratory development run; excluded from frozen claims."
+  ]
+}

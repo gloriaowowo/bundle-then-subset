@@ -1,0 +1,365 @@
+{
+  "candidate": {
+    "id": "access-tundra-access-provisioning",
+    "organizationId": "access-tundra",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "identity-not-verified",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "principal-assurance",
+            "reason": "Request lacks assured principal identity; automated access binding is prohibited."
+          }
+        ],
+        "provenance": [
+          "access-tundra-eligibility-policy"
+        ]
+      },
+      {
+        "id": "baseline-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "baseline"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 31
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_access_binding",
+            "args": {
+              "securityRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "principalRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskIndex": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "finalize_security_request",
+            "args": {
+              "securityRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "bound"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-tundra-limit-v2",
+          "access-tundra-action-schema",
+          "access-tundra-status-schema",
+          "access-tundra-message-3"
+        ]
+      },
+      {
+        "id": "baseline-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "baseline"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 31
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "access_assurance_manager",
+            "reason": "Eligible baseline request above automatic threshold requires manager approval before access binding."
+          }
+        ],
+        "provenance": [
+          "access-tundra-approval-policy",
+          "access-tundra-limit-v2"
+        ]
+      },
+      {
+        "id": "sensitive-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "sensitive"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 11
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_access_binding",
+            "args": {
+              "securityRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "principalRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskIndex": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "finalize_security_request",
+            "args": {
+              "securityRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "bound"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-tundra-special-policy",
+          "access-tundra-action-schema",
+          "access-tundra-status-schema",
+          "access-tundra-message-3"
+        ]
+      },
+      {
+        "id": "sensitive-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "sensitive"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 11
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "access_assurance_manager",
+            "reason": "Eligible sensitive request above automatic threshold requires manager approval before access binding."
+          }
+        ],
+        "provenance": [
+          "access-tundra-approval-policy",
+          "access-tundra-special-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-tundra-eligibility-policy",
+      "access-tundra-limit-v2",
+      "access-tundra-action-schema",
+      "access-tundra-status-schema",
+      "access-tundra-special-policy",
+      "access-tundra-approval-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "710a81d27949d5cc7ecda2dc72c4584513ed1de2827fb765bf6829ee5cf727f6"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-tundra-access-provisioning"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "720ed886a41c2000bc960588e5de547a2f436d402624c6a3ac1a156553218f05"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "720ed886a41c2000bc960588e5de547a2f436d402624c6a3ac1a156553218f05"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 5/5 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "720ed886a41c2000bc960588e5de547a2f436d402624c6a3ac1a156553218f05"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "720ed886a41c2000bc960588e5de547a2f436d402624c6a3ac1a156553218f05"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

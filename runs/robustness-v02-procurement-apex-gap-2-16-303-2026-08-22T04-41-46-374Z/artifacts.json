@@ -1,0 +1,348 @@
+{
+  "candidate": {
+    "id": "procurement-apex-purchase-request-workflow",
+    "organizationId": "procurement-apex",
+    "taskFamily": "purchase_request",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "purchase_request"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-approved-vendor",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.vendorApproved"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "open_procurement_order",
+            "args": {
+              "requestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "partnerId": {
+                "kind": "path",
+                "path": "input.vendorId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "record_request_status",
+            "args": {
+              "requestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "ordered"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "procurement-apex-vendor-policy",
+          "procurement-apex-limit-v2",
+          "procurement-apex-order-schema",
+          "procurement-apex-status-schema",
+          "procurement-apex-message-1",
+          "procurement-apex-message-3",
+          "procurement-apex-message-5",
+          "procurement-apex-message-9"
+        ]
+      },
+      {
+        "id": "rule-unapproved-vendor",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.vendorApproved"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "third-party-risk",
+            "reason": "Vendor is not approved; route to third-party-risk per policy."
+          }
+        ],
+        "provenance": [
+          "procurement-apex-vendor-policy",
+          "procurement-apex-message-6"
+        ]
+      }
+    ],
+    "provenance": [
+      "procurement-apex-vendor-policy",
+      "procurement-apex-limit-v2",
+      "procurement-apex-order-schema",
+      "procurement-apex-status-schema",
+      "procurement-apex-message-1",
+      "procurement-apex-message-3",
+      "procurement-apex-message-5",
+      "procurement-apex-message-9",
+      "procurement-apex-message-6"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "f6f4146b2abce1b3242afc5ac09c6185da34a324dfabab1a25dd229b938fadbe"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "procurement-apex-purchase-request-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "id": "direct:full-8",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "activeWorkflowHash": "cf15b20a92b91b48937cabb13c3d0a83be6f675c3756700b77edf92e80bcc575"
+      }
+    },
+    {
+      "id": "bundle:full-8",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains."
+      }
+    },
+    {
+      "id": "safe-subset:full-8",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "Activated 1/2 rules from the exact safe subset.",
+        "activeWorkflowHash": "24476afd180d682cf37938b2285fb84c34ce343e2898dd2242477ffab59ea4ba"
+      }
+    },
+    {
+      "id": "bundle:uniform-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "cf15b20a92b91b48937cabb13c3d0a83be6f675c3756700b77edf92e80bcc575"
+      }
+    },
+    {
+      "id": "safe-subset:uniform-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "Activated 1/2 rules from the exact safe subset.",
+        "activeWorkflowHash": "964471bc1edb7a0c0773fe01e691d20549e240c13da59af5a4a495e979c7b6e6"
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains."
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "No non-empty safe and useful rule subset was found."
+      }
+    },
+    {
+      "id": "bundle:uniform-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains."
+      }
+    },
+    {
+      "id": "safe-subset:uniform-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "No non-empty safe and useful rule subset was found."
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains."
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "No non-empty safe and useful rule subset was found."
+      }
+    },
+    {
+      "id": "bundle:uniform-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 3,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains."
+      }
+    },
+    {
+      "id": "safe-subset:uniform-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "No non-empty safe and useful rule subset was found."
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains."
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 2,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 3,
+        "reason": "Activated 1/2 rules from the exact safe subset.",
+        "activeWorkflowHash": "24476afd180d682cf37938b2285fb84c34ce343e2898dd2242477ffab59ea4ba"
+      }
+    }
+  ],
+  "notes": [
+    "No task-level hidden traces, task IDs, grades, or failure strings are retained."
+  ]
+}

@@ -1,0 +1,394 @@
+{
+  "candidate": {
+    "id": "access_provisioning_workflow",
+    "organizationId": "access-nimbus",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "route_unverified_identity",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "identity-proofing",
+            "reason": "Request without a verified workforce identity must be routed to identity-proofing"
+          }
+        ],
+        "provenance": [
+          "access-nimbus-eligibility-policy"
+        ]
+      },
+      {
+        "id": "auto_grant_privileged",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "privileged"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 12
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "provision_system_access",
+            "args": {
+              "accessRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "evaluatedRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "principalKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "complete_access_request",
+            "args": {
+              "accessRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "provisioned"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-nimbus-special-policy",
+          "access-nimbus-action-schema",
+          "access-nimbus-status-schema",
+          "access-nimbus-completion-policy"
+        ]
+      },
+      {
+        "id": "auto_grant_standard",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 28
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "provision_system_access",
+            "args": {
+              "accessRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "evaluatedRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "principalKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "complete_access_request",
+            "args": {
+              "accessRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "provisioned"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-nimbus-limit-v2",
+          "access-nimbus-action-schema",
+          "access-nimbus-status-schema",
+          "access-nimbus-completion-policy"
+        ]
+      },
+      {
+        "id": "require_manager_approval_over_threshold",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "any",
+              "args": [
+                {
+                  "op": "all",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.accessClass"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": "privileged"
+                      }
+                    },
+                    {
+                      "op": "gt",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.riskScore"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": 12
+                      }
+                    }
+                  ]
+                },
+                {
+                  "op": "all",
+                  "args": [
+                    {
+                      "op": "eq",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.accessClass"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": "standard"
+                      }
+                    },
+                    {
+                      "op": "gt",
+                      "left": {
+                        "kind": "path",
+                        "path": "input.riskScore"
+                      },
+                      "right": {
+                        "kind": "literal",
+                        "value": 28
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "identity_security_manager",
+            "reason": "Eligible request risk score exceeds automatic threshold"
+          }
+        ],
+        "provenance": [
+          "access-nimbus-approval-policy",
+          "access-nimbus-limit-v2",
+          "access-nimbus-special-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-nimbus-eligibility-policy",
+      "access-nimbus-limit-v2",
+      "access-nimbus-special-policy",
+      "access-nimbus-approval-policy",
+      "access-nimbus-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "d4b5bca019a4b9f873193e7be18cae1771f31c2ceb6f1febc235009f9e10e21e"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access_provisioning_workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "bdd9bf9308ff5b857132d15ff09a061f76620f4419595d9474607cb41523c525"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "bdd9bf9308ff5b857132d15ff09a061f76620f4419595d9474607cb41523c525"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 4/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "bdd9bf9308ff5b857132d15ff09a061f76620f4419595d9474607cb41523c525"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "bdd9bf9308ff5b857132d15ff09a061f76620f4419595d9474607cb41523c525"
+      }
+    }
+  ],
+  "notes": [
+    "Development artifacts use the same aggregate-only schema as hidden evaluation."
+  ]
+}

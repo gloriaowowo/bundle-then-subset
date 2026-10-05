@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-cross-model-acceptance-concordance",
+  "modelCalls": 0,
+  "sharedUnitKeys": 480,
+  "bundleAcceptanceConcordant": 445,
+  "bundleAcceptanceConcordanceRate": 0.9270833333333334,
+  "bothCandidatesGenerated": 380,
+  "bothCandidatesGeneratedConcordant": 348,
+  "threeWayOutcomeConcordant": 444,
+  "checkpointZeroUnits": 96,
+  "definitions": {
+    "bundleAcceptanceConcordant": "same bundle-accepted boolean; a unit with no candidate counts as not accepted",
+    "bothCandidatesGeneratedConcordant": "same accept/reject decision among units where both models generated a candidate (the paper's matched units)",
+    "threeWayOutcomeConcordant": "same outcome among no-candidate / rejected / accepted"
+  },
+  "note": "Accept/reject decision concordance between models. It does not by itself explain the within-0.002 per-gate agreement: per-unit SC-VAC differs in some concordant units, and the net shift from discordant units is largely offset by concordant units and by units where only one model generated a candidate."
+}

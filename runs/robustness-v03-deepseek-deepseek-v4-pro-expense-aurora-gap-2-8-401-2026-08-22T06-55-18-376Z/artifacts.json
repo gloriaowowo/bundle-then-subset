@@ -1,0 +1,247 @@
+{
+  "candidate": {
+    "id": "expense-aurora-expense_reimbursement-workflow",
+    "organizationId": "expense-aurora",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "receipt-required",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-integrity-review",
+            "reason": "Receipt not verified; policy requires routing to receipt-integrity-review."
+          }
+        ],
+        "provenance": [
+          "expense-aurora-eligibility-policy"
+        ]
+      },
+      {
+        "id": "auto-approve-low-amount",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 125
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_expense_reimbursement",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "employeeKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "actionClass": {
+                "kind": "literal",
+                "value": "automatic"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_expense_report",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "reimbursed"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-message-1",
+          "expense-aurora-message-3"
+        ]
+      },
+      {
+        "id": "manual-review-high-amount",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 125
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "expense_operations_manager",
+            "reason": "Amount exceeds automatic threshold; manager approval required before reimbursement."
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-message-2"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-aurora-eligibility-policy",
+      "expense-aurora-limit-v2",
+      "expense-aurora-message-1",
+      "expense-aurora-message-2",
+      "expense-aurora-message-3"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "f402d8f820e7df451700169af8e1e043c170abab994103f0049a9e0b9a94198b"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-aurora-expense_reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "10a9a4dc98005c087fa5e8437da288ca6dc06551a8afd4a6c4a59887cddd3d82"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 6,
+        "developmentPolicyFailures": 2,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains.",
+        "route": "bundle_abstained"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 7,
+        "reason": "Activated 2/3 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "3a9995383f13e0ed069b24224a63e588c5713cc32efbfeaa5fec3c82df00f986"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 8,
+        "reason": "The complete candidate failed; hierarchical release recovered a safe non-empty subset.",
+        "route": "subset_recovery",
+        "activeWorkflowHash": "3a9995383f13e0ed069b24224a63e588c5713cc32efbfeaa5fec3c82df00f986"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "runId": "robustness-v02-procurement-mesa-gap-0-32-303-2026-08-22T04-40-57-800Z",
+  "createdAt": "2026-08-22T04:40:57.800Z",
+  "benchmarkId": "orgboot-synth-robustness-v0.2",
+  "method": "shared-candidate-multi-gate",
+  "model": {
+    "provider": "deepseek",
+    "id": "deepseek-v4-pro",
+    "temperature": 0,
+    "reasoning": "off",
+    "jsonMode": true
+  },
+  "hashes": {
+    "benchmark": "24a3ae6a395f4a517884d0c71f80cd7fbe228008231f9f733d1ab4f748a13aee",
+    "promptContract": "81576c99f850cf0114e66d69299b0d74d7259a79a7dc4108175e550d1738918b",
+    "implementation": "8e47a854fe8a317146931297ac166e396f09c4fbdaa611c44a9ca527d2c5a58b",
+    "aggregate": "6383941d9b36b2dad13be319529b8e8df35806d66897a40b0397c24b8d53b80a",
+    "artifacts": "de63276551bb431f291c3e1b3069b5d1f589410e6a7afd44dbbbde2f17ef2950"
+  },
+  "metrics": {
+    "candidateGenerated": 1,
+    "logicalModelCalls": 1,
+    "providerCalls": 1,
+    "attributedCostUsd": 0.001055484,
+    "billableCostUsd": 0.001055484
+  },
+  "modelCalls": 1,
+  "modelRequestMade": true,
+  "notes": [
+    "One candidate and syntax-repair budget are shared by all release gates.",
+    "Gate feedback never changes the candidate.",
+    "Fresh frozen robustness split; aggregate and method artifacts only."
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "candidate": {
+    "id": "wf-expense-larkspur-reimbursement",
+    "organizationId": "expense-larkspur",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-unverified-receipt",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-audit-desk",
+            "reason": "A request without a verified receipt must never receive an automated expense refund"
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-eligibility-policy"
+        ]
+      },
+      {
+        "id": "rule-standard-travel-over-limit",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard_travel"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 140
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "field_finance_manager",
+            "reason": "Standard travel expense above threshold 140 requires field finance manager approval"
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-limit-v2",
+          "expense-larkspur-approval-policy",
+          "expense-larkspur-message-2"
+        ]
+      },
+      {
+        "id": "rule-standard-travel-auto-process",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "standard_travel"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 140
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "disburse_expense_refund",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "fieldReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "refundAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "staffKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_field_report",
+            "args": {
+              "fieldReportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "approved"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-larkspur-limit-v2",
+          "expense-larkspur-action-schema",
+          "expense-larkspur-status-schema",
+          "expense-larkspur-message-1"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-larkspur-eligibility-policy",
+      "expense-larkspur-limit-v2",
+      "expense-larkspur-approval-policy",
+      "expense-larkspur-action-schema",
+      "expense-larkspur-status-schema"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "2a6b7d80ff1fb04783e6e1e99aaf76ef6bd4ddce146bf00df48f61b424026ca1"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "wf-expense-larkspur-reimbursement"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "b8c45b4e5651ecca0dae27bcdff7d173156c9ceb96c4e1e6fd4307febbef9f05"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "b8c45b4e5651ecca0dae27bcdff7d173156c9ceb96c4e1e6fd4307febbef9f05"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 7,
+        "reason": "Activated 1/3 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "9d8237a7dd9ed750f11ab2ac861904da3c511e79c9ec340902add7448a89e63a"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "b8c45b4e5651ecca0dae27bcdff7d173156c9ceb96c4e1e6fd4307febbef9f05"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

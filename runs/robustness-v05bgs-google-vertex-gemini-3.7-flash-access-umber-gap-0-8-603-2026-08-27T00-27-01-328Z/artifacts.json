@@ -1,0 +1,232 @@
+{
+  "candidate": {
+    "id": "access-umber-access-provisioning",
+    "organizationId": "access-umber",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-identity-escalate",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "workspace-identity-checks",
+            "reason": "A request without an assured collaborator identity must route to workspace-identity-checks."
+          }
+        ],
+        "provenance": [
+          "access-umber-eligibility-policy"
+        ]
+      },
+      {
+        "id": "high-risk-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 26
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "workspace_assurance_manager",
+            "reason": "Requests above automatic threshold 26 require workspace_assurance_manager approval."
+          }
+        ],
+        "provenance": [
+          "access-umber-limit-v2",
+          "access-umber-approval-policy"
+        ]
+      },
+      {
+        "id": "low-risk-auto-provision",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 26
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "open_workspace_access",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "collaboratorRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskRating": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "workspaceRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-umber-eligibility-policy",
+          "access-umber-limit-v2",
+          "access-umber-action-schema"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-umber-eligibility-policy",
+      "access-umber-limit-v2",
+      "access-umber-approval-policy",
+      "access-umber-action-schema"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "ef6782b992178d9048f96c162d88a0161973d284c28fa185023751c1b4b165ea"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-umber-access-provisioning"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "54c1bf112c439f7ae8cc7d9a1f3b6ddad864f9c4ff8271ee647c2c5eb4487e63"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 1,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate failed safety or usefulness; bundle gate abstains.",
+        "route": "bundle_abstained"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 7,
+        "reason": "Activated 1/3 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "bc0a3cc245e9ceddfc1b0694b96c0f2a79493fdfa58bc55c9961f34c9d94752a"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 3,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 8,
+        "reason": "The complete candidate failed; hierarchical release recovered a safe non-empty subset.",
+        "route": "subset_recovery",
+        "activeWorkflowHash": "bc0a3cc245e9ceddfc1b0694b96c0f2a79493fdfa58bc55c9961f34c9d94752a"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

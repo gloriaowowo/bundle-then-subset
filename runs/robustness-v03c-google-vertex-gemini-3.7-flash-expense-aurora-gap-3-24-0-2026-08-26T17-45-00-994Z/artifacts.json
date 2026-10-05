@@ -1,0 +1,358 @@
+{
+  "candidate": {
+    "id": "expense-aurora-reimbursement-workflow",
+    "organizationId": "expense-aurora",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "check-receipt-verification",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "receipt-integrity-review",
+            "reason": "A request without a verified receipt must be routed to receipt-integrity-review."
+          }
+        ],
+        "provenance": [
+          "expense-aurora-eligibility-policy"
+        ]
+      },
+      {
+        "id": "process-domestic-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "domestic"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 125
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_expense_reimbursement",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "employeeKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_expense_report",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "reimbursed"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-completion-policy",
+          "expense-aurora-action-schema",
+          "expense-aurora-status-schema"
+        ]
+      },
+      {
+        "id": "process-international-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "international"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 480
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "issue_expense_reimbursement",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "amount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "employeeKey": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_expense_report",
+            "args": {
+              "reportId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "reimbursed"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-aurora-special-policy",
+          "expense-aurora-completion-policy",
+          "expense-aurora-action-schema",
+          "expense-aurora-status-schema"
+        ]
+      },
+      {
+        "id": "require-approval-over-limit",
+        "when": {
+          "op": "any",
+          "args": [
+            {
+              "op": "all",
+              "args": [
+                {
+                  "op": "eq",
+                  "left": {
+                    "kind": "path",
+                    "path": "input.expenseClass"
+                  },
+                  "right": {
+                    "kind": "literal",
+                    "value": "domestic"
+                  }
+                },
+                {
+                  "op": "gt",
+                  "left": {
+                    "kind": "path",
+                    "path": "input.amount"
+                  },
+                  "right": {
+                    "kind": "literal",
+                    "value": 125
+                  }
+                }
+              ]
+            },
+            {
+              "op": "all",
+              "args": [
+                {
+                  "op": "eq",
+                  "left": {
+                    "kind": "path",
+                    "path": "input.expenseClass"
+                  },
+                  "right": {
+                    "kind": "literal",
+                    "value": "international"
+                  }
+                },
+                {
+                  "op": "gt",
+                  "left": {
+                    "kind": "path",
+                    "path": "input.amount"
+                  },
+                  "right": {
+                    "kind": "literal",
+                    "value": 480
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "expense_operations_manager",
+            "reason": "Request amount exceeds automatic threshold."
+          }
+        ],
+        "provenance": [
+          "expense-aurora-limit-v2",
+          "expense-aurora-special-policy",
+          "expense-aurora-message-2",
+          "expense-aurora-message-15"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-aurora-eligibility-policy",
+      "expense-aurora-limit-v2",
+      "expense-aurora-special-policy",
+      "expense-aurora-completion-policy",
+      "expense-aurora-action-schema",
+      "expense-aurora-status-schema"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "272aef68cbaedbdf3c8348d6b525a22cb2485b20a49b2656e8accda733361d85"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-aurora-reimbursement-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "579f6c2e793d92b8c4ad19b949722761ca129134891e51dc52da86e72250f5a5"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "579f6c2e793d92b8c4ad19b949722761ca129134891e51dc52da86e72250f5a5"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 4/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "579f6c2e793d92b8c4ad19b949722761ca129134891e51dc52da86e72250f5a5"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "579f6c2e793d92b8c4ad19b949722761ca129134891e51dc52da86e72250f5a5"
+      }
+    }
+  ],
+  "notes": [
+    "Development artifacts use the same aggregate-only schema as hidden evaluation."
+  ]
+}

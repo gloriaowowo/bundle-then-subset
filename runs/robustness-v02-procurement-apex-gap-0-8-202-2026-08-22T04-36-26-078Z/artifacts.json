@@ -1,0 +1,240 @@
+{
+  "candidate": null,
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "ccd1199a09befc33ff6e0d61d7ba14e7a034680adbb21dd5814b6354542bc64f"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_rejected",
+      "reason": "Invalid workflow artifact: workflow has 9 steps; maximum is 8"
+    },
+    {
+      "sequence": 2,
+      "kind": "model_call",
+      "artifactId": "ff4ae5a14f944dc3ebc724f9d934867e2ac4b2d69c16c26d36d2bf0b94f25860"
+    },
+    {
+      "sequence": 3,
+      "kind": "workflow_rejected",
+      "reason": "Invalid workflow artifact: workflow has 10 steps; maximum is 8"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "id": "direct:full-8",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:full-8",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:full-8",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:uniform-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:uniform-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-1",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-1",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:uniform-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:uniform-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-2",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-2",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:uniform-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:uniform-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-4",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-4",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated."
+      }
+    }
+  ],
+  "notes": [
+    "No task-level hidden traces, task IDs, grades, or failure strings are retained."
+  ]
+}

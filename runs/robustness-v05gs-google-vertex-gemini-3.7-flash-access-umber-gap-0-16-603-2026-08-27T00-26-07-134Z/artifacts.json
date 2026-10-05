@@ -1,0 +1,418 @@
+{
+  "candidate": {
+    "id": "access-provisioning-workflow",
+    "organizationId": "access-umber",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "unverified-identity-escalate",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "workspace-identity-checks",
+            "reason": "Collaborator identity is not assured"
+          }
+        ],
+        "provenance": [
+          "access-umber-eligibility-policy",
+          "access-umber-message-4",
+          "access-umber-message-6"
+        ]
+      },
+      {
+        "id": "collaborator-high-risk-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "collaborator"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 26
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "workspace_assurance_manager",
+            "reason": "Collaborator risk score exceeds automatic threshold of 26"
+          }
+        ],
+        "provenance": [
+          "access-umber-limit-v2",
+          "access-umber-approval-policy",
+          "access-umber-message-2"
+        ]
+      },
+      {
+        "id": "custodial-high-risk-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "custodial"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 14
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "workspace_assurance_manager",
+            "reason": "Custodial risk score exceeds automatic threshold of 14"
+          }
+        ],
+        "provenance": [
+          "access-umber-special-policy",
+          "access-umber-approval-policy",
+          "access-umber-message-2",
+          "access-umber-message-5"
+        ]
+      },
+      {
+        "id": "collaborator-auto-provision",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "collaborator"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 26
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "open_workspace_access",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "collaboratorRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskRating": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "workspaceRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_workspace_request_state",
+            "args": {
+              "status": {
+                "kind": "literal",
+                "value": "opened"
+              },
+              "workspaceRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-umber-limit-v2",
+          "access-umber-action-schema",
+          "access-umber-status-schema",
+          "access-umber-message-1",
+          "access-umber-message-3",
+          "access-umber-message-8"
+        ]
+      },
+      {
+        "id": "custodial-auto-provision",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "custodial"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 14
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "open_workspace_access",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "collaboratorRef": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskRating": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "workspaceRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_workspace_request_state",
+            "args": {
+              "status": {
+                "kind": "literal",
+                "value": "opened"
+              },
+              "workspaceRequestId": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-umber-special-policy",
+          "access-umber-action-schema",
+          "access-umber-status-schema",
+          "access-umber-message-3",
+          "access-umber-message-5",
+          "access-umber-message-8"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-umber-eligibility-policy",
+      "access-umber-limit-v2",
+      "access-umber-approval-policy",
+      "access-umber-special-policy",
+      "access-umber-action-schema",
+      "access-umber-status-schema"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "66e9fbb87bd042c15266bbf724346f944e9cb9b6be890aad24b44bd4d2c71845"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-provisioning-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "d1d193ea986f7d63ad84cffbea745656100236ac2fa69a27cc104dab1f864bbb"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "d1d193ea986f7d63ad84cffbea745656100236ac2fa69a27cc104dab1f864bbb"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 3/5 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "314a9b5a8cb2153fe2e0b2923f466e8c147e9ebc4901ab9d147f752a8d231785"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "d1d193ea986f7d63ad84cffbea745656100236ac2fa69a27cc104dab1f864bbb"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

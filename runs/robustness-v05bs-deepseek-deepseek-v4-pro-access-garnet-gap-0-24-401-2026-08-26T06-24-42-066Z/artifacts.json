@@ -1,0 +1,414 @@
+{
+  "candidate": {
+    "id": "access-garnet-access-provisioning-workflow",
+    "organizationId": "access-garnet",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "identity-not-verified",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "principal-vetting-queue",
+            "reason": "Request without vetted principal identity must never receive automated resource grant; route to principal-vetting-queue."
+          }
+        ],
+        "provenance": [
+          "access-garnet-eligibility-policy"
+        ]
+      },
+      {
+        "id": "restricted-auto-eligible",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "restricted"
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 10
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "attach_resource_grant",
+            "args": {
+              "grantTicketId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "principalToken": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskMeasure": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "resolve_access_ticket",
+            "args": {
+              "grantTicketId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "attached"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-garnet-special-policy",
+          "access-garnet-action-schema",
+          "access-garnet-status-schema",
+          "access-garnet-message-3",
+          "access-garnet-completion-policy"
+        ]
+      },
+      {
+        "id": "general-auto-eligible",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "general"
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 33
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "attach_resource_grant",
+            "args": {
+              "grantTicketId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "principalToken": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "riskMeasure": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "resolve_access_ticket",
+            "args": {
+              "grantTicketId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "attached"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-garnet-limit-v2",
+          "access-garnet-action-schema",
+          "access-garnet-status-schema",
+          "access-garnet-message-3",
+          "access-garnet-completion-policy"
+        ]
+      },
+      {
+        "id": "restricted-requires-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "restricted"
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 10
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "resource_control_manager",
+            "reason": "Eligible requests above their applicable automatic threshold require resource_control_manager approval and must pause without executing resource grant."
+          }
+        ],
+        "provenance": [
+          "access-garnet-approval-policy",
+          "access-garnet-special-policy",
+          "access-garnet-message-5"
+        ]
+      },
+      {
+        "id": "general-requires-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "general"
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 33
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "resource_control_manager",
+            "reason": "Eligible requests above their applicable automatic threshold require resource_control_manager approval and must pause without executing resource grant."
+          }
+        ],
+        "provenance": [
+          "access-garnet-approval-policy",
+          "access-garnet-limit-v2",
+          "access-garnet-message-5"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-garnet-eligibility-policy",
+      "access-garnet-limit-v2",
+      "access-garnet-approval-policy",
+      "access-garnet-special-policy",
+      "access-garnet-action-schema",
+      "access-garnet-status-schema",
+      "access-garnet-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "67fe22e97ccf10fd1d4d77bddbd04d6a3e2f8224b327c4d329be1cd0fd5b73ef"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-garnet-access-provisioning-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "c2c19c893248f41c0ed91f81e4f649b7318bf70d059c5f1a6f15c3b00c253df2"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "c2c19c893248f41c0ed91f81e4f649b7318bf70d059c5f1a6f15c3b00c253df2"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 4/5 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "b7aaddaa2818cc716db57546d39be73f64d6d190da5c3d4e7743ab401abe2549"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "c2c19c893248f41c0ed91f81e4f649b7318bf70d059c5f1a6f15c3b00c253df2"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

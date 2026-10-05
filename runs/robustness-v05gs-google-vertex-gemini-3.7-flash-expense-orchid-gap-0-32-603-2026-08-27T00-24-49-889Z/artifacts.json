@@ -1,0 +1,341 @@
+{
+  "candidate": {
+    "id": "expense-orchid-workflow",
+    "organizationId": "expense-orchid",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "route-unverified-receipt",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "spend-integrity-queue",
+            "reason": "A request without a validated receipt must route to spend-integrity-queue."
+          }
+        ],
+        "provenance": [
+          "expense-orchid-eligibility-policy",
+          "expense-orchid-message-4",
+          "expense-orchid-message-6"
+        ]
+      },
+      {
+        "id": "settle-operational-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "operational"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 110
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "settle_spend_claim",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "claimId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "employeeToken": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "settledAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "mark_claim_state",
+            "args": {
+              "claimId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "settled"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-orchid-limit-v2",
+          "expense-orchid-action-schema",
+          "expense-orchid-status-schema",
+          "expense-orchid-completion-policy",
+          "expense-orchid-message-3",
+          "expense-orchid-message-13",
+          "expense-orchid-correction-1"
+        ]
+      },
+      {
+        "id": "settle-conference-auto",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "conference"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 430
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "settle_spend_claim",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "claimId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "employeeToken": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "settledAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "mark_claim_state",
+            "args": {
+              "claimId": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "settled"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-orchid-special-policy",
+          "expense-orchid-action-schema",
+          "expense-orchid-status-schema",
+          "expense-orchid-completion-policy",
+          "expense-orchid-message-3",
+          "expense-orchid-message-13",
+          "expense-orchid-correction-2"
+        ]
+      },
+      {
+        "id": "require-spend-approval",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "spend_governance_manager",
+            "reason": "Eligible requests above their applicable automatic threshold require spend_governance_manager approval."
+          }
+        ],
+        "provenance": [
+          "expense-orchid-approval-policy",
+          "expense-orchid-message-2",
+          "expense-orchid-message-14",
+          "expense-orchid-message-15"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-orchid-eligibility-policy",
+      "expense-orchid-limit-v2",
+      "expense-orchid-approval-policy",
+      "expense-orchid-special-policy",
+      "expense-orchid-action-schema",
+      "expense-orchid-status-schema",
+      "expense-orchid-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "e6b9c323cbe83fbe099e53c02d87dae5f01e43134a681f5d24ca435219c3f576"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-orchid-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "24a58d1695e6d52ba245318d7b5ef83cc9ddf4c2934b177d64174a342d1f2c04"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "24a58d1695e6d52ba245318d7b5ef83cc9ddf4c2934b177d64174a342d1f2c04"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 3,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 3/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "362eb371038f9fdd4c18523c06deddf2a7b027f30f2a145da2f2004c550276bc"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "24a58d1695e6d52ba245318d7b5ef83cc9ddf4c2934b177d64174a342d1f2c04"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

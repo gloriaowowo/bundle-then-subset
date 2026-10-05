@@ -1,0 +1,90 @@
+{
+  "candidate": null,
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "4b98214ebb66cb30d8661e4341718621ab65cdb36f482a1e88306109f779e99c"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_rejected",
+      "reason": "Invalid workflow artifact: workflow.rules[3].when.all requires a non-empty args array"
+    },
+    {
+      "sequence": 2,
+      "kind": "model_call",
+      "artifactId": "ffac875ea300d6847787e3dbc9b44d29ed483590733fa2f6d6ab2025e435ca2f"
+    },
+    {
+      "sequence": 3,
+      "kind": "workflow_rejected",
+      "reason": "Invalid workflow artifact: workflow.rules[3].when.all requires a non-empty args array"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated.",
+        "route": "direct_abstained"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated.",
+        "route": "bundle_abstained"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "No statically valid candidate was generated.",
+        "route": "safe-subset_abstained"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 0,
+        "promotedRuleCount": 0,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 0,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Neither the complete candidate nor a safe useful subset passed the verifier.",
+        "route": "complete_abstention"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

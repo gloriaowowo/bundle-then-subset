@@ -1,0 +1,374 @@
+{
+  "candidate": {
+    "id": "access-sable-access-provisioning-workflow",
+    "organizationId": "access-sable",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "identity-verification-required",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "identity-exceptions",
+            "reason": "Request lacks confirmed employee identity; automated directory access is prohibited."
+          }
+        ],
+        "provenance": [
+          "access-sable-eligibility-policy",
+          "access-sable-message-10"
+        ]
+      },
+      {
+        "id": "workforce-automatic-threshold",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "workforce"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 35
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "activate_directory_access",
+            "args": {
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "userKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "assessedRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_access_ticket_status",
+            "args": {
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "activated"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-sable-limit-v2",
+          "access-sable-message-9",
+          "access-sable-completion-policy",
+          "access-sable-message-3",
+          "access-sable-message-13"
+        ]
+      },
+      {
+        "id": "workforce-approval-required",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "workforce"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 35
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "iam_operations_owner",
+            "reason": "Workforce request risk score exceeds automatic threshold; approval required before directory access."
+          }
+        ],
+        "provenance": [
+          "access-sable-approval-policy",
+          "access-sable-limit-v2",
+          "access-sable-message-2"
+        ]
+      },
+      {
+        "id": "elevated-automatic-threshold",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "elevated"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 15
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "activate_directory_access",
+            "args": {
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "userKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "assessedRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_access_ticket_status",
+            "args": {
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "activated"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-sable-special-policy",
+          "access-sable-message-9",
+          "access-sable-completion-policy",
+          "access-sable-message-3",
+          "access-sable-message-13"
+        ]
+      },
+      {
+        "id": "elevated-approval-required",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "elevated"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 15
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "iam_operations_owner",
+            "reason": "Elevated request risk score exceeds automatic threshold; approval required before directory access."
+          }
+        ],
+        "provenance": [
+          "access-sable-approval-policy",
+          "access-sable-special-policy",
+          "access-sable-message-2"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-sable-eligibility-policy",
+      "access-sable-limit-v2",
+      "access-sable-special-policy",
+      "access-sable-approval-policy",
+      "access-sable-completion-policy",
+      "access-sable-action-schema",
+      "access-sable-status-schema",
+      "access-sable-message-3",
+      "access-sable-message-9",
+      "access-sable-message-13"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "3a4f8bd32b8e6a21832aa40d687e410c9e568603740a8f613077af2d78a28021"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-sable-access-provisioning-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "baf7dfe21c7a34833f9b0bd4f1a25f4dab5e06709df1708827685ccca16b773c"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "baf7dfe21c7a34833f9b0bd4f1a25f4dab5e06709df1708827685ccca16b773c"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 5/5 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "baf7dfe21c7a34833f9b0bd4f1a25f4dab5e06709df1708827685ccca16b773c"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "baf7dfe21c7a34833f9b0bd4f1a25f4dab5e06709df1708827685ccca16b773c"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

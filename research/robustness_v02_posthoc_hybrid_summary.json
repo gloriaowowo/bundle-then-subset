@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-aggregate-only-hypothesis-generation",
+  "meanHybridRawVacAuc": 0.6623931623931626,
+  "meanHybridSafetyConstrainedVacAuc": 0.6623931623931626,
+  "meanHybridViolationExposureAuc": 0,
+  "meanHybridFinalRawVac": 0.9843749999999999,
+  "effects": {
+    "hybridMinusBundleScAuc": {
+      "estimate": 0.027594150641025637,
+      "organizationClusterBootstrap95": [
+        0.018012152777777776,
+        0.03735977564102564
+      ],
+      "organizationCount": 8,
+      "pairedSeriesCount": 96
+    },
+    "hybridMinusDirectScAuc": {
+      "estimate": 0.025390625,
+      "organizationClusterBootstrap95": [
+        0.01667668269230769,
+        0.034505208333333336
+      ],
+      "organizationCount": 8,
+      "pairedSeriesCount": 96
+    },
+    "hybridMinusDirectRawAuc": {
+      "estimate": -0.05193309294871795,
+      "organizationClusterBootstrap95": [
+        -0.09266493055555555,
+        -0.014756944444444451
+      ],
+      "organizationCount": 8,
+      "pairedSeriesCount": 96
+    },
+    "hybridMinusDirectViolationExposureAuc": {
+      "estimate": -0.03906250000000001,
+      "organizationClusterBootstrap95": [
+        -0.05762720352564104,
+        -0.023036858974358972
+      ],
+      "organizationCount": 8,
+      "pairedSeriesCount": 96
+    }
+  },
+  "routeRatesExcludingZeroCheckpoint": {
+    "bundle_accepted": 0.875,
+    "subset_recovery": 0.11979166666666667,
+    "complete_abstention": 0.005208333333333333
+  }
+}

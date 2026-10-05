@@ -1,0 +1,330 @@
+{
+  "candidate": {
+    "id": "access-sable-access-provisioning-workflow",
+    "organizationId": "access-sable",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "rule-unverified-identity",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "identity-exceptions",
+            "reason": "Request without confirmed employee identity must be routed to identity-exceptions."
+          }
+        ],
+        "provenance": [
+          "access-sable-eligibility-policy"
+        ]
+      },
+      {
+        "id": "rule-elevated-auto-provision",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "elevated"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 15
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "activate_directory_access",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "assessedRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "userKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_access_ticket_status",
+            "args": {
+              "status": {
+                "kind": "literal",
+                "value": "activated"
+              },
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-sable-special-policy",
+          "access-sable-action-schema",
+          "access-sable-status-schema",
+          "access-sable-completion-policy"
+        ]
+      },
+      {
+        "id": "rule-workforce-auto-provision",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.identityVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "workforce"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 35
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "activate_directory_access",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "assessedRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "userKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "set_access_ticket_status",
+            "args": {
+              "status": {
+                "kind": "literal",
+                "value": "activated"
+              },
+              "ticketRef": {
+                "kind": "path",
+                "path": "input.requestId"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-sable-limit-v2",
+          "access-sable-action-schema",
+          "access-sable-status-schema",
+          "access-sable-completion-policy"
+        ]
+      },
+      {
+        "id": "rule-require-approval",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "iam_operations_owner",
+            "reason": "Eligible request risk score exceeds automatic threshold; requires iam_operations_owner approval."
+          }
+        ],
+        "provenance": [
+          "access-sable-approval-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-sable-eligibility-policy",
+      "access-sable-limit-v2",
+      "access-sable-special-policy",
+      "access-sable-approval-policy",
+      "access-sable-completion-policy",
+      "access-sable-action-schema",
+      "access-sable-status-schema"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "4433086802902a4cf5c2f8cbca9a003c0b45e48607b32b186f3f9acec054bdd8"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-sable-access-provisioning-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "83d42f005f5df001a73f13874f23813106fe0d0c7dd2f908c978de5b81d3716a"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "83d42f005f5df001a73f13874f23813106fe0d0c7dd2f908c978de5b81d3716a"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 4/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "83d42f005f5df001a73f13874f23813106fe0d0c7dd2f908c978de5b81d3716a"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "83d42f005f5df001a73f13874f23813106fe0d0c7dd2f908c978de5b81d3716a"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

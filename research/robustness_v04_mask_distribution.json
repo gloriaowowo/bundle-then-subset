@@ -1,0 +1,1618 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-camera-ready-per-mask-distribution",
+  "addedFor": "Camera-ready response to reviews (CLEA #74); not part of any preregistered protocol.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "arm": "v0.3 DeepSeek confirmatory hidden run set (480 units)",
+  "frozenRunSetPath": "research/robustness_v03_deepseek-deepseek-v4-pro_hidden_run_set.json",
+  "reproduces": "research/robustness_v04_verifier_ablation.json",
+  "validation": {
+    "fullVerifierUnitMismatches": 0,
+    "maxAbsDiffVsCommittedAblationMeans": 1.554312234475219e-14
+  },
+  "definitions": {
+    "perMaskMetric": "Mean over the 96 seed series (8 organizations x 4 evidence regimes x 3 seeds) of the trapezoid AUC over the five evidence checkpoints.",
+    "tieTolerance": 1e-12,
+    "lower": "BTS minus comparator < -1e-12",
+    "semanticMasks": "The 63 masks that keep whole semantic strata (Fig. 1(c) grouping).",
+    "fullPanel": "Mask 255 (all eight cases) is included in 'all 255 masks'; 254 masks are weakened panels.",
+    "seedSeries": "One (organization, evidence regime, seed) acquisition curve; 96 per mask, 24,480 in total.",
+    "unitCheckpoint": "One stored run unit (checkpoint) under one mask; 480 per mask, 122,400 in total."
+  },
+  "counts": {
+    "masks": 255,
+    "weakenedMasks": 254,
+    "semanticMasks": 63,
+    "seedSeriesPerMask": 96,
+    "seedSeriesTotal": 24480,
+    "unitCheckpointsTotal": 122400,
+    "organizationMaskPairs": 2040
+  },
+  "btsVersusSafeSubset": {
+    "bySemanticStratumCount": [
+      {
+        "group": "retained semantic strata = 1",
+        "masks": 6,
+        "violation": {
+          "lower": 2,
+          "equal": 2,
+          "higher": 2
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 6
+        },
+        "meanDeltaViolationAuc": -0.009403935185185173,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.0557892628205128,
+        "maxDeltaViolationAuc": 0.04610710470085471,
+        "meanDeltaScAuc": 0.4532195957977207,
+        "minDeltaScAuc": 0.3909254807692307,
+        "maxDeltaScAuc": 0.4977797809829059,
+        "meanBtsScAuc": 0.5668903579059829,
+        "meanComparatorScAuc": 0.11367076210826212,
+        "meanBtsViolationAuc": 0.02281428062678063,
+        "meanComparatorViolationAuc": 0.03221821581196581,
+        "comparatorOverBtsViolationRatio": 1.4121951219512192,
+        "seedSeriesSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 576
+        },
+        "seedSeriesViolation": {
+          "lower": 170,
+          "equal": 310,
+          "higher": 96
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 48
+        },
+        "unitCheckpointSc": {
+          "lower": 134,
+          "equal": 1080,
+          "higher": 1666
+        }
+      },
+      {
+        "group": "retained semantic strata = 2",
+        "masks": 15,
+        "violation": {
+          "lower": 7,
+          "equal": 2,
+          "higher": 6
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 15
+        },
+        "meanDeltaViolationAuc": -0.024517004985754983,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.03248530982905984,
+        "meanDeltaScAuc": 0.4168113425925925,
+        "minDeltaScAuc": 0.2088508279914531,
+        "maxDeltaScAuc": 0.5193726629273503,
+        "meanBtsScAuc": 0.6187822738603987,
+        "meanComparatorScAuc": 0.20197093126780624,
+        "meanBtsViolationAuc": 0.019718215811965818,
+        "meanComparatorViolationAuc": 0.04423522079772079,
+        "comparatorOverBtsViolationRatio": 2.243368325996161,
+        "seedSeriesSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 1440
+        },
+        "seedSeriesViolation": {
+          "lower": 629,
+          "equal": 639,
+          "higher": 172
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 120
+        },
+        "unitCheckpointSc": {
+          "lower": 206,
+          "equal": 2522,
+          "higher": 4472
+        }
+      },
+      {
+        "group": "retained semantic strata = 3",
+        "masks": 20,
+        "violation": {
+          "lower": 9,
+          "equal": 3,
+          "higher": 8
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 20
+        },
+        "meanDeltaViolationAuc": -0.027524873130341864,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.022018563034188053,
+        "meanDeltaScAuc": 0.34417484642094,
+        "minDeltaScAuc": 0.07430221688034133,
+        "maxDeltaScAuc": 0.5193726629273503,
+        "meanBtsScAuc": 0.6456163194444444,
+        "meanComparatorScAuc": 0.30144147302350444,
+        "meanBtsViolationAuc": 0.014564970619658127,
+        "meanComparatorViolationAuc": 0.04208984375,
+        "comparatorOverBtsViolationRatio": 2.889799426934096,
+        "seedSeriesSc": {
+          "lower": 4,
+          "equal": 0,
+          "higher": 1916
+        },
+        "seedSeriesViolation": {
+          "lower": 818,
+          "equal": 972,
+          "higher": 130
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 160
+        },
+        "unitCheckpointSc": {
+          "lower": 150,
+          "equal": 3550,
+          "higher": 5900
+        }
+      },
+      {
+        "group": "retained semantic strata = 4",
+        "masks": 15,
+        "violation": {
+          "lower": 5,
+          "equal": 5,
+          "higher": 5
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 15
+        },
+        "meanDeltaViolationAuc": -0.02164351851851852,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.009548611111111114,
+        "meanDeltaScAuc": 0.23957776887464377,
+        "minDeltaScAuc": 0.01453993055555558,
+        "maxDeltaScAuc": 0.5100661057692306,
+        "meanBtsScAuc": 0.6648292824074075,
+        "meanComparatorScAuc": 0.42525151353276375,
+        "meanBtsViolationAuc": 0.009439547720797725,
+        "meanComparatorViolationAuc": 0.031083066239316243,
+        "comparatorOverBtsViolationRatio": 3.2928554586182495,
+        "seedSeriesSc": {
+          "lower": 14,
+          "equal": 106,
+          "higher": 1320
+        },
+        "seedSeriesViolation": {
+          "lower": 455,
+          "equal": 941,
+          "higher": 44
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 8,
+          "higher": 112
+        },
+        "unitCheckpointSc": {
+          "lower": 50,
+          "equal": 3304,
+          "higher": 3846
+        }
+      },
+      {
+        "group": "retained semantic strata = 5",
+        "masks": 6,
+        "violation": {
+          "lower": 1,
+          "equal": 4,
+          "higher": 1
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 2,
+          "higher": 4
+        },
+        "meanDeltaViolationAuc": -0.011220730947293445,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.068626469017094,
+        "maxDeltaViolationAuc": 0.001302083333333334,
+        "meanDeltaScAuc": 0.11817240918803414,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.45307491987179505,
+        "meanBtsScAuc": 0.6846064814814815,
+        "meanComparatorScAuc": 0.5664340722934473,
+        "meanBtsViolationAuc": 0.004557291666666668,
+        "meanComparatorViolationAuc": 0.01577802261396011,
+        "comparatorOverBtsViolationRatio": 3.4621489621489605,
+        "seedSeriesSc": {
+          "lower": 6,
+          "equal": 245,
+          "higher": 325
+        },
+        "seedSeriesViolation": {
+          "lower": 91,
+          "equal": 479,
+          "higher": 6
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 20,
+          "higher": 28
+        },
+        "unitCheckpointSc": {
+          "lower": 6,
+          "equal": 1970,
+          "higher": 904
+        }
+      },
+      {
+        "group": "retained semantic strata = 6",
+        "masks": 1,
+        "violation": {
+          "lower": 0,
+          "equal": 1,
+          "higher": 0
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 1,
+          "higher": 0
+        },
+        "meanDeltaViolationAuc": 0,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0,
+        "meanDeltaScAuc": 0,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0,
+        "meanBtsScAuc": 0.7035924145299145,
+        "meanComparatorScAuc": 0.7035924145299145,
+        "meanBtsViolationAuc": 0,
+        "meanComparatorViolationAuc": 0,
+        "comparatorOverBtsViolationRatio": null,
+        "seedSeriesSc": {
+          "lower": 0,
+          "equal": 96,
+          "higher": 0
+        },
+        "seedSeriesViolation": {
+          "lower": 0,
+          "equal": 96,
+          "higher": 0
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 8,
+          "higher": 0
+        },
+        "unitCheckpointSc": {
+          "lower": 0,
+          "equal": 480,
+          "higher": 0
+        }
+      }
+    ],
+    "allSemanticMasks": {
+      "group": "all 63 semantic-stratum masks",
+      "masks": 63,
+      "violation": {
+        "lower": 24,
+        "equal": 17,
+        "higher": 22
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 3,
+        "higher": 60
+      },
+      "meanDeltaViolationAuc": -0.02169290971374305,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": -0.07286658653846152,
+      "maxDeltaViolationAuc": 0.04610710470085471,
+      "meanDeltaScAuc": 0.31996326397368063,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.5193726629273503,
+      "meanBtsScAuc": 0.6409376695835031,
+      "meanComparatorScAuc": 0.3209744056098223,
+      "meanBtsViolationAuc": 0.014172941256274595,
+      "meanComparatorViolationAuc": 0.035865850970017626,
+      "comparatorOverBtsViolationRatio": 2.530586299730779,
+      "seedSeriesSc": {
+        "lower": 24,
+        "equal": 447,
+        "higher": 5577
+      },
+      "seedSeriesViolation": {
+        "lower": 2163,
+        "equal": 3437,
+        "higher": 448
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 36,
+        "higher": 468
+      },
+      "unitCheckpointSc": {
+        "lower": 546,
+        "equal": 12906,
+        "higher": 16788
+      }
+    },
+    "byVerifierSize": [
+      {
+        "group": "verifier size = 1",
+        "masks": 8,
+        "violation": {
+          "lower": 3,
+          "equal": 3,
+          "higher": 2
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 8
+        },
+        "meanDeltaViolationAuc": -0.014026609241452978,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.0557892628205128,
+        "maxDeltaViolationAuc": 0.04610710470085471,
+        "meanDeltaScAuc": 0.4510028545673076,
+        "minDeltaScAuc": 0.3909254807692307,
+        "maxDeltaScAuc": 0.4977797809829059,
+        "meanBtsScAuc": 0.5768959501869657,
+        "meanComparatorScAuc": 0.12589309561965809,
+        "meanBtsViolationAuc": 0.019489516559829063,
+        "meanComparatorViolationAuc": 0.03351612580128205,
+        "comparatorOverBtsViolationRatio": 1.7197002141327618,
+        "seedSeriesSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 768
+        },
+        "seedSeriesViolation": {
+          "lower": 255,
+          "equal": 412,
+          "higher": 101
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 64
+        },
+        "unitCheckpointSc": {
+          "lower": 157,
+          "equal": 1428,
+          "higher": 2255
+        }
+      },
+      {
+        "group": "verifier size = 2",
+        "masks": 28,
+        "violation": {
+          "lower": 15,
+          "equal": 4,
+          "higher": 9
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 28
+        },
+        "meanDeltaViolationAuc": -0.03068480998168498,
+        "medianDeltaViolationAuc": -0.0557892628205128,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.03248530982905984,
+        "meanDeltaScAuc": 0.4207148103632477,
+        "minDeltaScAuc": 0.2088508279914531,
+        "maxDeltaScAuc": 0.5193726629273503,
+        "meanBtsScAuc": 0.6237640939789376,
+        "meanComparatorScAuc": 0.2030492836156899,
+        "meanBtsViolationAuc": 0.015484298687423693,
+        "meanComparatorViolationAuc": 0.046169108669108685,
+        "comparatorOverBtsViolationRatio": 2.981672570460496,
+        "seedSeriesSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 2688
+        },
+        "seedSeriesViolation": {
+          "lower": 1344,
+          "equal": 1090,
+          "higher": 254
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 224
+        },
+        "unitCheckpointSc": {
+          "lower": 330,
+          "equal": 4727,
+          "higher": 8383
+        }
+      },
+      {
+        "group": "verifier size = 3",
+        "masks": 56,
+        "violation": {
+          "lower": 31,
+          "equal": 6,
+          "higher": 19
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 56
+        },
+        "meanDeltaViolationAuc": -0.035045060191544554,
+        "medianDeltaViolationAuc": -0.06490384615384616,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.022018563034188053,
+        "meanDeltaScAuc": 0.36475145947802173,
+        "minDeltaScAuc": 0.07430221688034133,
+        "maxDeltaScAuc": 0.5193726629273503,
+        "meanBtsScAuc": 0.6470677488743896,
+        "meanComparatorScAuc": 0.28231628939636755,
+        "meanBtsViolationAuc": 0.011341956654456656,
+        "meanComparatorViolationAuc": 0.046387016846001175,
+        "comparatorOverBtsViolationRatio": 4.089860176619003,
+        "seedSeriesSc": {
+          "lower": 6,
+          "equal": 0,
+          "higher": 5370
+        },
+        "seedSeriesViolation": {
+          "lower": 2812,
+          "equal": 2241,
+          "higher": 323
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 448
+        },
+        "unitCheckpointSc": {
+          "lower": 397,
+          "equal": 9935,
+          "higher": 16548
+        }
+      },
+      {
+        "group": "verifier size = 4",
+        "masks": 70,
+        "violation": {
+          "lower": 34,
+          "equal": 13,
+          "higher": 23
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 70
+        },
+        "meanDeltaViolationAuc": -0.031923696962759415,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.022018563034188053,
+        "meanDeltaScAuc": 0.2910823985042735,
+        "minDeltaScAuc": 0.01453993055555558,
+        "maxDeltaScAuc": 0.5193726629273503,
+        "meanBtsScAuc": 0.6635795844780222,
+        "meanComparatorScAuc": 0.3724971859737487,
+        "meanBtsViolationAuc": 0.007804868742368742,
+        "meanComparatorViolationAuc": 0.03972856570512817,
+        "comparatorOverBtsViolationRatio": 5.090228550476652,
+        "seedSeriesSc": {
+          "lower": 42,
+          "equal": 318,
+          "higher": 6360
+        },
+        "seedSeriesViolation": {
+          "lower": 3093,
+          "equal": 3393,
+          "higher": 234
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 24,
+          "higher": 536
+        },
+        "unitCheckpointSc": {
+          "lower": 294,
+          "equal": 14462,
+          "higher": 18844
+        }
+      },
+      {
+        "group": "verifier size = 5",
+        "masks": 56,
+        "violation": {
+          "lower": 21,
+          "equal": 19,
+          "higher": 16
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 6,
+          "higher": 50
+        },
+        "meanDeltaViolationAuc": -0.025094913766788778,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.07286658653846152,
+        "maxDeltaViolationAuc": 0.009548611111111114,
+        "meanDeltaScAuc": 0.21131369715354062,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.5100661057692306,
+        "meanBtsScAuc": 0.6772711338141031,
+        "meanComparatorScAuc": 0.4659574366605619,
+        "meanBtsViolationAuc": 0.0047880179716117246,
+        "meanComparatorViolationAuc": 0.029882931738400488,
+        "comparatorOverBtsViolationRatio": 6.241190387249405,
+        "seedSeriesSc": {
+          "lower": 56,
+          "equal": 1053,
+          "higher": 4267
+        },
+        "seedSeriesViolation": {
+          "lower": 1911,
+          "equal": 3355,
+          "higher": 110
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 84,
+          "higher": 364
+        },
+        "unitCheckpointSc": {
+          "lower": 140,
+          "equal": 14537,
+          "higher": 12203
+        }
+      },
+      {
+        "group": "verifier size = 6",
+        "masks": 28,
+        "violation": {
+          "lower": 7,
+          "equal": 15,
+          "higher": 6
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 9,
+          "higher": 19
+        },
+        "meanDeltaViolationAuc": -0.016846597413003664,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.068626469017094,
+        "maxDeltaViolationAuc": 0.001302083333333334,
+        "meanDeltaScAuc": 0.13430953811813182,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.4623814770299144,
+        "meanBtsScAuc": 0.6882207961309524,
+        "meanComparatorScAuc": 0.5539112580128206,
+        "meanBtsViolationAuc": 0.0024276938339438344,
+        "meanComparatorViolationAuc": 0.019274291246947496,
+        "comparatorOverBtsViolationRatio": 7.939341846758348,
+        "seedSeriesSc": {
+          "lower": 30,
+          "equal": 1129,
+          "higher": 1529
+        },
+        "seedSeriesViolation": {
+          "lower": 637,
+          "equal": 2015,
+          "higher": 36
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 92,
+          "higher": 132
+        },
+        "unitCheckpointSc": {
+          "lower": 42,
+          "equal": 9147,
+          "higher": 4251
+        }
+      },
+      {
+        "group": "verifier size = 7",
+        "masks": 8,
+        "violation": {
+          "lower": 1,
+          "equal": 6,
+          "higher": 1
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 5,
+          "higher": 3
+        },
+        "meanDeltaViolationAuc": -0.008415548210470084,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": -0.068626469017094,
+        "maxDeltaViolationAuc": 0.001302083333333334,
+        "meanDeltaScAuc": 0.06434879139957263,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.45307491987179505,
+        "meanBtsScAuc": 0.6968921107104702,
+        "meanComparatorScAuc": 0.6325433193108975,
+        "meanBtsViolationAuc": 0.0008555355235042734,
+        "meanComparatorViolationAuc": 0.009271083733974356,
+        "comparatorOverBtsViolationRatio": 10.836585365853656,
+        "seedSeriesSc": {
+          "lower": 6,
+          "equal": 533,
+          "higher": 229
+        },
+        "seedSeriesViolation": {
+          "lower": 91,
+          "equal": 671,
+          "higher": 6
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 44,
+          "higher": 20
+        },
+        "unitCheckpointSc": {
+          "lower": 6,
+          "equal": 3210,
+          "higher": 624
+        }
+      },
+      {
+        "group": "verifier size = 8",
+        "masks": 1,
+        "violation": {
+          "lower": 0,
+          "equal": 1,
+          "higher": 0
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 1,
+          "higher": 0
+        },
+        "meanDeltaViolationAuc": 0,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0,
+        "meanDeltaScAuc": 0,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0,
+        "meanBtsScAuc": 0.7035924145299145,
+        "meanComparatorScAuc": 0.7035924145299145,
+        "meanBtsViolationAuc": 0,
+        "meanComparatorViolationAuc": 0,
+        "comparatorOverBtsViolationRatio": null,
+        "seedSeriesSc": {
+          "lower": 0,
+          "equal": 96,
+          "higher": 0
+        },
+        "seedSeriesViolation": {
+          "lower": 0,
+          "equal": 96,
+          "higher": 0
+        },
+        "organizationMaskSc": {
+          "lower": 0,
+          "equal": 8,
+          "higher": 0
+        },
+        "unitCheckpointSc": {
+          "lower": 0,
+          "equal": 480,
+          "higher": 0
+        }
+      }
+    ],
+    "allMasks": {
+      "group": "all 255 masks (incl. full panel)",
+      "masks": 255,
+      "violation": {
+        "lower": 112,
+        "equal": 67,
+        "higher": 76
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 21,
+        "higher": 234
+      },
+      "meanDeltaViolationAuc": -0.027893780375398004,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": -0.07286658653846152,
+      "maxDeltaViolationAuc": 0.04610710470085471,
+      "meanDeltaScAuc": 0.28352514349756947,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.5193726629273503,
+      "meanBtsScAuc": 0.6597765575247169,
+      "meanComparatorScAuc": 0.3762514140271493,
+      "meanBtsViolationAuc": 0.008289865091335676,
+      "meanComparatorViolationAuc": 0.03618364546673364,
+      "comparatorOverBtsViolationRatio": 4.364805104554925,
+      "seedSeriesSc": {
+        "lower": 140,
+        "equal": 3129,
+        "higher": 21211
+      },
+      "seedSeriesViolation": {
+        "lower": 10143,
+        "equal": 13273,
+        "higher": 1064
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 252,
+        "higher": 1788
+      },
+      "unitCheckpointSc": {
+        "lower": 1366,
+        "equal": 57926,
+        "higher": 63108
+      }
+    },
+    "weakenedMasks": {
+      "group": "254 weakened masks (full panel excluded)",
+      "masks": 254,
+      "violation": {
+        "lower": 112,
+        "equal": 66,
+        "higher": 76
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 20,
+        "higher": 234
+      },
+      "meanDeltaViolationAuc": -0.028003598408372014,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": -0.07286658653846152,
+      "maxDeltaViolationAuc": 0.04610710470085471,
+      "meanDeltaScAuc": 0.28464138422000085,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.5193726629273503,
+      "meanBtsScAuc": 0.6596040541506807,
+      "meanComparatorScAuc": 0.3749626699306817,
+      "meanBtsViolationAuc": 0.008322502355474791,
+      "meanComparatorViolationAuc": 0.036326100763846764,
+      "comparatorOverBtsViolationRatio": 4.364805104554926,
+      "seedSeriesSc": {
+        "lower": 140,
+        "equal": 3033,
+        "higher": 21211
+      },
+      "seedSeriesViolation": {
+        "lower": 10143,
+        "equal": 13177,
+        "higher": 1064
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 244,
+        "higher": 1788
+      },
+      "unitCheckpointSc": {
+        "lower": 1366,
+        "equal": 57446,
+        "higher": 63108
+      }
+    },
+    "escalationCaseD8Absent": {
+      "group": "escalation case D8 absent",
+      "masks": 127,
+      "violation": {
+        "lower": 112,
+        "equal": 11,
+        "higher": 4
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 0,
+        "higher": 127
+      },
+      "meanDeltaViolationAuc": -0.059901879753011526,
+      "medianDeltaViolationAuc": -0.068626469017094,
+      "minDeltaViolationAuc": -0.07286658653846152,
+      "maxDeltaViolationAuc": 0.009047809829059849,
+      "meanDeltaScAuc": 0.4604039691853418,
+      "minDeltaScAuc": 0.32335069444444425,
+      "maxDeltaScAuc": 0.5193726629273503,
+      "meanBtsScAuc": 0.640512221128609,
+      "meanComparatorScAuc": 0.18010825194326677,
+      "meanBtsViolationAuc": 0.008745751732956466,
+      "meanComparatorViolationAuc": 0.06864763148596806,
+      "comparatorOverBtsViolationRatio": 7.849254538896224,
+      "seedSeriesSc": {
+        "lower": 0,
+        "equal": 0,
+        "higher": 12192
+      },
+      "seedSeriesViolation": {
+        "lower": 10143,
+        "equal": 1971,
+        "higher": 78
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 0,
+        "higher": 1016
+      },
+      "unitCheckpointSc": {
+        "lower": 372,
+        "equal": 21934,
+        "higher": 38654
+      }
+    },
+    "escalationCaseD8Present": {
+      "group": "escalation case D8 present",
+      "masks": 128,
+      "violation": {
+        "lower": 0,
+        "equal": 56,
+        "higher": 72
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 21,
+        "higher": 107
+      },
+      "meanDeltaViolationAuc": 0.0038642557258279885,
+      "medianDeltaViolationAuc": 0.001302083333333334,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0.04610710470085471,
+      "meanDeltaScAuc": 0.10802818363548308,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.488698584401709,
+      "meanBtsScAuc": 0.6788903912927351,
+      "meanComparatorScAuc": 0.5708622076572517,
+      "meanBtsViolationAuc": 0.007837540064102559,
+      "meanComparatorViolationAuc": 0.0039732843382745825,
+      "comparatorOverBtsViolationRatio": 0.5069555378061784,
+      "seedSeriesSc": {
+        "lower": 140,
+        "equal": 3129,
+        "higher": 9019
+      },
+      "seedSeriesViolation": {
+        "lower": 0,
+        "equal": 11302,
+        "higher": 986
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 252,
+        "higher": 772
+      },
+      "unitCheckpointSc": {
+        "lower": 994,
+        "equal": 35992,
+        "higher": 24454
+      }
+    },
+    "d8PresentD3Absent": {
+      "group": "D8 present, special-approval D3 absent",
+      "masks": 64,
+      "violation": {
+        "lower": 0,
+        "equal": 0,
+        "higher": 64
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 0,
+        "higher": 64
+      },
+      "meanDeltaViolationAuc": 0.006426428118322645,
+      "medianDeltaViolationAuc": 0.001302083333333334,
+      "minDeltaViolationAuc": 0.001302083333333334,
+      "maxDeltaViolationAuc": 0.04610710470085471,
+      "meanDeltaScAuc": 0.11417043310964191,
+      "minDeltaScAuc": 0.01453993055555558,
+      "maxDeltaScAuc": 0.488698584401709,
+      "meanBtsScAuc": 0.6757979433760687,
+      "meanComparatorScAuc": 0.5616275102664267,
+      "meanBtsViolationAuc": 0.008922609508546998,
+      "meanComparatorViolationAuc": 0.0024961813902243573,
+      "comparatorOverBtsViolationRatio": 0.2797591206735268,
+      "seedSeriesSc": {
+        "lower": 140,
+        "equal": 1008,
+        "higher": 4996
+      },
+      "seedSeriesViolation": {
+        "lower": 0,
+        "equal": 5246,
+        "higher": 898
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 84,
+        "higher": 428
+      },
+      "unitCheckpointSc": {
+        "lower": 902,
+        "equal": 16101,
+        "higher": 13717
+      }
+    },
+    "d8PresentD3Present": {
+      "group": "D8 present, special-approval D3 present",
+      "masks": 64,
+      "violation": {
+        "lower": 0,
+        "equal": 56,
+        "higher": 8
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 21,
+        "higher": 43
+      },
+      "meanDeltaViolationAuc": 0.0013020833333333341,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0.013020833333333346,
+      "meanDeltaScAuc": 0.10188593416132455,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.4825721153846152,
+      "meanBtsScAuc": 0.6819828392094021,
+      "meanComparatorScAuc": 0.5800969050480772,
+      "meanBtsViolationAuc": 0.006752470619658121,
+      "meanComparatorViolationAuc": 0.005450387286324788,
+      "comparatorOverBtsViolationRatio": 0.8071693448702102,
+      "seedSeriesSc": {
+        "lower": 0,
+        "equal": 2121,
+        "higher": 4023
+      },
+      "seedSeriesViolation": {
+        "lower": 0,
+        "equal": 6056,
+        "higher": 88
+      },
+      "organizationMaskSc": {
+        "lower": 0,
+        "equal": 168,
+        "higher": 344
+      },
+      "unitCheckpointSc": {
+        "lower": 92,
+        "equal": 19891,
+        "higher": 10737
+      }
+    }
+  },
+  "btsVersusBundle": {
+    "bySemanticStratumCount": [
+      {
+        "group": "retained semantic strata = 1",
+        "masks": 6,
+        "violation": {
+          "lower": 0,
+          "equal": 6,
+          "higher": 0
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 6,
+          "higher": 0
+        },
+        "meanDeltaViolationAuc": 0,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0,
+        "meanDeltaScAuc": 0,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0,
+        "meanBtsScAuc": 0.5668903579059829,
+        "meanComparatorScAuc": 0.5668903579059829,
+        "meanBtsViolationAuc": 0.02281428062678063,
+        "meanComparatorViolationAuc": 0.02281428062678063,
+        "comparatorOverBtsViolationRatio": 1
+      },
+      {
+        "group": "retained semantic strata = 2",
+        "masks": 15,
+        "violation": {
+          "lower": 0,
+          "equal": 11,
+          "higher": 4
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 7,
+          "higher": 8
+        },
+        "meanDeltaViolationAuc": 0.0006232193732193733,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.00424011752136752,
+        "meanDeltaScAuc": 0.007197070868945895,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.031450320512820706,
+        "meanBtsScAuc": 0.6187822738603987,
+        "meanComparatorScAuc": 0.6115852029914528,
+        "meanBtsViolationAuc": 0.019718215811965818,
+        "meanComparatorViolationAuc": 0.01909499643874645,
+        "comparatorOverBtsViolationRatio": 0.9683937238966025
+      },
+      {
+        "group": "retained semantic strata = 3",
+        "masks": 20,
+        "violation": {
+          "lower": 0,
+          "equal": 12,
+          "higher": 8
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 2,
+          "higher": 18
+        },
+        "meanDeltaViolationAuc": 0.001168536324786325,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.020200654380341947,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.06663995726495742,
+        "meanBtsScAuc": 0.6456163194444444,
+        "meanComparatorScAuc": 0.6254156650641025,
+        "meanBtsViolationAuc": 0.014564970619658127,
+        "meanComparatorViolationAuc": 0.013396434294871803,
+        "comparatorOverBtsViolationRatio": 0.9197707736389685
+      },
+      {
+        "group": "retained semantic strata = 4",
+        "masks": 15,
+        "violation": {
+          "lower": 0,
+          "equal": 10,
+          "higher": 5
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 15
+        },
+        "meanDeltaViolationAuc": 0.0012464387464387462,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.03745548433048446,
+        "minDeltaScAuc": 0.001953125,
+        "maxDeltaScAuc": 0.07184829059829068,
+        "meanBtsScAuc": 0.6648292824074075,
+        "meanComparatorScAuc": 0.627373798076923,
+        "meanBtsViolationAuc": 0.009439547720797725,
+        "meanComparatorViolationAuc": 0.00819310897435898,
+        "comparatorOverBtsViolationRatio": 0.867955670832351
+      },
+      {
+        "group": "retained semantic strata = 5",
+        "masks": 6,
+        "violation": {
+          "lower": 0,
+          "equal": 5,
+          "higher": 1
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 6
+        },
+        "meanDeltaViolationAuc": 0.0007790242165242162,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.056952234686609815,
+        "minDeltaScAuc": 0.015625,
+        "maxDeltaScAuc": 0.0759381677350428,
+        "meanBtsScAuc": 0.6846064814814815,
+        "meanComparatorScAuc": 0.6276542467948717,
+        "meanBtsViolationAuc": 0.004557291666666668,
+        "meanComparatorViolationAuc": 0.0037782674501424516,
+        "comparatorOverBtsViolationRatio": 0.8290598290598292
+      },
+      {
+        "group": "retained semantic strata = 6",
+        "masks": 1,
+        "violation": {
+          "lower": 0,
+          "equal": 1,
+          "higher": 0
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 1
+        },
+        "meanDeltaViolationAuc": 0,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0,
+        "meanDeltaScAuc": 0.0759381677350428,
+        "minDeltaScAuc": 0.0759381677350428,
+        "maxDeltaScAuc": 0.0759381677350428,
+        "meanBtsScAuc": 0.7035924145299145,
+        "meanComparatorScAuc": 0.6276542467948717,
+        "meanBtsViolationAuc": 0,
+        "meanComparatorViolationAuc": 0,
+        "comparatorOverBtsViolationRatio": null
+      }
+    ],
+    "allSemanticMasks": {
+      "group": "all 63 semantic-stratum masks",
+      "masks": 63,
+      "violation": {
+        "lower": 0,
+        "equal": 45,
+        "higher": 18
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 15,
+        "higher": 48
+      },
+      "meanDeltaViolationAuc": 0.0008903133903133902,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0.004674145299145297,
+      "meanDeltaScAuc": 0.02367385700719041,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.0759381677350428,
+      "meanBtsScAuc": 0.6409376695835031,
+      "meanComparatorScAuc": 0.6172638125763122,
+      "meanBtsViolationAuc": 0.014172941256274595,
+      "meanComparatorViolationAuc": 0.013282627865961209,
+      "comparatorOverBtsViolationRatio": 0.9371821717020643
+    },
+    "byVerifierSize": [
+      {
+        "group": "verifier size = 1",
+        "masks": 8,
+        "violation": {
+          "lower": 0,
+          "equal": 8,
+          "higher": 0
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 8,
+          "higher": 0
+        },
+        "meanDeltaViolationAuc": 0,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0,
+        "meanDeltaScAuc": 0,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0,
+        "meanBtsScAuc": 0.5768959501869657,
+        "meanComparatorScAuc": 0.5768959501869657,
+        "meanBtsViolationAuc": 0.019489516559829063,
+        "meanComparatorViolationAuc": 0.019489516559829063,
+        "comparatorOverBtsViolationRatio": 1
+      },
+      {
+        "group": "verifier size = 2",
+        "masks": 28,
+        "violation": {
+          "lower": 0,
+          "equal": 19,
+          "higher": 9
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 13,
+          "higher": 15
+        },
+        "meanDeltaViolationAuc": 0.0009550995879120879,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.00424011752136752,
+        "meanDeltaScAuc": 0.00943056509462764,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.031450320512820706,
+        "meanBtsScAuc": 0.6237640939789376,
+        "meanComparatorScAuc": 0.61433352888431,
+        "meanBtsViolationAuc": 0.015484298687423693,
+        "meanComparatorViolationAuc": 0.014529199099511603,
+        "comparatorOverBtsViolationRatio": 0.9383181888187277
+      },
+      {
+        "group": "verifier size = 3",
+        "masks": 56,
+        "violation": {
+          "lower": 0,
+          "equal": 29,
+          "higher": 27
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 8,
+          "higher": 48
+        },
+        "meanDeltaViolationAuc": 0.0016830500228937726,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.023003472222222314,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.06663995726495742,
+        "meanBtsScAuc": 0.6470677488743896,
+        "meanComparatorScAuc": 0.6240642766521672,
+        "meanBtsViolationAuc": 0.011341956654456656,
+        "meanComparatorViolationAuc": 0.009658906631562884,
+        "comparatorOverBtsViolationRatio": 0.8516084945332213
+      },
+      {
+        "group": "verifier size = 4",
+        "masks": 70,
+        "violation": {
+          "lower": 0,
+          "equal": 37,
+          "higher": 33
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 2,
+          "higher": 68
+        },
+        "meanDeltaViolationAuc": 0.0018744276556776553,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.037225990155677784,
+        "minDeltaScAuc": 0,
+        "maxDeltaScAuc": 0.07184829059829068,
+        "meanBtsScAuc": 0.6635795844780222,
+        "meanComparatorScAuc": 0.6263535943223437,
+        "meanBtsViolationAuc": 0.007804868742368742,
+        "meanComparatorViolationAuc": 0.005930441086691092,
+        "comparatorOverBtsViolationRatio": 0.7598386702517728
+      },
+      {
+        "group": "verifier size = 5",
+        "masks": 56,
+        "violation": {
+          "lower": 0,
+          "equal": 35,
+          "higher": 21
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 56
+        },
+        "meanDeltaViolationAuc": 0.001630585126678876,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.050067608173077094,
+        "minDeltaScAuc": 0.001953125,
+        "maxDeltaScAuc": 0.0759381677350428,
+        "meanBtsScAuc": 0.6772711338141031,
+        "meanComparatorScAuc": 0.6272035256410255,
+        "meanBtsViolationAuc": 0.0047880179716117246,
+        "meanComparatorViolationAuc": 0.003157432844932847,
+        "comparatorOverBtsViolationRatio": 0.6594446519736024
+      },
+      {
+        "group": "verifier size = 6",
+        "masks": 28,
+        "violation": {
+          "lower": 0,
+          "equal": 21,
+          "higher": 7
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 28
+        },
+        "meanDeltaViolationAuc": 0.0011530353327228323,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.06071678972069612,
+        "minDeltaScAuc": 0.015625,
+        "maxDeltaScAuc": 0.0759381677350428,
+        "meanBtsScAuc": 0.6882207961309524,
+        "meanComparatorScAuc": 0.6275040064102565,
+        "meanBtsViolationAuc": 0.0024276938339438344,
+        "meanComparatorViolationAuc": 0.0012746585012210015,
+        "comparatorOverBtsViolationRatio": 0.525049115913556
+      },
+      {
+        "group": "verifier size = 7",
+        "masks": 8,
+        "violation": {
+          "lower": 0,
+          "equal": 7,
+          "higher": 1
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 8
+        },
+        "meanDeltaViolationAuc": 0.0005842681623931622,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0.004674145299145297,
+        "meanDeltaScAuc": 0.06923786391559841,
+        "minDeltaScAuc": 0.0338040865384619,
+        "maxDeltaScAuc": 0.0759381677350428,
+        "meanBtsScAuc": 0.6968921107104702,
+        "meanComparatorScAuc": 0.6276542467948717,
+        "meanBtsViolationAuc": 0.0008555355235042734,
+        "meanComparatorViolationAuc": 0.00027126736111111123,
+        "comparatorOverBtsViolationRatio": 0.3170731707317075
+      },
+      {
+        "group": "verifier size = 8",
+        "masks": 1,
+        "violation": {
+          "lower": 0,
+          "equal": 1,
+          "higher": 0
+        },
+        "safetyConstrainedVac": {
+          "lower": 0,
+          "equal": 0,
+          "higher": 1
+        },
+        "meanDeltaViolationAuc": 0,
+        "medianDeltaViolationAuc": 0,
+        "minDeltaViolationAuc": 0,
+        "maxDeltaViolationAuc": 0,
+        "meanDeltaScAuc": 0.0759381677350428,
+        "minDeltaScAuc": 0.0759381677350428,
+        "maxDeltaScAuc": 0.0759381677350428,
+        "meanBtsScAuc": 0.7035924145299145,
+        "meanComparatorScAuc": 0.6276542467948717,
+        "meanBtsViolationAuc": 0,
+        "meanComparatorViolationAuc": 0,
+        "comparatorOverBtsViolationRatio": null
+      }
+    ],
+    "allMasks": {
+      "group": "all 255 masks (incl. full panel)",
+      "masks": 255,
+      "violation": {
+        "lower": 0,
+        "equal": 157,
+        "higher": 98
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 31,
+        "higher": 224
+      },
+      "meanDeltaViolationAuc": 0.001492060499413441,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0.004674145299145297,
+      "meanDeltaScAuc": 0.0364383012820514,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.0759381677350428,
+      "meanBtsScAuc": 0.6597765575247169,
+      "meanComparatorScAuc": 0.6233382562426671,
+      "meanBtsViolationAuc": 0.008289865091335676,
+      "meanComparatorViolationAuc": 0.006797804591922231,
+      "comparatorOverBtsViolationRatio": 0.8200138985406527
+    },
+    "weakenedMasks": {
+      "group": "254 weakened masks (full panel excluded)",
+      "masks": 254,
+      "violation": {
+        "lower": 0,
+        "equal": 156,
+        "higher": 98
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 31,
+        "higher": 223
+      },
+      "meanDeltaViolationAuc": 0.0014979347533481398,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0.004674145299145297,
+      "meanDeltaScAuc": 0.0362827899968034,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.0759381677350428,
+      "meanBtsScAuc": 0.6596040541506807,
+      "meanComparatorScAuc": 0.6233212641538789,
+      "meanBtsViolationAuc": 0.008322502355474791,
+      "meanComparatorViolationAuc": 0.00682456760212665,
+      "comparatorOverBtsViolationRatio": 0.8200138985406529
+    },
+    "escalationCaseD8Absent": {
+      "group": "escalation case D8 absent",
+      "masks": 127,
+      "violation": {
+        "lower": 0,
+        "equal": 29,
+        "higher": 98
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 29,
+        "higher": 98
+      },
+      "meanDeltaViolationAuc": 0.0029958695066962795,
+      "medianDeltaViolationAuc": 0.00424011752136752,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0.004674145299145297,
+      "meanDeltaScAuc": 0.021523939615721244,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.0338040865384619,
+      "meanBtsScAuc": 0.640512221128609,
+      "meanComparatorScAuc": 0.6189882815128874,
+      "meanBtsViolationAuc": 0.008745751732956466,
+      "meanComparatorViolationAuc": 0.005749882226260179,
+      "comparatorOverBtsViolationRatio": 0.6574485992545384
+    },
+    "escalationCaseD8Present": {
+      "group": "escalation case D8 present",
+      "masks": 128,
+      "violation": {
+        "lower": 0,
+        "equal": 128,
+        "higher": 0
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 2,
+        "higher": 126
+      },
+      "meanDeltaViolationAuc": 0,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0,
+      "meanDeltaScAuc": 0.051236144497863303,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.0759381677350428,
+      "meanBtsScAuc": 0.6788903912927351,
+      "meanComparatorScAuc": 0.6276542467948715,
+      "meanBtsViolationAuc": 0.007837540064102559,
+      "meanComparatorViolationAuc": 0.007837540064102559,
+      "comparatorOverBtsViolationRatio": 1
+    },
+    "d8PresentD3Absent": {
+      "group": "D8 present, special-approval D3 absent",
+      "masks": 64,
+      "violation": {
+        "lower": 0,
+        "equal": 64,
+        "higher": 0
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 2,
+        "higher": 62
+      },
+      "meanDeltaViolationAuc": 0,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0,
+      "meanDeltaScAuc": 0.048143696581196715,
+      "minDeltaScAuc": 0,
+      "maxDeltaScAuc": 0.0685596955128207,
+      "meanBtsScAuc": 0.6757979433760687,
+      "meanComparatorScAuc": 0.6276542467948714,
+      "meanBtsViolationAuc": 0.008922609508546998,
+      "meanComparatorViolationAuc": 0.008922609508546998,
+      "comparatorOverBtsViolationRatio": 1
+    },
+    "d8PresentD3Present": {
+      "group": "D8 present, special-approval D3 present",
+      "masks": 64,
+      "violation": {
+        "lower": 0,
+        "equal": 64,
+        "higher": 0
+      },
+      "safetyConstrainedVac": {
+        "lower": 0,
+        "equal": 0,
+        "higher": 64
+      },
+      "meanDeltaViolationAuc": 0,
+      "medianDeltaViolationAuc": 0,
+      "minDeltaViolationAuc": 0,
+      "maxDeltaViolationAuc": 0,
+      "meanDeltaScAuc": 0.054328592414529905,
+      "minDeltaScAuc": 0.004340277777777679,
+      "maxDeltaScAuc": 0.0759381677350428,
+      "meanBtsScAuc": 0.6819828392094021,
+      "meanComparatorScAuc": 0.6276542467948714,
+      "meanBtsViolationAuc": 0.006752470619658121,
+      "meanComparatorViolationAuc": 0.006752470619658121,
+      "comparatorOverBtsViolationRatio": 1
+    }
+  },
+  "btsHigherViolationThanSafeSubset": {
+    "total": 76,
+    "d8PresentD3Absent": 64,
+    "d8PresentD3Present": 8,
+    "d8Absent": 4,
+    "d8AbsentMasks": [
+      "D2",
+      "D2+D5",
+      "D2+D7",
+      "D2+D5+D7"
+    ],
+    "d8PresentD3PresentMasks": [
+      "D3+D8",
+      "D2+D3+D8",
+      "D3+D5+D8",
+      "D2+D3+D5+D8",
+      "D3+D7+D8",
+      "D2+D3+D7+D8",
+      "D3+D5+D7+D8",
+      "D2+D3+D5+D7+D8"
+    ]
+  },
+  "depthSweep": [
+    {
+      "droppedStrata": 1,
+      "masks": 6,
+      "safeSubsetScAuc": 0.5664340722934473,
+      "btsScAuc": 0.6846064814814815,
+      "bundleScAuc": 0.6276542467948717,
+      "safeSubsetViolationAuc": 0.01577802261396011,
+      "btsViolationAuc": 0.004557291666666668,
+      "safeSubsetOverBtsViolationRatio": 3.4621489621489605
+    },
+    {
+      "droppedStrata": 2,
+      "masks": 15,
+      "safeSubsetScAuc": 0.42525151353276375,
+      "btsScAuc": 0.6648292824074075,
+      "bundleScAuc": 0.627373798076923,
+      "safeSubsetViolationAuc": 0.031083066239316243,
+      "btsViolationAuc": 0.009439547720797725,
+      "safeSubsetOverBtsViolationRatio": 3.2928554586182495
+    },
+    {
+      "droppedStrata": 3,
+      "masks": 20,
+      "safeSubsetScAuc": 0.30144147302350444,
+      "btsScAuc": 0.6456163194444444,
+      "bundleScAuc": 0.6254156650641025,
+      "safeSubsetViolationAuc": 0.04208984375,
+      "btsViolationAuc": 0.014564970619658127,
+      "safeSubsetOverBtsViolationRatio": 2.889799426934096
+    }
+  ],
+  "leaveOneOut": {
+    "btsScAuc": 0.6968921107104702,
+    "btsViolationAuc": 0.0008555355235042734,
+    "safeSubsetScAuc": 0.6325433193108975,
+    "safeSubsetViolationAuc": 0.009271083733974356
+  },
+  "interpretationGuardrail": "Descriptive sensitivity of one synthetic eight-case verifier in the v0.3 DeepSeek arm; masks are not a random sample of real verifiers. Mean SC-AUC dominance holds per mask and per organization, not per seed series or per unit.",
+  "perMaskCsv": "research/robustness_v04_mask_distribution_per_mask.csv"
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "runId": "robustness-v02-procurement-delta-gap-3-8-0-2026-08-22T04-12-04-951Z",
+  "createdAt": "2026-08-22T04:12:04.951Z",
+  "benchmarkId": "orgboot-synth-robustness-v0.2",
+  "method": "shared-candidate-multi-gate",
+  "model": {
+    "provider": "deepseek",
+    "id": "deepseek-v4-pro",
+    "temperature": 0,
+    "reasoning": "off",
+    "jsonMode": true
+  },
+  "hashes": {
+    "benchmark": "a44489750da387e2974f9f2d195b8839b47fb3bfc76900cb4332fa0a6bbe2a4b",
+    "promptContract": "81576c99f850cf0114e66d69299b0d74d7259a79a7dc4108175e550d1738918b",
+    "implementation": "2250b14a1d6d9f7e87e0f08c0ca5534a094a0998f18b7564fc228299df538fe2",
+    "aggregate": "c6284c6cd839cf55ea2696f1b1d5e92c0d1811d305b67042f820acb883f0945f",
+    "artifacts": "86839faa5ee38b14b7bf5b785f6cb5336bc29a6dcbcb134c0f663e0ae8d9e94b"
+  },
+  "metrics": {
+    "candidateGenerated": 1,
+    "logicalModelCalls": 1,
+    "providerCalls": 1,
+    "attributedCostUsd": 0.000886211
+  },
+  "modelCalls": 1,
+  "modelRequestMade": true,
+  "notes": [
+    "One candidate and syntax-repair budget are shared by all release gates.",
+    "Gate feedback never changes the candidate.",
+    "Exploratory development run; excluded from frozen claims."
+  ]
+}

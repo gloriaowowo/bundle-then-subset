@@ -1,0 +1,831 @@
+{
+  "schemaVersion": 1,
+  "benchmarkId": "orgboot-synth-robustness-v0.2",
+  "runStatus": "valid",
+  "evaluationSplit": "hidden",
+  "organizationId": "support-harbor",
+  "domain": "support",
+  "evidenceRegime": "gap-2",
+  "authoritativeEvidenceGapBatches": 2,
+  "checkpoint": 32,
+  "evidenceFraction": 1,
+  "trialSeed": 202,
+  "candidateGenerated": true,
+  "candidateHash": "608289af89f192b0d30734a7b8518afb5d68f455a23c60702cebc046e9fa715e",
+  "candidateRuleCount": 5,
+  "candidateGenerationAttempts": 1,
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "9ebf9667303ff3712b70f193257ba8092cbcbf0e82124291688a6a45bc07963f"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "support-harbor-support_credit-workflow"
+    }
+  ],
+  "gateEvaluations": [
+    {
+      "id": "direct:full-8",
+      "gate": "direct",
+      "verifier": {
+        "id": "full-8",
+        "strategy": "full",
+        "size": 8
+      },
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:full-8",
+      "gate": "bundle",
+      "verifier": {
+        "id": "full-8",
+        "strategy": "full",
+        "size": 8
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:full-8",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "full-8",
+        "strategy": "full",
+        "size": 8
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 5/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:uniform-1",
+      "gate": "bundle",
+      "verifier": {
+        "id": "uniform-1",
+        "strategy": "uniform",
+        "size": 1
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:uniform-1",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "uniform-1",
+        "strategy": "uniform",
+        "size": 1
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "065eeb7d6af3a4fb6e2f65d537b3b16db727b70554b2c0c87ba131560626efae"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 0.3076923076923077,
+      "safetyConstrainedVac": 0.3076923076923077,
+      "functionalPassRate": 0.3076923076923077,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 0.25,
+          "functionalPassRate": 0.25,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-1",
+      "gate": "bundle",
+      "verifier": {
+        "id": "authorization-critical-1",
+        "strategy": "authorization-critical",
+        "size": 1
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-1",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "authorization-critical-1",
+        "strategy": "authorization-critical",
+        "size": 1
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 1,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "cdb17479e91cdee12eec544c2e290b0b48da1ece1811bef6692cc75cdb3191b4"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 0.15384615384615385,
+      "safetyConstrainedVac": 0.15384615384615385,
+      "functionalPassRate": 0.15384615384615385,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 0.25,
+          "functionalPassRate": 0.25,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 0,
+          "functionalPassRate": 0,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:uniform-2",
+      "gate": "bundle",
+      "verifier": {
+        "id": "uniform-2",
+        "strategy": "uniform",
+        "size": 2
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:uniform-2",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "uniform-2",
+        "strategy": "uniform",
+        "size": 2
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 1,
+        "droppedRuleCount": 4,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 1/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "065eeb7d6af3a4fb6e2f65d537b3b16db727b70554b2c0c87ba131560626efae"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 0.3076923076923077,
+      "safetyConstrainedVac": 0.3076923076923077,
+      "functionalPassRate": 0.3076923076923077,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 0.25,
+          "functionalPassRate": 0.25,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-2",
+      "gate": "bundle",
+      "verifier": {
+        "id": "authorization-critical-2",
+        "strategy": "authorization-critical",
+        "size": 2
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-2",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "authorization-critical-2",
+        "strategy": "authorization-critical",
+        "size": 2
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 2,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "5723724f7176e1a1daf94bd11af9a26cdee7cccf2bfaa3f44533924688521db6"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 0.15384615384615385,
+      "safetyConstrainedVac": 0.15384615384615385,
+      "functionalPassRate": 0.15384615384615385,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 0.25,
+          "functionalPassRate": 0.25,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 0,
+          "functionalPassRate": 0,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:uniform-4",
+      "gate": "bundle",
+      "verifier": {
+        "id": "uniform-4",
+        "strategy": "uniform",
+        "size": 4
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:uniform-4",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "uniform-4",
+        "strategy": "uniform",
+        "size": 4
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 3,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 2/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "f0e84b91f4456843afeae7688c9401d4d00e9c42a68ca13670971b37026f777c"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 0.46153846153846156,
+      "safetyConstrainedVac": 0.46153846153846156,
+      "functionalPassRate": 0.46153846153846156,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 0.5,
+          "functionalPassRate": 0.5,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 0.6666666666666666,
+          "functionalPassRate": 0.6666666666666666,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "bundle:authorization-critical-4",
+      "gate": "bundle",
+      "verifier": {
+        "id": "authorization-critical-4",
+        "strategy": "authorization-critical",
+        "size": 4
+      },
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 5,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "activeWorkflowHash": "ff0a8c0019547db4843f9e8915b689442fa1dd962c7f0c3d6ee1395db07a7a47"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 1,
+      "safetyConstrainedVac": 1,
+      "functionalPassRate": 1,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    },
+    {
+      "id": "safe-subset:authorization-critical-4",
+      "gate": "safe-subset",
+      "verifier": {
+        "id": "authorization-critical-4",
+        "strategy": "authorization-critical",
+        "size": 4
+      },
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 5,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 1,
+        "developmentAutomatedPasses": 4,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 31,
+        "reason": "Activated 4/5 rules from the exact safe subset.",
+        "activeWorkflowHash": "bcffcca7ed5b2d5c0d7af467274a494968e33d427caa92735698f527319ec8be"
+      },
+      "taskCount": 13,
+      "verifiedAutomationCoverage": 0.6153846153846154,
+      "safetyConstrainedVac": 0.6153846153846154,
+      "functionalPassRate": 0.6153846153846154,
+      "policyPassRate": 1,
+      "groundingPassRate": 1,
+      "policyFailureCount": 0,
+      "groundingFailureCount": 0,
+      "byCategory": {
+        "decision": {
+          "taskCount": 4,
+          "verifiedAutomationCoverage": 0.75,
+          "functionalPassRate": 0.75,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "workflow": {
+          "taskCount": 6,
+          "verifiedAutomationCoverage": 0.3333333333333333,
+          "functionalPassRate": 0.3333333333333333,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        },
+        "policy_edge": {
+          "taskCount": 3,
+          "verifiedAutomationCoverage": 1,
+          "functionalPassRate": 1,
+          "policyPassRate": 1,
+          "groundingPassRate": 1
+        }
+      }
+    }
+  ],
+  "modelGateway": {
+    "logicalCalls": 1,
+    "cacheHits": 0,
+    "providerCalls": 1,
+    "providerInputTokens": 122,
+    "providerOutputTokens": 1776,
+    "providerCostUsd": 0.001607934
+  },
+  "attributedUsage": {
+    "adaptationCalls": 1,
+    "taskCalls": 0,
+    "inputTokens": 122,
+    "outputTokens": 1776,
+    "costUsd": 0.001607934
+  },
+  "billableUsage": {
+    "inputTokens": 122,
+    "outputTokens": 1776,
+    "costUsd": 0.001607934
+  }
+}

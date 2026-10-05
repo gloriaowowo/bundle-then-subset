@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "label": "robustness-v0.3b-google-gemini-3.7-flash-development",
+  "benchmarkId": "enterprise-rsi-hierarchical-release-v0.3",
+  "evaluationSplit": "development",
+  "organizations": [
+    "expense-aurora",
+    "access-nimbus"
+  ],
+  "evidenceRegimes": [
+    "gap-0",
+    "gap-1",
+    "gap-2",
+    "gap-3"
+  ],
+  "checkpoints": [
+    0,
+    8,
+    16,
+    24,
+    32
+  ],
+  "trialSeeds": [
+    0
+  ],
+  "models": [
+    {
+      "provider": "google",
+      "id": "gemini-3.7-flash"
+    }
+  ],
+  "runIds": [
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-0-0-2026-08-26T04-00-10-317Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-8-0-2026-08-26T04-00-10-348Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-16-0-2026-08-26T04-00-15-762Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-24-0-2026-08-26T04-02-39-268Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-0-32-0-2026-08-26T04-03-04-692Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-0-0-2026-08-26T04-02-39-656Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-8-0-2026-08-26T04-03-30-893Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-16-0-2026-08-26T04-05-02-238Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-24-0-2026-08-26T04-04-54-845Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-1-32-0-2026-08-26T04-14-51-103Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-0-0-2026-08-26T04-04-54-821Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-8-0-2026-08-26T04-06-44-297Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-16-0-2026-08-26T04-06-44-300Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-24-0-2026-08-26T04-07-35-413Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-2-32-0-2026-08-26T04-12-37-463Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-0-0-2026-08-26T04-12-37-432Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-8-0-2026-08-26T04-12-37-462Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-16-0-2026-08-26T04-14-51-530Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-24-0-2026-08-26T04-14-51-531Z",
+    "robustness-v03b-google-gemini-3.7-flash-expense-aurora-gap-3-32-0-2026-08-26T04-20-58-441Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-0-0-0-2026-08-26T04-14-51-508Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-0-8-0-2026-08-26T04-26-38-558Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-0-16-0-2026-08-26T04-44-31-215Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-0-24-0-2026-08-26T04-21-23-086Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-0-32-0-2026-08-26T04-26-10-704Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-1-0-0-2026-08-26T04-26-10-664Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-1-8-0-2026-08-26T04-31-15-948Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-1-16-0-2026-08-26T04-32-11-827Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-1-24-0-2026-08-26T04-31-15-951Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-1-32-0-2026-08-26T05-01-29-656Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-2-0-0-2026-08-26T04-36-43-292Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-2-8-0-2026-08-26T04-36-43-329Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-2-16-0-2026-08-26T05-01-25-384Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-2-24-0-2026-08-26T04-50-29-328Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-2-32-0-2026-08-26T04-50-28-163Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-3-0-0-2026-08-26T04-56-02-295Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-3-8-0-2026-08-26T04-56-02-327Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-3-16-0-2026-08-26T05-01-07-452Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-3-24-0-2026-08-26T05-12-18-929Z",
+    "robustness-v03b-google-gemini-3.7-flash-access-nimbus-gap-3-32-0-2026-08-26T05-06-53-896Z"
+  ],
+  "scientificStatus": "exploratory-development-only"
+}

@@ -1,0 +1,551 @@
+{
+  "schemaVersion": 1,
+  "benchmarkId": "enterprise-rsi-verifier-blindspot-stress-v0.5",
+  "mode": "hidden",
+  "provider": "google-vertex",
+  "modelId": "gemini-3.7-flash",
+  "billableCostUsd": 0,
+  "completed": {
+    "expense-larkspur:gap-0:0:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-0-401-2026-08-27T00-26-56-301Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:8:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-8-401-2026-08-27T00-26-56-337Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:16:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-16-401-2026-08-27T00-26-56-344Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:24:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-24-401-2026-08-27T00-26-56-351Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:32:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-32-401-2026-08-27T00-26-56-338Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:0:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-0-401-2026-08-27T00-26-56-306Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:8:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-8-401-2026-08-27T00-26-56-673Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:16:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-16-401-2026-08-27T00-26-56-663Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:24:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-24-401-2026-08-27T00-26-56-670Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:32:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-32-401-2026-08-27T00-26-56-687Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:0:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-0-401-2026-08-27T00-26-56-637Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:8:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-8-401-2026-08-27T00-26-56-691Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:16:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-16-401-2026-08-27T00-26-57-020Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:24:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-24-401-2026-08-27T00-26-56-998Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:32:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-32-401-2026-08-27T00-26-57-026Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:0:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-0-401-2026-08-27T00-26-56-990Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:8:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-8-401-2026-08-27T00-26-57-028Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:16:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-16-401-2026-08-27T00-26-57-037Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:24:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-24-401-2026-08-27T00-26-57-359Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:32:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-32-401-2026-08-27T00-26-57-349Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:0:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-0-401-2026-08-27T00-26-57-322Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:8:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-8-401-2026-08-27T00-26-57-352Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:16:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-16-401-2026-08-27T00-26-57-369Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:24:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-24-401-2026-08-27T00-26-57-360Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:32:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-32-401-2026-08-27T00-26-57-735Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:0:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-0-401-2026-08-27T00-26-57-719Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:8:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-8-401-2026-08-27T00-26-57-694Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:16:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-16-401-2026-08-27T00-26-57-729Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:24:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-24-401-2026-08-27T00-26-57-682Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:32:401": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-32-401-2026-08-27T00-26-57-706Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:0:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-0-502-2026-08-27T00-26-58-037Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:8:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-8-502-2026-08-27T00-26-58-104Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:16:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-16-502-2026-08-27T00-26-58-089Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:24:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-24-502-2026-08-27T00-26-58-100Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:32:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-32-502-2026-08-27T00-26-58-076Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:0:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-0-502-2026-08-27T00-26-58-052Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:8:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-8-502-2026-08-27T00-26-58-415Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:16:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-16-502-2026-08-27T00-26-58-442Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:24:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-24-502-2026-08-27T00-26-58-449Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:32:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-32-502-2026-08-27T00-26-58-434Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:0:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-0-502-2026-08-27T00-26-58-412Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:8:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-8-502-2026-08-27T00-26-58-416Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:16:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-16-502-2026-08-27T00-26-58-799Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:24:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-24-502-2026-08-27T00-26-58-802Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:32:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-32-502-2026-08-27T00-26-58-772Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:0:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-0-502-2026-08-27T00-26-58-755Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:8:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-8-502-2026-08-27T00-26-58-778Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:16:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-16-502-2026-08-27T00-26-58-804Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:24:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-24-502-2026-08-27T00-26-59-163Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:32:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-32-502-2026-08-27T00-26-59-172Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:0:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-0-502-2026-08-27T00-26-59-146Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:8:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-8-502-2026-08-27T00-26-59-152Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:16:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-16-502-2026-08-27T00-26-59-154Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:24:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-24-502-2026-08-27T00-26-59-188Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:32:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-32-502-2026-08-27T00-26-59-515Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:0:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-0-502-2026-08-27T00-26-59-497Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:8:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-8-502-2026-08-27T00-26-59-537Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:16:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-16-502-2026-08-27T00-26-59-540Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:24:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-24-502-2026-08-27T00-26-59-552Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:32:502": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-32-502-2026-08-27T00-26-59-533Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:0:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-0-603-2026-08-27T00-26-59-835Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:8:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-8-603-2026-08-27T00-26-59-865Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:16:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-16-603-2026-08-27T00-26-59-880Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:24:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-24-603-2026-08-27T00-26-59-883Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:32:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-larkspur-gap-0-32-603-2026-08-27T00-26-59-875Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:0:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-0-603-2026-08-27T00-26-59-815Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:8:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-8-603-2026-08-27T00-27-00-185Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:16:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-16-603-2026-08-27T00-27-00-206Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:24:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-24-603-2026-08-27T00-27-00-205Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-orchid:gap-0:32:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-orchid-gap-0-32-603-2026-08-27T00-27-00-193Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:0:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-0-603-2026-08-27T00-27-00-179Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:8:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-8-603-2026-08-27T00-27-00-199Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:16:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-16-603-2026-08-27T00-27-00-580Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:24:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-24-603-2026-08-27T00-27-00-602Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-verbena:gap-0:32:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-expense-verbena-gap-0-32-603-2026-08-27T00-27-00-620Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:0:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-0-603-2026-08-27T00-27-00-556Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:8:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-8-603-2026-08-27T00-27-00-601Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:16:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-16-603-2026-08-27T00-27-00-633Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:24:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-24-603-2026-08-27T00-27-00-971Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:32:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-basalt-gap-0-32-603-2026-08-27T00-27-00-999Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:0:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-0-603-2026-08-27T00-27-00-920Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:8:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-8-603-2026-08-27T00-27-00-977Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:16:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-16-603-2026-08-27T00-27-00-952Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:24:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-24-603-2026-08-27T00-27-00-961Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-garnet:gap-0:32:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-garnet-gap-0-32-603-2026-08-27T00-27-01-324Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:0:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-0-603-2026-08-27T00-27-01-331Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:8:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-8-603-2026-08-27T00-27-01-328Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:16:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-16-603-2026-08-27T00-27-01-357Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:24:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-24-603-2026-08-27T00-27-01-347Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-umber:gap-0:32:603": {
+      "runId": "robustness-v05bgs-google-vertex-gemini-3.7-flash-access-umber-gap-0-32-603-2026-08-27T00-27-01-316Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    }
+  },
+  "infrastructureFailures": []
+}

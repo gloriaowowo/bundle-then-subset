@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "label": "robustness-v0.2-exploratory-development",
+  "benchmarkId": "orgboot-synth-robustness-v0.2",
+  "evaluationSplit": "development",
+  "organizations": [
+    "support-orion",
+    "procurement-delta"
+  ],
+  "evidenceRegimes": [
+    "gap-0",
+    "gap-1",
+    "gap-2",
+    "gap-3"
+  ],
+  "checkpoints": [
+    0,
+    8,
+    16,
+    24,
+    32
+  ],
+  "trialSeeds": [
+    0
+  ],
+  "runIds": [
+    "robustness-v02-support-orion-gap-0-0-0-2026-08-22T04-25-36-097Z",
+    "robustness-v02-support-orion-gap-0-8-0-2026-08-22T04-25-36-111Z",
+    "robustness-v02-support-orion-gap-0-16-0-2026-08-22T04-25-36-128Z",
+    "robustness-v02-support-orion-gap-0-24-0-2026-08-22T04-25-36-126Z",
+    "robustness-v02-support-orion-gap-0-32-0-2026-08-22T04-25-36-371Z",
+    "robustness-v02-support-orion-gap-1-0-0-2026-08-22T04-25-36-345Z",
+    "robustness-v02-support-orion-gap-1-8-0-2026-08-22T04-25-36-359Z",
+    "robustness-v02-support-orion-gap-1-16-0-2026-08-22T04-25-36-377Z",
+    "robustness-v02-support-orion-gap-1-24-0-2026-08-22T04-25-36-617Z",
+    "robustness-v02-support-orion-gap-1-32-0-2026-08-22T04-25-36-617Z",
+    "robustness-v02-support-orion-gap-2-0-0-2026-08-22T04-25-36-599Z",
+    "robustness-v02-support-orion-gap-2-8-0-2026-08-22T04-25-36-603Z",
+    "robustness-v02-support-orion-gap-2-16-0-2026-08-22T04-25-36-869Z",
+    "robustness-v02-support-orion-gap-2-24-0-2026-08-22T04-25-36-855Z",
+    "robustness-v02-support-orion-gap-2-32-0-2026-08-22T04-25-36-862Z",
+    "robustness-v02-support-orion-gap-3-0-0-2026-08-22T04-25-36-826Z",
+    "robustness-v02-support-orion-gap-3-8-0-2026-08-22T04-25-37-105Z",
+    "robustness-v02-support-orion-gap-3-16-0-2026-08-22T04-25-37-117Z",
+    "robustness-v02-support-orion-gap-3-24-0-2026-08-22T04-25-37-109Z",
+    "robustness-v02-support-orion-gap-3-32-0-2026-08-22T04-25-37-109Z",
+    "robustness-v02-procurement-delta-gap-0-0-0-2026-08-22T04-25-37-335Z",
+    "robustness-v02-procurement-delta-gap-0-8-0-2026-08-22T04-25-37-351Z",
+    "robustness-v02-procurement-delta-gap-0-16-0-2026-08-22T04-25-37-347Z",
+    "robustness-v02-procurement-delta-gap-0-24-0-2026-08-22T04-25-37-348Z",
+    "robustness-v02-procurement-delta-gap-0-32-0-2026-08-22T04-25-37-579Z",
+    "robustness-v02-procurement-delta-gap-1-0-0-2026-08-22T04-25-37-560Z",
+    "robustness-v02-procurement-delta-gap-1-8-0-2026-08-22T04-25-37-574Z",
+    "robustness-v02-procurement-delta-gap-1-16-0-2026-08-22T04-25-37-579Z",
+    "robustness-v02-procurement-delta-gap-1-24-0-2026-08-22T04-25-37-804Z",
+    "robustness-v02-procurement-delta-gap-1-32-0-2026-08-22T04-25-37-805Z",
+    "robustness-v02-procurement-delta-gap-2-0-0-2026-08-22T04-25-37-791Z",
+    "robustness-v02-procurement-delta-gap-2-8-0-2026-08-22T04-25-37-796Z",
+    "robustness-v02-procurement-delta-gap-2-16-0-2026-08-22T04-25-38-025Z",
+    "robustness-v02-procurement-delta-gap-2-24-0-2026-08-22T04-25-38-029Z",
+    "robustness-v02-procurement-delta-gap-2-32-0-2026-08-22T04-25-38-029Z",
+    "robustness-v02-procurement-delta-gap-3-0-0-2026-08-22T04-25-38-018Z",
+    "robustness-v02-procurement-delta-gap-3-8-0-2026-08-22T04-25-38-251Z",
+    "robustness-v02-procurement-delta-gap-3-16-0-2026-08-22T04-25-38-251Z",
+    "robustness-v02-procurement-delta-gap-3-24-0-2026-08-22T04-25-38-256Z",
+    "robustness-v02-procurement-delta-gap-3-32-0-2026-08-22T04-25-38-256Z"
+  ],
+  "scientificStatus": "exploratory-development-only"
+}

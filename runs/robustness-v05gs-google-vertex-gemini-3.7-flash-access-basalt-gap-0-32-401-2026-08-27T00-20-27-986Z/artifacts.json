@@ -1,0 +1,282 @@
+{
+  "candidate": {
+    "id": "access-basalt-workflow",
+    "organizationId": "access-basalt",
+    "taskFamily": "access_provisioning",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "access_provisioning"
+      }
+    },
+    "rules": [
+      {
+        "id": "check-identity-verification",
+        "when": {
+          "op": "neq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "identity-review-desk",
+            "reason": "Request without verified member identity must be reviewed by identity-review-desk"
+          }
+        ],
+        "provenance": [
+          "access-basalt-eligibility-policy",
+          "access-basalt-message-4",
+          "access-basalt-message-6"
+        ]
+      },
+      {
+        "id": "operator-threshold-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "operator"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 13
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "platform_security_manager",
+            "reason": "Operator risk score exceeds automatic threshold of 13"
+          }
+        ],
+        "provenance": [
+          "access-basalt-special-policy",
+          "access-basalt-approval-policy",
+          "access-basalt-correction-2"
+        ]
+      },
+      {
+        "id": "member-threshold-approval",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "neq",
+              "left": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "operator"
+              }
+            },
+            {
+              "op": "gt",
+              "left": {
+                "kind": "path",
+                "path": "input.riskScore"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 30
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "platform_security_manager",
+            "reason": "Member risk score exceeds automatic threshold of 30"
+          }
+        ],
+        "provenance": [
+          "access-basalt-limit-v2",
+          "access-basalt-approval-policy",
+          "access-basalt-correction-1"
+        ]
+      },
+      {
+        "id": "provision-platform-access",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.identityVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "enable_platform_access",
+            "args": {
+              "accessCaseId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "actionClass": {
+                "kind": "path",
+                "path": "input.accessClass"
+              },
+              "memberKey": {
+                "kind": "path",
+                "path": "input.principalId"
+              },
+              "scoredRisk": {
+                "kind": "path",
+                "path": "input.riskScore"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "close_access_case",
+            "args": {
+              "accessCaseId": {
+                "kind": "path",
+                "path": "input.requestId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "enabled"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "access-basalt-action-schema",
+          "access-basalt-status-schema",
+          "access-basalt-completion-policy",
+          "access-basalt-message-3",
+          "access-basalt-message-8",
+          "access-basalt-message-13"
+        ]
+      }
+    ],
+    "provenance": [
+      "access-basalt-eligibility-policy",
+      "access-basalt-limit-v2",
+      "access-basalt-approval-policy",
+      "access-basalt-special-policy",
+      "access-basalt-action-schema",
+      "access-basalt-status-schema",
+      "access-basalt-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "42b684fb6631a0805194898a8761230194e554fde77f5dab54d7bb737aa3878d"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "access-basalt-workflow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "4737450e161e18e91ac0488cf9243ee148c6ffb8512dd026bdeb4e99052c1379"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "4737450e161e18e91ac0488cf9243ee148c6ffb8512dd026bdeb4e99052c1379"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 2,
+        "droppedRuleCount": 2,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 2/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "66083b926e0bb202d999b92cf8681b855f8aee80f6c2bbaf68262349ac7703a1"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "4737450e161e18e91ac0488cf9243ee148c6ffb8512dd026bdeb4e99052c1379"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

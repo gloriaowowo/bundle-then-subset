@@ -1,0 +1,35 @@
+{
+  "name": "orgboot-workshop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Organization-grounded bootstrapping experiments on a minimal Pi agent runtime.",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "check": "tsc -p tsconfig.json --noEmit",
+    "smoke": "npm run build && node dist/smoke.js",
+    "gate:s": "npm run build && node dist/gate-s.js && node dist/gate-runner.js && node dist/gate-model.js && node dist/gate-methods.js",
+    "gate:runner": "npm run build && node dist/gate-runner.js",
+    "gate:model": "npm run build && node dist/gate-model.js",
+    "gate:methods": "npm run build && node dist/gate-methods.js",
+    "gate:robustness": "npm run build && node dist/gate-robustness.js",
+    "pilot": "npm run build && node dist/pilot.js",
+    "summarize:runs": "npm run build && node dist/summarize-runs.js",
+    "robustness:v02": "npm run build && node dist/robustness-v02.js",
+    "robustness:develop": "npm run build && node scripts/run-robustness-development.mjs",
+    "robustness:summarize": "npm run build && node dist/summarize-robustness.js",
+    "robustness:freeze": "npm run build && node scripts/print-robustness-v02-freeze.mjs",
+    "robustness:confirm": "npm run build && node scripts/run-robustness-confirmatory.mjs",
+    "robustness:audit": "npm run build && node scripts/audit-robustness-v02.mjs",
+    "confirmatory:run": "npm run build && node scripts/run-confirmatory.mjs",
+    "summarize:references": "npm run build && node scripts/summarize-full-evidence.mjs"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.84.2",
+    "@earendil-works/pi-ai": "0.84.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.2.0",
+    "typescript": "7.0.2"
+  }
+}

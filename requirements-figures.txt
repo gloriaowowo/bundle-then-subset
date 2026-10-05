@@ -1,0 +1,4 @@
+# Direct dependencies for paper figures and PDF visual QA.
+matplotlib==3.11.1
+numpy==2.5.2
+reportlab==5.0.1

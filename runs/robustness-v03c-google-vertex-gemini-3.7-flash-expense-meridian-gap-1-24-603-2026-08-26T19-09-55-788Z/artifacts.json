@@ -1,0 +1,330 @@
+{
+  "candidate": {
+    "id": "expense-meridian-reimbursement-flow",
+    "organizationId": "expense-meridian",
+    "taskFamily": "expense_reimbursement",
+    "version": 1,
+    "trigger": {
+      "op": "eq",
+      "left": {
+        "kind": "path",
+        "path": "input.taskFamily"
+      },
+      "right": {
+        "kind": "literal",
+        "value": "expense_reimbursement"
+      }
+    },
+    "rules": [
+      {
+        "id": "check-receipt-verification",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": false
+          }
+        },
+        "steps": [
+          {
+            "kind": "escalate",
+            "queue": "evidence-validation",
+            "reason": "Receipt is not verified; automated payment disallowed."
+          }
+        ],
+        "provenance": [
+          "expense-meridian-eligibility-policy"
+        ]
+      },
+      {
+        "id": "auto-approve-routine",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "routine"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 225
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "release_expense_payment",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "employeeRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "paymentAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "update_report_disposition",
+            "args": {
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "released"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-meridian-eligibility-policy",
+          "expense-meridian-limit-v2",
+          "expense-meridian-action-schema",
+          "expense-meridian-status-schema",
+          "expense-meridian-completion-policy"
+        ]
+      },
+      {
+        "id": "auto-approve-executive-travel",
+        "when": {
+          "op": "all",
+          "args": [
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.receiptVerified"
+              },
+              "right": {
+                "kind": "literal",
+                "value": true
+              }
+            },
+            {
+              "op": "eq",
+              "left": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "right": {
+                "kind": "literal",
+                "value": "executive_travel"
+              }
+            },
+            {
+              "op": "lte",
+              "left": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "right": {
+                "kind": "literal",
+                "value": 900
+              }
+            }
+          ]
+        },
+        "steps": [
+          {
+            "kind": "tool",
+            "tool": "release_expense_payment",
+            "args": {
+              "actionClass": {
+                "kind": "path",
+                "path": "input.expenseClass"
+              },
+              "employeeRef": {
+                "kind": "path",
+                "path": "input.employeeId"
+              },
+              "paymentAmount": {
+                "kind": "path",
+                "path": "input.amount"
+              },
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              }
+            }
+          },
+          {
+            "kind": "tool",
+            "tool": "update_report_disposition",
+            "args": {
+              "reportKey": {
+                "kind": "path",
+                "path": "input.reportId"
+              },
+              "status": {
+                "kind": "literal",
+                "value": "released"
+              }
+            }
+          }
+        ],
+        "provenance": [
+          "expense-meridian-eligibility-policy",
+          "expense-meridian-special-policy",
+          "expense-meridian-action-schema",
+          "expense-meridian-status-schema",
+          "expense-meridian-completion-policy"
+        ]
+      },
+      {
+        "id": "require-approval-above-threshold",
+        "when": {
+          "op": "eq",
+          "left": {
+            "kind": "path",
+            "path": "input.receiptVerified"
+          },
+          "right": {
+            "kind": "literal",
+            "value": true
+          }
+        },
+        "steps": [
+          {
+            "kind": "require_approval",
+            "role": "expense_control_owner",
+            "reason": "Eligible request exceeds automatic threshold; approval required before payment."
+          }
+        ],
+        "provenance": [
+          "expense-meridian-approval-policy"
+        ]
+      }
+    ],
+    "provenance": [
+      "expense-meridian-eligibility-policy",
+      "expense-meridian-limit-v2",
+      "expense-meridian-special-policy",
+      "expense-meridian-approval-policy",
+      "expense-meridian-completion-policy"
+    ],
+    "status": "candidate"
+  },
+  "generationAudit": [
+    {
+      "sequence": 0,
+      "kind": "model_call",
+      "artifactId": "3a0a3dc2777f66f3ba52dcbc4be6310a834e0eb7b6be9b7d7bcde8ea0dd06c6b"
+    },
+    {
+      "sequence": 1,
+      "kind": "workflow_proposed",
+      "artifactId": "expense-meridian-reimbursement-flow"
+    }
+  ],
+  "gateDecisions": [
+    {
+      "gate": "direct",
+      "promotion": {
+        "gate": "direct",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 0,
+        "reason": "Direct activation accepts the statically valid candidate without behavioral gating.",
+        "route": "direct_accepted",
+        "activeWorkflowHash": "4a9f6482b03581bbb0f250cb99b3e1901a7be0cc97b26c1b36d6dcb71b996327"
+      }
+    },
+    {
+      "gate": "bundle",
+      "promotion": {
+        "gate": "bundle",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed the external development gate.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "4a9f6482b03581bbb0f250cb99b3e1901a7be0cc97b26c1b36d6dcb71b996327"
+      }
+    },
+    {
+      "gate": "safe-subset",
+      "promotion": {
+        "gate": "safe-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 15,
+        "reason": "Activated 4/4 rules from the exact safe subset.",
+        "route": "safe-subset_accepted",
+        "activeWorkflowHash": "4a9f6482b03581bbb0f250cb99b3e1901a7be0cc97b26c1b36d6dcb71b996327"
+      }
+    },
+    {
+      "gate": "bundle-then-subset",
+      "promotion": {
+        "gate": "bundle-then-subset",
+        "candidateRuleCount": 4,
+        "promotedRuleCount": 4,
+        "droppedRuleCount": 0,
+        "developmentAutomatedPasses": 8,
+        "developmentPolicyFailures": 0,
+        "developmentGroundingFailures": 0,
+        "subsetsEvaluated": 1,
+        "reason": "The complete candidate passed, so hierarchical release preserved it unchanged.",
+        "route": "bundle_accepted",
+        "activeWorkflowHash": "4a9f6482b03581bbb0f250cb99b3e1901a7be0cc97b26c1b36d6dcb71b996327"
+      }
+    }
+  ],
+  "notes": [
+    "Only aggregate hidden outcome counts are retained; no task-level identifiers, traces, grades, or failures are stored."
+  ]
+}

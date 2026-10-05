@@ -1,0 +1,137 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-h3-by-organization-and-model-gap-interaction",
+  "addedFor": "Camera-ready, after the authors' post-acceptance critique (CLEA #74): per-organization H3 and the model x evidence-gap interaction. Not preregistered.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "metric": "Direct raw-VAC AUC, gap-3 minus gap-0, mean over each organization's seed series",
+  "interval": "two-sided 95% t-interval over the eight organizations (df = 7)",
+  "selfChecks": {
+    "perArmMeanEqualsStoredPreregisteredH3": true
+  },
+  "h3ByOrganization": {
+    "access-nimbus": {
+      "domain": "access",
+      "deepseek": -0.02083333333333337,
+      "gemini": 0.16666666666666663,
+      "geminiMinusDeepseek": 0.1875
+    },
+    "access-quartz": {
+      "domain": "access",
+      "deepseek": -0.17361111111111105,
+      "gemini": 0.11111111111111116,
+      "geminiMinusDeepseek": 0.2847222222222222
+    },
+    "access-sable": {
+      "domain": "access",
+      "deepseek": -0.11805555555555558,
+      "gemini": 0.08333333333333337,
+      "geminiMinusDeepseek": 0.20138888888888895
+    },
+    "access-tundra": {
+      "domain": "access",
+      "deepseek": -0.02777777777777779,
+      "gemini": 0.125,
+      "geminiMinusDeepseek": 0.1527777777777778
+    },
+    "expense-aurora": {
+      "domain": "expense",
+      "deepseek": 0.03846153846153855,
+      "gemini": 0.025641025641025772,
+      "geminiMinusDeepseek": -0.012820512820512775
+    },
+    "expense-cobalt": {
+      "domain": "expense",
+      "deepseek": 0.08333333333333326,
+      "gemini": 0.07051282051282048,
+      "geminiMinusDeepseek": -0.012820512820512775
+    },
+    "expense-juniper": {
+      "domain": "expense",
+      "deepseek": 0.08333333333333326,
+      "gemini": 0.07051282051282048,
+      "geminiMinusDeepseek": -0.012820512820512775
+    },
+    "expense-meridian": {
+      "domain": "expense",
+      "deepseek": 0.044871794871794934,
+      "gemini": 0.10897435897435903,
+      "geminiMinusDeepseek": 0.0641025641025641
+    }
+  },
+  "h3Mean": {
+    "deepseek": -0.011284722222222224,
+    "gemini": 0.09521901709401712
+  },
+  "modelByGapInteraction": {
+    "estimate": 0.10650373931623934,
+    "tInterval95": [
+      0.009634823357796349,
+      0.20337265527468235
+    ],
+    "organizations": 8,
+    "organizationsPositive": 5
+  },
+  "byDomain": {
+    "access": {
+      "organizations": [
+        "access-nimbus",
+        "access-quartz",
+        "access-sable",
+        "access-tundra"
+      ],
+      "deepseekH3": [
+        -0.02083333333333337,
+        -0.17361111111111105,
+        -0.11805555555555558,
+        -0.02777777777777779
+      ],
+      "geminiH3": [
+        0.16666666666666663,
+        0.11111111111111116,
+        0.08333333333333337,
+        0.125
+      ],
+      "geminiMinusDeepseek": [
+        0.1875,
+        0.2847222222222222,
+        0.20138888888888895,
+        0.1527777777777778
+      ],
+      "meanDeepseekH3": -0.08506944444444445,
+      "meanGeminiH3": 0.12152777777777779,
+      "meanGeminiMinusDeepseek": 0.20659722222222224,
+      "organizationsDeepseekNegativeGeminiPositive": 4
+    },
+    "expense": {
+      "organizations": [
+        "expense-aurora",
+        "expense-cobalt",
+        "expense-juniper",
+        "expense-meridian"
+      ],
+      "deepseekH3": [
+        0.03846153846153855,
+        0.08333333333333326,
+        0.08333333333333326,
+        0.044871794871794934
+      ],
+      "geminiH3": [
+        0.025641025641025772,
+        0.07051282051282048,
+        0.07051282051282048,
+        0.10897435897435903
+      ],
+      "geminiMinusDeepseek": [
+        -0.012820512820512775,
+        -0.012820512820512775,
+        -0.012820512820512775,
+        0.0641025641025641
+      ],
+      "meanDeepseekH3": 0.0625,
+      "meanGeminiH3": 0.06891025641025644,
+      "meanGeminiMinusDeepseek": 0.006410256410256443,
+      "organizationsDeepseekNegativeGeminiPositive": 0
+    }
+  }
+}

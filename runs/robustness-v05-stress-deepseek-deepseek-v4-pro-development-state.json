@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "benchmarkId": "enterprise-rsi-verifier-blindspot-stress-v0.5",
+  "mode": "development",
+  "provider": "deepseek",
+  "modelId": "deepseek-v4-pro",
+  "billableCostUsd": 0.015107753000000002,
+  "completed": {
+    "expense-larkspur:gap-0:0:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-expense-larkspur-gap-0-0-0-2026-08-26T05-32-48-835Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:8:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-expense-larkspur-gap-0-8-0-2026-08-26T05-32-58-054Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00134154,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:16:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-expense-larkspur-gap-0-16-0-2026-08-26T05-33-06-078Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.002554755,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:24:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-expense-larkspur-gap-0-24-0-2026-08-26T05-33-05-990Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.00279618,
+      "attempts": 1
+    },
+    "expense-larkspur:gap-0:32:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-expense-larkspur-gap-0-32-0-2026-08-26T05-33-20-160Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0017296470000000002,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:0:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-access-basalt-gap-0-0-0-2026-08-26T05-33-06-419Z",
+      "providerCalls": 0,
+      "billableCostUsd": 0,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:8:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-access-basalt-gap-0-8-0-2026-08-26T05-33-14-699Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.001161566,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:16:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-access-basalt-gap-0-16-0-2026-08-26T05-33-19-700Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0019641410000000004,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:24:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-access-basalt-gap-0-24-0-2026-08-26T05-33-33-881Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.001669037,
+      "attempts": 1
+    },
+    "access-basalt:gap-0:32:0": {
+      "runId": "robustness-v05s-deepseek-deepseek-v4-pro-access-basalt-gap-0-32-0-2026-08-26T05-33-33-624Z",
+      "providerCalls": 1,
+      "billableCostUsd": 0.0018908870000000002,
+      "attempts": 1
+    }
+  },
+  "infrastructureFailures": []
+}

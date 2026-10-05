@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "scientificStatus": "post-hoc-exploratory-recovery-variants",
+  "addedFor": "Camera-ready response to reviews (CLEA #74); exploratory, designed after the Max-Subset result; full verifier only.",
+  "modelCalls": 0,
+  "providerCostUsd": 0,
+  "verifier": "full eight-case panel only (no weakened masks)",
+  "scMetric": "SC-AUC: trapezoid over the five checkpoints per (organization, regime, seed) series, mean per organization, then mean over organizations.",
+  "arms": {
+    "v03_deepseek": {
+      "bts-exhaustive": {
+        "scAucClusterMean": 0.7035924145299146,
+        "verifierArtifactEvals": 1063,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 70,
+        "meanRecoveredRules": 1.7428571428571429
+      },
+      "bts-descend": {
+        "scAucClusterMean": 0.7035924145299146,
+        "verifierArtifactEvals": 626,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 70,
+        "meanRecoveredRules": 2.3
+      },
+      "bts-greedy": {
+        "scAucClusterMean": 0.7035924145299146,
+        "verifierArtifactEvals": 620,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 70,
+        "meanRecoveredRules": 2.3
+      }
+    },
+    "v03c_gemini": {
+      "bts-exhaustive": {
+        "scAucClusterMean": 0.7050614316239318,
+        "verifierArtifactEvals": 952,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 83,
+        "meanRecoveredRules": 1.8674698795180722
+      },
+      "bts-descend": {
+        "scAucClusterMean": 0.7050614316239318,
+        "verifierArtifactEvals": 629,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 83,
+        "meanRecoveredRules": 1.963855421686747
+      },
+      "bts-greedy": {
+        "scAucClusterMean": 0.7050614316239318,
+        "verifierArtifactEvals": 629,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 83,
+        "meanRecoveredRules": 1.963855421686747
+      }
+    },
+    "v05_deepseek": {
+      "bts-exhaustive": {
+        "scAucClusterMean": 0.6527777777777778,
+        "verifierArtifactEvals": 122,
+        "hiddenPolicyFailures": 20,
+        "recoveredRejected": 6,
+        "meanRecoveredRules": 1.3333333333333333
+      },
+      "bts-descend": {
+        "scAucClusterMean": 0.657051282051282,
+        "verifierArtifactEvals": 91,
+        "hiddenPolicyFailures": 20,
+        "recoveredRejected": 6,
+        "meanRecoveredRules": 2.1666666666666665
+      },
+      "bts-greedy": {
+        "scAucClusterMean": 0.657051282051282,
+        "verifierArtifactEvals": 91,
+        "hiddenPolicyFailures": 20,
+        "recoveredRejected": 6,
+        "meanRecoveredRules": 2.1666666666666665
+      }
+    },
+    "v05b_deepseek": {
+      "bts-exhaustive": {
+        "scAucClusterMean": 0.688301282051282,
+        "verifierArtifactEvals": 200,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 13,
+        "meanRecoveredRules": 1
+      },
+      "bts-descend": {
+        "scAucClusterMean": 0.7323717948717948,
+        "verifierArtifactEvals": 131,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 13,
+        "meanRecoveredRules": 2.1538461538461537
+      },
+      "bts-greedy": {
+        "scAucClusterMean": 0.7323717948717948,
+        "verifierArtifactEvals": 128,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 13,
+        "meanRecoveredRules": 2.1538461538461537
+      }
+    },
+    "v05g_gemini": {
+      "bts-exhaustive": {
+        "scAucClusterMean": 0.6474358974358975,
+        "verifierArtifactEvals": 114,
+        "hiddenPolicyFailures": 18,
+        "recoveredRejected": 6,
+        "meanRecoveredRules": 1
+      },
+      "bts-descend": {
+        "scAucClusterMean": 0.6474358974358975,
+        "verifierArtifactEvals": 90,
+        "hiddenPolicyFailures": 18,
+        "recoveredRejected": 6,
+        "meanRecoveredRules": 2
+      },
+      "bts-greedy": {
+        "scAucClusterMean": 0.6474358974358975,
+        "verifierArtifactEvals": 90,
+        "hiddenPolicyFailures": 18,
+        "recoveredRejected": 6,
+        "meanRecoveredRules": 2
+      }
+    },
+    "v05bg_gemini": {
+      "bts-exhaustive": {
+        "scAucClusterMean": 0.6754807692307692,
+        "verifierArtifactEvals": 177,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 9,
+        "meanRecoveredRules": 1
+      },
+      "bts-descend": {
+        "scAucClusterMean": 0.7067307692307692,
+        "verifierArtifactEvals": 135,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 9,
+        "meanRecoveredRules": 2
+      },
+      "bts-greedy": {
+        "scAucClusterMean": 0.7067307692307692,
+        "verifierArtifactEvals": 129,
+        "hiddenPolicyFailures": 0,
+        "recoveredRejected": 9,
+        "meanRecoveredRules": 2
+      }
+    }
+  }
+}

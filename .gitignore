@@ -1,0 +1,20 @@
+.env
+.env.*
+!.env.example
+.DS_Store
+node_modules/
+# dist/ is tracked in the public release (prebuilt with TypeScript 7.0.2)
+.venv*/
+.figure-cache/
+tmp/
+results.tsv
+*-cache/
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.synctex.gz
+*.xdv
+.supplement-build/
+reproduced/
