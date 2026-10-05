@@ -10,7 +10,7 @@
  },
  "canaryPolicy": "canary 'embedded' = the file contains the canary string; 'manifest-only' = the file is hash-linked or code and stays byte-identical, so it is covered by this manifest instead",
  "fileCount": 8020,
- "totalBytesExcludingManifest": 97321589,
+ "totalBytesExcludingManifest": 97325587,
  "files": [
   {
    "path": ".gitignore",
@@ -46,8 +46,8 @@
   },
   {
    "path": "ERRATA.json",
-   "bytes": 7586,
-   "sha256": "0f407cb1ed9e055d0f2770d0e2c8b0e1a2a68a92e886b7eda4cbba1717fff787",
+   "bytes": 9517,
+   "sha256": "0979e3a0c2e34b22aef2820f3ea5738e5c19e9e2484edb7846bb311c834b01be",
    "license": "CC-BY-4.0",
    "redacted": false,
    "generated": true,
@@ -55,8 +55,8 @@
   },
   {
    "path": "ERRATA.md",
-   "bytes": 5268,
-   "sha256": "3ad66d69b803ad44a23c05a9dc235e4691475ac13a167513ded2e4b645b0670b",
+   "bytes": 5722,
+   "sha256": "e69220ed11c4b271982f788be3b31d4e7ab8e149f7834887164c00eba9c5996d",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "embedded"
@@ -80,7 +80,7 @@
   {
    "path": "README.md",
    "bytes": 9744,
-   "sha256": "d50be50d2883026f0e3e5bfafd5a401d070f35768e5303f73964d56b2996a627",
+   "sha256": "7c01974e43e073b705b3aa4c65ff0d4b6356d2e750db9681249afe2efa51fd52",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "embedded"
@@ -191,8 +191,8 @@
   },
   {
    "path": "artifact_tools/verify-release.mjs",
-   "bytes": 13254,
-   "sha256": "94541ebbc78cf8ae93187cc20e00b4d9cef5bc0f490b0bd0ee8b1c62e9bc1df7",
+   "bytes": 13552,
+   "sha256": "523b06baedf5547d15b94f22db9e163069941e919abee3e1ecbdf4a971cd059b",
    "license": "Apache-2.0",
    "redacted": false,
    "canary": "manifest-only"
@@ -1727,16 +1727,16 @@
   },
   {
    "path": "paper/latex/main.pdf",
-   "bytes": 278077,
-   "sha256": "57ecc4c1c31b086b585f12e365d7a17776e8580bb5d1e776068e0708938e23e6",
+   "bytes": 278962,
+   "sha256": "13ca108fdc032255b646ecc303efd3dd89419b518fe783e6362a048b4dc79e1c",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "manifest-only"
   },
   {
    "path": "paper/latex/main.tex",
-   "bytes": 73080,
-   "sha256": "21bde6ed191b079b46b3e183369800b0f57d4c4c1e3e09ea1734832713f2220e",
+   "bytes": 73434,
+   "sha256": "3415cd053a88184bc03de0aaa25ea4df7a0d631c0ffa95c22631412954faa990",
    "license": "CC-BY-4.0",
    "redacted": true,
    "canary": "manifest-only"
@@ -2049,10 +2049,10 @@
   },
   {
    "path": "research/robustness_v03_protocol.md",
-   "bytes": 7333,
-   "sha256": "8f654b45f6b4200526eb6bf2c99c0069c70dedb86228d7008b5247ac5c59a911",
+   "bytes": 7399,
+   "sha256": "9ecef87cb6fb5b9427269cdd56ed0e3c18d77a7df19bd2d4028140b4cd25dedc",
    "license": "CC-BY-4.0",
-   "redacted": false,
+   "redacted": true,
    "canary": "manifest-only"
   },
   {
@@ -2257,10 +2257,10 @@
   },
   {
    "path": "research/robustness_v05_stress_protocol.md",
-   "bytes": 4143,
-   "sha256": "5801d62febe58d5138deda2e70946986de51c0af1031fea90e167e0f2d83f74d",
+   "bytes": 4153,
+   "sha256": "ff7ef1039b27410e839296a5131a41f8cc70da05abdbb3b374e9cfadb276548c",
    "license": "CC-BY-4.0",
-   "redacted": false,
+   "redacted": true,
    "canary": "manifest-only"
   },
   {

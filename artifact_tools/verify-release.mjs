@@ -97,6 +97,8 @@ const pinnedBy = {
   },
   "research/robustness_v02_protocol_freeze.json": async () => [(await readJson(rel("research/robustness_v02_hidden_audit.json"))).hashes.freeze],
   "research/robustness_v05g_stress_protocol.md": async () => [(await readJson(rel("research/robustness_v05g_stress_protocol_freeze.json"))).hashes.protocol],
+  "research/robustness_v03_protocol.md": async () => [(await readJson(rel("research/robustness_v03_protocol_freeze.json"))).hashes.protocol],
+  "research/robustness_v05_stress_protocol.md": async () => [(await readJson(rel("research/robustness_v05_stress_protocol_freeze.json"))).hashes.protocol],
 };
 const errataRows = [];
 for (const entry of errata.files) {

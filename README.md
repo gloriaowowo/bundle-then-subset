@@ -99,7 +99,7 @@ Not rerunnable from this archive:
 
 The protocols and freeze records were written in agent-assisted sessions and
 record who authorized each step and when. Policy for this release: lines with
-non-scientific session wording (five lines in three hash-frozen files, plus
+non-scientific session wording (seven lines in five hash-frozen files, plus
 the same wording in one unfrozen script) are replaced; short go-ahead
 messages and session provenance ship verbatim, because they are part of the
 record and sit inside further frozen hashes. `ERRATA.md` lists every edited

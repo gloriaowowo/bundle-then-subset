@@ -34,8 +34,8 @@
       "path": "paper/latex/main.tex",
       "kind": "latex-comments-removed",
       "hashFrozen": false,
-      "originalSha256": "bd042e14028ed8528f1ccebdfe5e244d7086d4cf54c2c78cf1517c7dc3726844",
-      "releasedSha256": "21bde6ed191b079b46b3e183369800b0f57d4c4c1e3e09ea1734832713f2220e",
+      "originalSha256": "ff66e5727f55066a337adc56e51730e898832ecf1432cbc66886dfcc2ebad33f",
+      "releasedSha256": "3415cd053a88184bc03de0aaa25ea4df7a0d631c0ffa95c22631412954faa990",
       "reason": "Internal editing comments (comment-only lines and trailing TODO/DECISION comments) removed; typeset output unchanged.",
       "linesRemovedOrTrimmed": 7
     },
@@ -92,6 +92,48 @@
           "line": 6,
           "removedLineSha256": "89df9b31188622a36a59eff52ae1c2bfb611aa32f6a0304305458270dd7a4f49",
           "releasedLine": "  \"authorizationMessage\": \"[redacted for the public release; see ERRATA.md]\","
+        }
+      ],
+      "reconstructionVerifiedAtBuild": true
+    },
+    {
+      "path": "research/robustness_v03_protocol.md",
+      "kind": "line-redaction",
+      "hashFrozen": true,
+      "frozenIn": [
+        "hashes.protocol of research/robustness_v03_protocol_freeze.json"
+      ],
+      "frozenSha256": "8f654b45f6b4200526eb6bf2c99c0069c70dedb86228d7008b5247ac5c59a911",
+      "originalSha256": "8f654b45f6b4200526eb6bf2c99c0069c70dedb86228d7008b5247ac5c59a911",
+      "releasedSha256": "9ecef87cb6fb5b9427269cdd56ed0e3c18d77a7df19bd2d4028140b4cd25dedc",
+      "lineCount": 147,
+      "reason": "Non-scientific session wording replaced; the cost ceiling is kept.",
+      "redactions": [
+        {
+          "line": 6,
+          "removedLineSha256": "e5dd4d0ed6da8fba5ad7deb7e94f2469076653da155ad15f727024d5f4a74fb9",
+          "releasedLine": "Total experiment ceiling set by the authors: USD 50, inclusive of all v0.1--v0.3 provider spend [line edited for the public release; see ERRATA.md]"
+        }
+      ],
+      "reconstructionVerifiedAtBuild": true
+    },
+    {
+      "path": "research/robustness_v05_stress_protocol.md",
+      "kind": "line-redaction",
+      "hashFrozen": true,
+      "frozenIn": [
+        "hashes.protocol of research/robustness_v05_stress_protocol_freeze.json"
+      ],
+      "frozenSha256": "5801d62febe58d5138deda2e70946986de51c0af1031fea90e167e0f2d83f74d",
+      "originalSha256": "5801d62febe58d5138deda2e70946986de51c0af1031fea90e167e0f2d83f74d",
+      "releasedSha256": "ff7ef1039b27410e839296a5131a41f8cc70da05abdbb3b374e9cfadb276548c",
+      "lineCount": 78,
+      "reason": "Non-scientific session wording replaced.",
+      "redactions": [
+        {
+          "line": 12,
+          "removedLineSha256": "23dd0e8f35740f89ac9a1ced9e58bda15f3f04f0f9ab9415f6cfd8451fa0ad47",
+          "releasedLine": "confirmation. The authors judged this the study's weakest [line edited; see ERRATA.md]"
         }
       ],
       "reconstructionVerifiedAtBuild": true
