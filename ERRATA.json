@@ -34,8 +34,8 @@
       "path": "paper/latex/main.tex",
       "kind": "latex-comments-removed",
       "hashFrozen": false,
-      "originalSha256": "237ce58165ff0b8e7150e5d7274f2e624c1daa2327294f0dc617b209474042d1",
-      "releasedSha256": "d628102be00407ee072c0a73d3e3583954b516850c8cce1c4611361fee172a2f",
+      "originalSha256": "01aec47441ca52736fdf43c02dfee4ca8a37c1d021da46fbe4c278278e5a570d",
+      "releasedSha256": "9cb462f7f65b7826e3bd41b5d1468edbd8df874ab922f27f3a44bacc720aeb8f",
       "reason": "Internal editing comments (comment-only lines and trailing TODO/DECISION comments) removed; typeset output unchanged.",
       "linesRemovedOrTrimmed": 7
     },
