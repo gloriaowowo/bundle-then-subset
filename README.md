@@ -5,7 +5,8 @@ Enterprise AI Agents, NeurIPS 2026):
 
 > Shijin Wang\*, Yuanyuan Tan\*, Wenqi Zheng, Jinming He, Tongzhou Jiang.
 > *Conservative-First Release under Finite Verifiers in Generated Agent
-> Workflows.* Independent Researchers. \*Equal contribution.
+> Workflows.* Shijin Wang, Yuanyuan Tan, Wenqi Zheng and Jinming He: Independent
+> Researchers; Tongzhou Jiang: Google. \*Equal contribution.
 
 Release URL: https://github.com/gloriaowowo/bundle-then-subset
 

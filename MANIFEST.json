@@ -10,7 +10,7 @@
  },
  "canaryPolicy": "canary 'embedded' = the file contains the canary string; 'manifest-only' = the file is hash-linked or code and stays byte-identical, so it is covered by this manifest instead",
  "fileCount": 8020,
- "totalBytesExcludingManifest": 97325587,
+ "totalBytesExcludingManifest": 97325851,
  "files": [
   {
    "path": ".gitignore",
@@ -30,16 +30,16 @@
   },
   {
    "path": "CITATION.cff",
-   "bytes": 1908,
-   "sha256": "5fa41fcfc6406e4962dc1edc175b78e7f8115e0dd27a637b81283c776cf18af7",
+   "bytes": 1876,
+   "sha256": "6951e1fbce7f46814503f4faf9cc43db05c2ae27bd73cfb84cb7d55c107a9ac7",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "embedded"
   },
   {
    "path": "DATASET_CARD.md",
-   "bytes": 5846,
-   "sha256": "261e0cfd78026e8a324034772f3acee8398df0ab2b45d9334c33fc02e5d1eae2",
+   "bytes": 5927,
+   "sha256": "3d461ef18d9c9e5c0f26600b296de6f021c2998396c2c46cace996f9f1f8365d",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "embedded"
@@ -47,7 +47,7 @@
   {
    "path": "ERRATA.json",
    "bytes": 9517,
-   "sha256": "0979e3a0c2e34b22aef2820f3ea5738e5c19e9e2484edb7846bb311c834b01be",
+   "sha256": "34e648b9087910c074cbdd99153ce5b4e527378fbb0ff5d83c8dfbfd5358aed3",
    "license": "CC-BY-4.0",
    "redacted": false,
    "generated": true,
@@ -79,8 +79,8 @@
   },
   {
    "path": "README.md",
-   "bytes": 9744,
-   "sha256": "7c01974e43e073b705b3aa4c65ff0d4b6356d2e750db9681249afe2efa51fd52",
+   "bytes": 9825,
+   "sha256": "fdf07bdd18da952127f9bb049544779e1652825f62b4b3c4718eeba665c92bd3",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "embedded"
@@ -1727,16 +1727,16 @@
   },
   {
    "path": "paper/latex/main.pdf",
-   "bytes": 278962,
-   "sha256": "13ca108fdc032255b646ecc303efd3dd89419b518fe783e6362a048b4dc79e1c",
+   "bytes": 279041,
+   "sha256": "db690fa9adf9a88d0e62bb15780ff2be03afa18ac24a4eb8a2dfd21c4e1a4313",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "manifest-only"
   },
   {
    "path": "paper/latex/main.tex",
-   "bytes": 73434,
-   "sha256": "3415cd053a88184bc03de0aaa25ea4df7a0d631c0ffa95c22631412954faa990",
+   "bytes": 73489,
+   "sha256": "d628102be00407ee072c0a73d3e3583954b516850c8cce1c4611361fee172a2f",
    "license": "CC-BY-4.0",
    "redacted": true,
    "canary": "manifest-only"

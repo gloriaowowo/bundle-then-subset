@@ -110,6 +110,7 @@ hold rights in them (`THIRD_PARTY_NOTICES.md`).
 
 ## Maintenance and contact
 
-The authors are independent researchers. Questions and issue reports go to the
+Four authors are independent researchers and one (Tongzhou Jiang) is at Google;
+the release is maintained by the authors. Questions and issue reports go to the
 issue tracker at https://github.com/gloriaowowo/bundle-then-subset/issues.
 Errata and redactions are listed in `ERRATA.md`. Cite with `CITATION.cff`.

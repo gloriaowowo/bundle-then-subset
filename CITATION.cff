@@ -20,7 +20,7 @@ authors:
     affiliation: Independent Researcher
   - given-names: Tongzhou
     family-names: Jiang
-    affiliation: Independent Researcher
+    affiliation: Google
 url: "https://github.com/gloriaowowo/bundle-then-subset"
 license:
   - Apache-2.0
@@ -49,7 +49,7 @@ preferred-citation:
       affiliation: Independent Researcher
     - given-names: Tongzhou
       family-names: Jiang
-      affiliation: Independent Researcher
+      affiliation: Google
   collection-title: "Continual Learning for Enterprise AI Agents (CLEA) Workshop at NeurIPS 2026"
   conference:
     name: "NeurIPS 2026 Workshop on Continual Learning for Enterprise AI Agents (CLEA)"
