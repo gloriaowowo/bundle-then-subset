@@ -10,7 +10,7 @@
  },
  "canaryPolicy": "canary 'embedded' = the file contains the canary string; 'manifest-only' = the file is hash-linked or code and stays byte-identical, so it is covered by this manifest instead",
  "fileCount": 8020,
- "totalBytesExcludingManifest": 97326430,
+ "totalBytesExcludingManifest": 97327963,
  "files": [
   {
    "path": ".gitignore",
@@ -47,7 +47,7 @@
   {
    "path": "ERRATA.json",
    "bytes": 9517,
-   "sha256": "fa070a5e05f94f759cce89e6b9e22712fa60376c572432c9290ddfa44121878f",
+   "sha256": "ef857e2a78a653df1cd6a001a297d1452055bf5103e9c2e77fc351cf12decc55",
    "license": "CC-BY-4.0",
    "redacted": false,
    "generated": true,
@@ -1727,16 +1727,16 @@
   },
   {
    "path": "paper/latex/main.pdf",
-   "bytes": 279523,
-   "sha256": "021b06709eaac26f84d45612675a39baf8c442f378a7e6fc842b251cc9b81b28",
+   "bytes": 280142,
+   "sha256": "2a07971d85dceb1ed077cd0a2b36ede7777590dbfc790f32fedc4d0f572d24c7",
    "license": "CC-BY-4.0",
    "redacted": false,
    "canary": "manifest-only"
   },
   {
    "path": "paper/latex/main.tex",
-   "bytes": 73586,
-   "sha256": "9cb462f7f65b7826e3bd41b5d1468edbd8df874ab922f27f3a44bacc720aeb8f",
+   "bytes": 73686,
+   "sha256": "97b67b5b7e70eedb347edda22eef9824c42ac430d577446dc37b73eac02dfa70",
    "license": "CC-BY-4.0",
    "redacted": true,
    "canary": "manifest-only"
@@ -1751,8 +1751,8 @@
   },
   {
    "path": "paper/latex/references.bib",
-   "bytes": 11261,
-   "sha256": "4ea0f93e50434627d7aaafb1548de7273361a81e2a49b516799c1a45e96565fa",
+   "bytes": 12075,
+   "sha256": "30dc1109c323dd608e94b61963027985bd3a25864fa074c9c23ae090b51d97e8",
    "license": "CC-BY-4.0",
    "redacted": true,
    "canary": "manifest-only"

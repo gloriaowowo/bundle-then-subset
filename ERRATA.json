@@ -34,8 +34,8 @@
       "path": "paper/latex/main.tex",
       "kind": "latex-comments-removed",
       "hashFrozen": false,
-      "originalSha256": "01aec47441ca52736fdf43c02dfee4ca8a37c1d021da46fbe4c278278e5a570d",
-      "releasedSha256": "9cb462f7f65b7826e3bd41b5d1468edbd8df874ab922f27f3a44bacc720aeb8f",
+      "originalSha256": "410d1534eec6b73473c6a3eb29eba13ff29c6dc629d02b22bd5a45a9bad81481",
+      "releasedSha256": "97b67b5b7e70eedb347edda22eef9824c42ac430d577446dc37b73eac02dfa70",
       "reason": "Internal editing comments (comment-only lines and trailing TODO/DECISION comments) removed; typeset output unchanged.",
       "linesRemovedOrTrimmed": 7
     },
@@ -43,8 +43,8 @@
       "path": "paper/latex/references.bib",
       "kind": "latex-comments-removed",
       "hashFrozen": false,
-      "originalSha256": "78c059e2958afae3195cbe513c1153e2180e5a3176c82b02d4fe027a5775252f",
-      "releasedSha256": "4ea0f93e50434627d7aaafb1548de7273361a81e2a49b516799c1a45e96565fa",
+      "originalSha256": "66598e7b01e6a47cdd29b44ca89cd6467465d670dda7fd8c8903fed334a1448f",
+      "releasedSha256": "30dc1109c323dd608e94b61963027985bd3a25864fa074c9c23ae090b51d97e8",
       "reason": "Internal editing comments (comment-only lines and trailing TODO/DECISION comments) removed; typeset output unchanged.",
       "linesRemovedOrTrimmed": 1
     },
